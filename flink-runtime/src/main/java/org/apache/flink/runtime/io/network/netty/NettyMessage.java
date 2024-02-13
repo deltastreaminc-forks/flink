@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.netty;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.runtime.event.TaskEvent;
 import org.apache.flink.runtime.executiongraph.ExecutionAttemptID;
@@ -484,6 +485,7 @@ public abstract class NettyMessage {
 
         static ErrorResponse readFrom(ByteBuf buffer) throws Exception {
             try (ObjectInputStream ois = new ObjectInputStream(new ByteBufInputStream(buffer))) {
+                ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
                 Object obj = ois.readObject();
 
                 if (!(obj instanceof Throwable)) {

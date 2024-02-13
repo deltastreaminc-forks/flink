@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.taskexecutor.slot;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.util.FileUtils;
 
 import org.slf4j.Logger;
@@ -121,6 +122,7 @@ public class FileSlotAllocationSnapshotPersistenceService
         for (File allocationFile : slotAllocationFiles) {
             try (ObjectInputStream ois =
                     new ObjectInputStream(new FileInputStream(allocationFile))) {
+                ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
                 slotAllocationSnapshots.add((SlotAllocationSnapshot) ois.readObject());
             } catch (IOException | ClassNotFoundException e) {
                 LOG.debug(
