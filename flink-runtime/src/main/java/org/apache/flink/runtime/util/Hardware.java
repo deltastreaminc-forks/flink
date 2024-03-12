@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.util;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.flink.util.OperatingSystem;
 
 import org.slf4j.Logger;
@@ -153,7 +154,7 @@ public class Hardware {
     private static long getSizeOfPhysicalMemoryForMac() {
         BufferedReader bi = null;
         try {
-            Process proc = Runtime.getRuntime().exec("sysctl hw.memsize");
+            Process proc = SystemCommand.runCommand(Runtime.getRuntime(), "sysctl hw.memsize");
 
             bi =
                     new BufferedReader(
@@ -192,7 +193,7 @@ public class Hardware {
     private static long getSizeOfPhysicalMemoryForFreeBSD() {
         BufferedReader bi = null;
         try {
-            Process proc = Runtime.getRuntime().exec("sysctl hw.physmem");
+            Process proc = SystemCommand.runCommand(Runtime.getRuntime(), "sysctl hw.physmem");
 
             bi =
                     new BufferedReader(
@@ -237,7 +238,7 @@ public class Hardware {
     private static long getSizeOfPhysicalMemoryForWindows() {
         BufferedReader bi = null;
         try {
-            Process proc = Runtime.getRuntime().exec("wmic memorychip get capacity");
+            Process proc = SystemCommand.runCommand(Runtime.getRuntime(), "wmic memorychip get capacity");
 
             bi =
                     new BufferedReader(
