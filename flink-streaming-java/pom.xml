@@ -110,6 +110,10 @@ under the License.
 			<version>${project.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.github.pixee</groupId>
+			<artifactId>java-security-toolkit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>
@@ -144,23 +148,20 @@ under the License.
 								</goals>
 								<configuration>
 									<target>
-										<condition property="optional.classes" value="--classes '${generate.classes}'"
-												   else="">
-											<isset property="generate.classes"/>
+										<condition property="optional.classes" value="--classes '${generate.classes}'" else="">
+											else="">
 										</condition>
-										<condition property="optional.prefixes"
-												   value="--prefixes '${generate.prefixes}'" else="">
-											<isset property="generate.prefixes"/>
+										<condition property="optional.prefixes" value="--prefixes '${generate.prefixes}'" else="">
+											}'" else="">
 										</condition>
-										<java classname="org.apache.flink.test.migration.MigrationTestsSnapshotGenerator"
-											  fork="true" failonerror="true" dir="${project.basedir}">
-											<classpath refid="maven.test.classpath"/>
-											<arg value="--dir"/>
-											<arg line="${project.basedir}"/>
-											<arg value="--version"/>
-											<arg value="${generate.version}"/>
-											<arg line="${optional.classes}"/>
-											<arg line="${optional.prefixes}"/>
+										<java classname="org.apache.flink.test.migration.MigrationTestsSnapshotGenerator" fork="true" failonerror="true" dir="${project.basedir}">
+											t.basedir}">
+											classpath"/>
+											ue="--dir"/>
+											.basedir}"/>
+											--version"/>
+											.version}"/>
+											.classes}"/>
 										</java>
 									</target>
 								</configuration>
