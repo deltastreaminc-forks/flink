@@ -205,6 +205,7 @@ under the License.
 		<!-- Can be set to any value to reproduce a specific build. -->
 		<test.randomization.seed/>
 		<test.unit.pattern>**/*Test.*</test.unit.pattern>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 
 	<dependencies>
@@ -937,7 +938,14 @@ under the License.
 					</exclusion>
 				</exclusions>
 			</dependency>
-
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				
+				
+				
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -1264,8 +1272,7 @@ under the License.
 									<stylesheet>plain.xsl</stylesheet>
 
 									<fileMappers>
-										<fileMapper
-											implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
 											<targetExtension>.html</targetExtension>
 										</fileMapper>
 									</fileMappers>
@@ -1659,7 +1666,7 @@ under the License.
 				<version>3.0.0-M5</version>
 				<configuration>
 					<!-- enables TCP/IP communication between surefire and forked JVM-->
-					<forkNode implementation="org.apache.maven.plugin.surefire.extensions.SurefireForkNodeFactory"/>
+					JVM--&gt;
 					<reuseForks>${flink.reuseForks}</reuseForks>
 					<trimStackTrace>false</trimStackTrace>
 					<systemPropertyVariables combine.children="append">
@@ -1924,7 +1931,7 @@ under the License.
 					</filters>
 					<transformers combine.children="append">
 						<!-- The service transformer is needed to merge META-INF/services files -->
-						<transformer implementation="org.apache.maven.plugins.shade.resource.ServicesResourceTransformer"/>
+						les --&gt;
 						<!-- The ApacheNoticeResourceTransformer collects and aggregates NOTICE files -->
 						<transformer implementation="org.apache.maven.plugins.shade.resource.ApacheNoticeResourceTransformer">
 							<projectName>Apache Flink</projectName>

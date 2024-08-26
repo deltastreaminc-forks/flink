@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -114,7 +115,8 @@ class AvroOutputFormatTest {
         }
         try (final ObjectInputStream ois =
                 new ObjectInputStream(new ByteArrayInputStream(bos.toByteArray()))) {
-            // then
+            
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             Object o = ois.readObject();
             assertThat(o).isInstanceOf(AvroOutputFormat.class);
             @SuppressWarnings("unchecked")
@@ -122,9 +124,9 @@ class AvroOutputFormatTest {
             final AvroOutputFormat.Codec restoredCodec =
                     Whitebox.getInternalState(restored, "codec");
             final Schema restoredSchema = Whitebox.getInternalState(restored, "userDefinedSchema");
-
             assertThat(codec).isSameAs(restoredCodec);
             assertThat(schema).isEqualTo(restoredSchema);
+
         }
     }
 

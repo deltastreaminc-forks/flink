@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common.io;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.io.FileInputFormat.FileBaseStatistics;
 import org.apache.flink.api.common.io.statistics.BaseStatistics;
 import org.apache.flink.configuration.ConfigConstants;
@@ -104,6 +105,7 @@ public class DelimitedInputFormatTest {
         oos.close();
 
         ObjectInputStream ois = new ObjectInputStream(new ByteArrayInputStream(baos.toByteArray()));
+        ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
         @SuppressWarnings("unchecked")
         DelimitedInputFormat<String> deserialized = (DelimitedInputFormat<String>) ois.readObject();
 

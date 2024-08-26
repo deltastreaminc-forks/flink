@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.util;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.Configuration;
@@ -535,6 +536,7 @@ public class ZooKeeperUtils {
             final UUID leaderSessionID;
 
             try (final ObjectInputStream ois = new ObjectInputStream(bais)) {
+                ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
                 leaderAddress = ois.readUTF();
                 leaderSessionID = (UUID) ois.readObject();
             }

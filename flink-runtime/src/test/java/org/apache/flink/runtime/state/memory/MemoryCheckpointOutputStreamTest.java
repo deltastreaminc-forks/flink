@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.memory;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.runtime.state.CheckpointStateOutputStream;
 import org.apache.flink.runtime.state.StreamStateHandle;
 import org.apache.flink.runtime.state.memory.MemCheckpointStreamFactory.MemoryCheckpointOutputStream;
@@ -77,6 +78,7 @@ public class MemoryCheckpointOutputStreamTest {
         assertNotNull(handle);
 
         try (ObjectInputStream ois = new ObjectInputStream(handle.openInputStream())) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             assertEquals(state, ois.readObject());
             assertTrue(ois.available() <= 0);
         }
