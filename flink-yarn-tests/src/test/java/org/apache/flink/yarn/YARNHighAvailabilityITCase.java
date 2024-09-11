@@ -18,6 +18,7 @@
 
 package org.apache.flink.yarn;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.client.deployment.ClusterDeploymentException;
@@ -372,7 +373,7 @@ class YARNHighAvailabilityITCase extends YarnTestBase {
         final Set<Integer> origPids = getApplicationMasterPids(processName);
         assertThat(origPids).isNotEmpty();
 
-        final Process exec = Runtime.getRuntime().exec("pkill -f " + processName);
+        final Process exec = SystemCommand.runCommand(Runtime.getRuntime(), "pkill -f " + processName);
         assertThat(exec.waitFor()).isEqualTo(0);
 
         CommonTestUtils.waitUntilCondition(
@@ -384,7 +385,7 @@ class YARNHighAvailabilityITCase extends YarnTestBase {
 
     private Set<Integer> getApplicationMasterPids(final String processName)
             throws IOException, InterruptedException {
-        final Process exec = Runtime.getRuntime().exec("pgrep -f " + processName);
+        final Process exec = SystemCommand.runCommand(Runtime.getRuntime(), "pgrep -f " + processName);
 
         if (exec.waitFor() != 0) {
             return Collections.emptySet();
