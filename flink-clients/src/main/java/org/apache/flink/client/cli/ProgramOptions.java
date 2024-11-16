@@ -18,6 +18,8 @@
 
 package org.apache.flink.client.cli;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.configuration.ConfigUtils;
 import org.apache.flink.configuration.Configuration;
@@ -86,7 +88,7 @@ public class ProgramOptions extends CommandLineOptions {
         if (line.hasOption(CLASSPATH_OPTION.getOpt())) {
             for (String path : line.getOptionValues(CLASSPATH_OPTION.getOpt())) {
                 try {
-                    classpaths.add(new URL(path));
+                    classpaths.add(Urls.create(path, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
                 } catch (MalformedURLException e) {
                     throw new CliArgsException("Bad syntax for classpath: " + path);
                 }

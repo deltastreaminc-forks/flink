@@ -18,6 +18,8 @@
 
 package org.apache.flink.runtime.rest;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -297,7 +299,7 @@ public abstract class RestServerEndpoint implements RestService {
 
             log.info("Rest endpoint listening at {}:{}", advertisedAddress, port);
 
-            restBaseUrl = new URL(determineProtocol(), advertisedAddress, port, "").toString();
+            restBaseUrl = Urls.create(determineProtocol(), advertisedAddress, port, "", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).toString();
 
             restAddressFuture.complete(restBaseUrl);
 

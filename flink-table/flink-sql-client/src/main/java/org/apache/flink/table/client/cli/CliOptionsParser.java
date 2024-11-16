@@ -18,6 +18,8 @@
 
 package org.apache.flink.table.client.cli;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.table.client.SqlClientException;
@@ -306,14 +308,10 @@ public class CliOptionsParser {
     private static URL parseGatewayAddress(String cliOptionAddress) {
         URL url;
         try {
-            url = new URL(cliOptionAddress);
+            url = Urls.create(cliOptionAddress, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             if (!NetUtils.isValidHostPort(url.getPort())) {
                 url =
-                        new URL(
-                                url.getProtocol(),
-                                url.getHost(),
-                                url.getDefaultPort(),
-                                url.getPath());
+                        Urls.create(url.getProtocol(), url.getHost(), url.getDefaultPort(), url.getPath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             }
 
         } catch (MalformedURLException e) {

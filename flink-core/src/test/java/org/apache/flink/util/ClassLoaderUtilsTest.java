@@ -18,6 +18,8 @@
 
 package org.apache.flink.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.junit.Test;
 
 import java.io.File;
@@ -82,9 +84,9 @@ public class ClassLoaderUtilsTest {
 
             URL[] urls = {
                 new URL("http", "localhost", 26712, "/some/file/path"),
-                new URL("file", null, validJar.getAbsolutePath()),
-                new URL("file", null, invalidJar.getAbsolutePath()),
-                new URL("file", null, nonExisting.getAbsolutePath()),
+                Urls.create("file", null, validJar.getAbsolutePath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS),
+                Urls.create("file", null, invalidJar.getAbsolutePath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS),
+                Urls.create("file", null, nonExisting.getAbsolutePath(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS),
             };
 
             URLClassLoader loader = new URLClassLoader(urls, getClass().getClassLoader());

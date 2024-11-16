@@ -118,6 +118,10 @@ under the License.
 			<scope>test</scope>
 			<classifier>job-lib-jar</classifier>
 		</dependency>
+		<dependency>
+			<groupId>io.github.pixee</groupId>
+			<artifactId>java-security-toolkit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<!-- More information on this:

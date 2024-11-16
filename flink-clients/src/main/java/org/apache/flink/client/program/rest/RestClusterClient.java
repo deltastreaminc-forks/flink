@@ -18,6 +18,8 @@
 
 package org.apache.flink.client.program.rest;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
@@ -1084,7 +1086,7 @@ public class RestClusterClient<T> implements ClusterClient<T> {
                         leaderAddressSessionId -> {
                             final String url = leaderAddressSessionId.f0;
                             try {
-                                return new URL(url);
+                                return Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                             } catch (MalformedURLException e) {
                                 throw new IllegalArgumentException(
                                         "Could not parse URL from " + url, e);

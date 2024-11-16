@@ -17,6 +17,8 @@
 
 package org.apache.flink.metrics.prometheus;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.metrics.MetricConfig;
 import org.apache.flink.metrics.reporter.MetricReporterFactory;
@@ -92,7 +94,7 @@ public class PrometheusPushGatewayReporterFactory implements MetricReporterFacto
 
         try {
             return new PrometheusPushGatewayReporter(
-                    new URL(hostUrl), jobName, groupingKey, deleteOnShutdown);
+                    Urls.create(hostUrl, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS), jobName, groupingKey, deleteOnShutdown);
         } catch (MalformedURLException e) {
             throw new RuntimeException(e);
         }
