@@ -20,6 +20,7 @@ package org.apache.flink.table.tpch;
 
 import io.airlift.tpch.TpchEntity;
 import io.airlift.tpch.TpchTable;
+import io.github.pixee.security.BoundedLineReader;
 
 import java.io.BufferedReader;
 import java.io.BufferedWriter;
@@ -113,7 +114,7 @@ public class TpchDataGenerator {
                                                     path + "/expected/q" + (i + 1) + ".csv")))) {
                 int lineNumber = 0;
                 String line;
-                while ((line = reader.readLine()) != null) {
+                while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                     line = line.trim().replace("null", "");
                     lineNumber++;
                     if (lineNumber == 1) {

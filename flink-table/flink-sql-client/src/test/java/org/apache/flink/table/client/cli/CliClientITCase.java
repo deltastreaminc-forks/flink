@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.client.cli;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.runtime.testutils.MiniClusterResourceConfiguration;
 import org.apache.flink.table.api.config.ExecutionConfigOptions;
@@ -379,7 +380,7 @@ class CliClientITCase {
         boolean reachFirstPromote = false;
         try (BufferedReader reader = new BufferedReader(new StringReader(str))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 if (line.startsWith(PROMOTE)) {
                     if (reachFirstPromote) {
                         // begin a new result, put current result into list

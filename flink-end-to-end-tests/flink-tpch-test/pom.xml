@@ -34,6 +34,10 @@ under the License.
 			<artifactId>tpch</artifactId>
 			<version>0.10</version>
 		</dependency>
+		<dependency>
+			<groupId>io.github.pixee</groupId>
+			<artifactId>java-security-toolkit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

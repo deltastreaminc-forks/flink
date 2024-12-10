@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.csv.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.core.fs.FileStatus;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -61,7 +62,7 @@ public class CsvFormatStatisticsReportUtil {
                             BufferedReader br = new BufferedReader(isr)) {
                         String line;
                         while (sampledRowCnt < totalSampleLineCnt
-                                && (line = br.readLine()) != null) {
+                                && (line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                             sampledRowCnt += 1;
                             sampledRowSize += (line.getBytes(StandardCharsets.UTF_8).length + 1);
                         }

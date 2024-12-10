@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.fs.hdfs;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.RecoverableFsDataOutputStream;
 import org.apache.flink.core.fs.RecoverableWriter;
@@ -165,7 +166,7 @@ public class HadoopViewFileSystemTruncateTest {
         try (FSDataInputStream in = fSystem.open(testPath);
                 InputStreamReader ir = new InputStreamReader(in, UTF_8);
                 BufferedReader reader = new BufferedReader(ir)) {
-            final String line = reader.readLine();
+            final String line = BoundedLineReader.readLine(reader, 5_000_000);
             assertEquals(expectedContent, line);
         }
     }

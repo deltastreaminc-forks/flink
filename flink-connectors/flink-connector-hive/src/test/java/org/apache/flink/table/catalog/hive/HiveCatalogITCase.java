@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.catalog.hive;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.CoreOptions;
 import org.apache.flink.table.api.DataTypes;
@@ -221,12 +222,12 @@ public class HiveCatalogITCase {
         BufferedReader reader = new BufferedReader(new FileReader(resultFile));
         String readLine;
         for (int i = 0; i < 3; i++) {
-            readLine = reader.readLine();
+            readLine = BoundedLineReader.readLine(reader, 5_000_000);
             assertThat(readLine).isEqualTo(String.format("%d,%d", i + 1, i + 1));
         }
 
         // No more line
-        assertThat(reader.readLine()).isNull();
+        assertThat(BoundedLineReader.readLine(reader, 5_000_000)).isNull();
 
         tableEnv.executeSql(String.format("DROP TABLE %s", sourceTableName));
         tableEnv.executeSql(String.format("DROP TABLE %s", sinkTableName));

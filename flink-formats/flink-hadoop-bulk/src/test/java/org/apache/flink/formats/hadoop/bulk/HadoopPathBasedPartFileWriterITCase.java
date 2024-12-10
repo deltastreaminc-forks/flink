@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.hadoop.bulk;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.streaming.api.datastream.DataStream;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
@@ -120,7 +121,7 @@ public class HadoopPathBasedPartFileWriterITCase extends AbstractTestBase {
             List<String> lines = new ArrayList<>();
             BufferedReader reader = new BufferedReader(new InputStreamReader(dataInputStream));
             String line = null;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 lines.add(line);
             }
 

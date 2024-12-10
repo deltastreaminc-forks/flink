@@ -36,6 +36,7 @@ under the License.
 	<properties>
 		<excludeE2E/>
 		<japicmp.skip>true</japicmp.skip>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 
 	<modules>
@@ -198,4 +199,15 @@ under the License.
 		</pluginManagement>
 	</build>
 	
+	<dependencyManagement>
+		<dependencies>
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				
+				
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
 </project>

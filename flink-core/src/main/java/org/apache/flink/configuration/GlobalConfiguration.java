@@ -18,6 +18,7 @@
 
 package org.apache.flink.configuration;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.util.Preconditions;
 
@@ -194,7 +195,7 @@ public final class GlobalConfiguration {
 
             String line;
             int lineNo = 0;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 lineNo++;
                 // 1. check for comments
                 String[] comments = line.split("#", 2);

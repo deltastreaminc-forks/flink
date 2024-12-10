@@ -18,6 +18,7 @@
 
 package org.apache.flink.connectors.hive;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.configuration.BatchExecutionOptions;
 import org.apache.flink.table.HiveVersionTestUtil;
 import org.apache.flink.table.api.SqlDialect;
@@ -1029,7 +1030,7 @@ public class HiveDialectQueryITCase {
         List<String> sqlStatements = new ArrayList<>();
         List<String> results = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(qfile))) {
-            String line = reader.readLine();
+            String line = BoundedLineReader.readLine(reader, 5_000_000);
             while (line != null) {
                 if (expectSqlStatement) {
                     line = line.trim();
@@ -1071,7 +1072,7 @@ public class HiveDialectQueryITCase {
                     }
                 }
 
-                line = reader.readLine();
+                line = BoundedLineReader.readLine(reader, 5_000_000);
             }
         }
         return new QTest(sqlStatements, results, sortResults);

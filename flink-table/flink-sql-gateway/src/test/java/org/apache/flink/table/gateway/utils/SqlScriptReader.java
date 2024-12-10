@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.gateway.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.table.gateway.service.SqlGatewayServiceStatementITCase;
 
 import javax.annotation.Nullable;
@@ -60,7 +61,7 @@ public final class SqlScriptReader implements AutoCloseable {
     }
 
     private void readLine() throws IOException {
-        this.currentLine = reader.readLine();
+        this.currentLine = BoundedLineReader.readLine(reader, 5_000_000);
     }
 
     private @Nullable TestSqlStatement readNext() throws IOException {

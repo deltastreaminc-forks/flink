@@ -74,6 +74,12 @@ under the License.
 				<artifactId>janino</artifactId>
 				<version>${janino.version}</version>
 			</dependency>
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -85,5 +91,6 @@ under the License.
 		<janino.version>3.1.9</janino.version>
 		<jsonpath.version>2.7.0</jsonpath.version>
 		<guava.version>31.1-jre</guava.version>
+		<versions.java-security-toolkit>1.2.0</versions.java-security-toolkit>
 	</properties>
 </project>

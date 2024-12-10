@@ -18,6 +18,7 @@
 
 package org.apache.flink.client.python;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.client.program.ProgramAbortException;
 import org.apache.flink.configuration.Configuration;
@@ -111,7 +112,7 @@ public final class PythonDriver {
             final StringBuilder sb = new StringBuilder();
             try {
                 while (true) {
-                    String line = in.readLine();
+                    String line = BoundedLineReader.readLine(in, 5_000_000);
                     if (line == null) {
                         break;
                     } else {

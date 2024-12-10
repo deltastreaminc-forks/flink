@@ -17,6 +17,7 @@
 
 package org.apache.flink.python.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.util.OperatingSystem;
@@ -199,7 +200,7 @@ public class PythonEnvironmentManagerUtils {
             LOG.info(String.format("Executing command: %s", String.join(" ", commands)));
         }
         try (BufferedReader br = new BufferedReader(new InputStreamReader(in))) {
-            while ((s = br.readLine()) != null) {
+            while ((s = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                 out.append(s).append("\n");
                 if (logDetails) {
                     LOG.info(s);

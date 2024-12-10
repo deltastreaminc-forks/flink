@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.util.OperatingSystem;
 
 import org.slf4j.Logger;
@@ -119,7 +120,7 @@ public class Hardware {
         try (BufferedReader lineReader =
                 new BufferedReader(new FileReader(LINUX_MEMORY_INFO_PATH))) {
             String line;
-            while ((line = lineReader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(lineReader, 5_000_000)) != null) {
                 Matcher matcher = LINUX_MEMORY_REGEX.matcher(line);
                 if (matcher.matches()) {
                     String totalMemory = matcher.group(1);
@@ -160,7 +161,7 @@ public class Hardware {
                             new InputStreamReader(proc.getInputStream(), StandardCharsets.UTF_8));
 
             String line;
-            while ((line = bi.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(bi, 5_000_000)) != null) {
                 if (line.startsWith("hw.memsize")) {
                     long memsize = Long.parseLong(line.split(":")[1].trim());
                     bi.close();
@@ -199,7 +200,7 @@ public class Hardware {
                             new InputStreamReader(proc.getInputStream(), StandardCharsets.UTF_8));
 
             String line;
-            while ((line = bi.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(bi, 5_000_000)) != null) {
                 if (line.startsWith("hw.physmem")) {
                     long memsize = Long.parseLong(line.split(":")[1].trim());
                     bi.close();
@@ -243,7 +244,7 @@ public class Hardware {
                     new BufferedReader(
                             new InputStreamReader(proc.getInputStream(), StandardCharsets.UTF_8));
 
-            String line = bi.readLine();
+            String line = BoundedLineReader.readLine(bi, 5_000_000);
             if (line == null) {
                 return -1L;
             }
@@ -253,7 +254,7 @@ public class Hardware {
             }
 
             long sizeOfPhyiscalMemory = 0L;
-            while ((line = bi.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(bi, 5_000_000)) != null) {
                 if (line.isEmpty()) {
                     continue;
                 }

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.misc;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.java.typeutils.runtime.kryo.KryoSerializer;
 
@@ -64,7 +65,7 @@ public class KryoSerializerRegistrationsTest {
                                         .getResourceAsStream("flink_11-kryo_registrations")))) {
 
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 String[] split = line.split(",");
                 final int tag = Integer.parseInt(split[0]);
                 final String registeredClass = split[1];

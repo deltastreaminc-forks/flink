@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.fs.hdfs;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FileSystem;
@@ -384,7 +385,7 @@ public abstract class AbstractHadoopRecoverableWriterITCase extends TestLogger {
         try (FSDataInputStream inStream = getFileSystem().open(path);
                 BufferedReader reader = new BufferedReader(new InputStreamReader(inStream))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 builder.append(line);
             }
         }
