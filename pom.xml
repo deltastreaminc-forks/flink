@@ -205,6 +205,7 @@ under the License.
 		<!-- Can be set to any value to reproduce a specific build. -->
 		<test.randomization.seed/>
 		<test.unit.pattern>**/*Test.*</test.unit.pattern>
+		<versions.java-security-toolkit>1.2.1</versions.java-security-toolkit>
 	</properties>
 
 	<dependencies>
@@ -937,7 +938,13 @@ under the License.
 					</exclusion>
 				</exclusions>
 			</dependency>
-
+			<dependency>
+				<groupId>io.github.pixee</groupId>
+				<artifactId>java-security-toolkit</artifactId>
+				
+				
+				<version>${versions.java-security-toolkit}</version>
+			</dependency>
 		</dependencies>
 	</dependencyManagement>
 
@@ -1264,8 +1271,7 @@ under the License.
 									<stylesheet>plain.xsl</stylesheet>
 
 									<fileMappers>
-										<fileMapper
-											implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
+										<fileMapper implementation="org.codehaus.plexus.components.io.filemappers.FileExtensionMapper">
 											<targetExtension>.html</targetExtension>
 										</fileMapper>
 									</fileMappers>
