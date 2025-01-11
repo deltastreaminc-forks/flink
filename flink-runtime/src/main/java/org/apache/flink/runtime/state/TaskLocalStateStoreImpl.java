@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -255,8 +256,9 @@ public class TaskLocalStateStoreImpl implements OwnedTaskLocalStateStore {
             TaskStateSnapshot taskStateSnapshot = null;
             try (ObjectInputStream ois =
                     new ObjectInputStream(new FileInputStream(taskStateSnapshotFile))) {
-                taskStateSnapshot = (TaskStateSnapshot) ois.readObject();
+                ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 
+                taskStateSnapshot = (TaskStateSnapshot) ois.readObject();
                 LOG.debug(
                         "Loaded task state snapshot for checkpoint {} successfully from disk.",
                         checkpointID);

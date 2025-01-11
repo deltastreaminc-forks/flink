@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.filesystem;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.core.fs.DuplicatingFileSystem;
 import org.apache.flink.core.fs.FileSystem;
@@ -161,6 +162,7 @@ public class FsCheckpointStorageAccessTest extends AbstractFileCheckpointStorage
 
         // validate the contents
         try (ObjectInputStream in = new ObjectInputStream(stateHandle.openInputStream())) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             assertEquals(state, in.readObject());
         }
     }

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.entrypoint.component;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.configuration.ConfigOption;
 import org.apache.flink.configuration.ConfigOptions;
 import org.apache.flink.configuration.Configuration;
@@ -61,6 +62,7 @@ public class FileJobGraphRetriever extends AbstractUserClassPathJobGraphRetrieve
 
         try (FileInputStream input = new FileInputStream(fp);
                 ObjectInputStream obInput = new ObjectInputStream(input)) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(obInput);
             final JobGraph jobGraph = (JobGraph) obInput.readObject();
             addUserClassPathsToJobGraph(jobGraph);
             return jobGraph;

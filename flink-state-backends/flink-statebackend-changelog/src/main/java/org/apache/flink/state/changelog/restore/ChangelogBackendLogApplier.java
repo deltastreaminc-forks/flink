@@ -17,6 +17,7 @@
 
 package org.apache.flink.state.changelog.restore;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.state.AggregatingStateDescriptor;
 import org.apache.flink.api.common.state.ListStateDescriptor;
 import org.apache.flink.api.common.state.MapStateDescriptor;
@@ -130,6 +131,7 @@ class ChangelogBackendLogApplier {
             try {
                 try (ObjectInputStream objectInputStream =
                         new ObjectInputStream(new DataInputViewStream(in))) {
+                    ObjectInputFilters.enableObjectFilterIfUnprotected(objectInputStream);
                     return (StateTtlConfig) objectInputStream.readObject();
                 }
             } catch (ClassNotFoundException e) {

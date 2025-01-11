@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.memory;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.runtime.state.CheckpointMetadataOutputStream;
@@ -191,6 +192,7 @@ public class MemoryCheckpointStorageAccessTest extends AbstractFileCheckpointSto
         }
 
         try (ObjectInputStream in = new ObjectInputStream(stateHandle.openInputStream())) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             assertEquals(state, in.readObject());
         }
     }
