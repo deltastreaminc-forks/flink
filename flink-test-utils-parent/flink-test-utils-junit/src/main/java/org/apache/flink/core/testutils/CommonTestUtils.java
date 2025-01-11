@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.testutils;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.junit.Assert;
 
 import java.io.BufferedWriter;
@@ -63,6 +64,7 @@ public class CommonTestUtils {
         ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
 
         try (ObjectInputStream ois = new ObjectInputStream(bais)) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             @SuppressWarnings("unchecked")
             T copy = (T) ois.readObject();
             return copy;

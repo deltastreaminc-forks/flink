@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java.utils;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.io.TempDir;
 
@@ -201,6 +202,7 @@ class ParameterToolTest extends AbstractParameterToolTest {
 
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 
             // this should work :-)
             ParameterTool deserializedParameterTool = ((ParameterTool) ois.readObject());

@@ -18,6 +18,7 @@
 
 package org.apache.flink.connectors.hive;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.core.io.SimpleVersionedSerializer;
 
 import java.io.ByteArrayInputStream;
@@ -57,6 +58,7 @@ public class HiveTablePartitionSerializer implements SimpleVersionedSerializer<H
         if (version == CURRENT_VERSION) {
             try (ObjectInputStream inputStream =
                     new ObjectInputStream(new ByteArrayInputStream(serialized))) {
+                ObjectInputFilters.enableObjectFilterIfUnprotected(inputStream);
                 return (HiveTablePartition) inputStream.readObject();
             } catch (ClassNotFoundException e) {
                 throw new IOException("Failed to deserialize HiveTablePartition", e);

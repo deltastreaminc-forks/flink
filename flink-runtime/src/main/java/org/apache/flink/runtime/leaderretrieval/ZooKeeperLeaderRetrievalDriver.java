@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.leaderretrieval;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.runtime.leaderelection.LeaderInformation;
 import org.apache.flink.runtime.leaderelection.ZooKeeperLeaderElectionDriver;
@@ -135,6 +136,7 @@ public class ZooKeeperLeaderRetrievalDriver implements LeaderRetrievalDriver {
                 if (data != null && data.length > 0) {
                     ByteArrayInputStream bais = new ByteArrayInputStream(data);
                     ObjectInputStream ois = new ObjectInputStream(bais);
+                    ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 
                     final String leaderAddress = ois.readUTF();
                     final UUID leaderSessionID = (UUID) ois.readObject();

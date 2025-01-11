@@ -18,6 +18,7 @@
 
 package org.apache.flink.connectors.hive;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.connector.file.src.FileSourceSplit;
 import org.apache.flink.connector.file.src.FileSourceSplitSerializer;
 import org.apache.flink.connectors.hive.read.HiveSourceSplit;
@@ -63,6 +64,7 @@ public class HiveSourceSplitSerializer implements SimpleVersionedSerializer<Hive
         if (version == 1) {
             try (ObjectInputStream inputStream =
                     new ObjectInputStream(new ByteArrayInputStream(serialized))) {
+                ObjectInputFilters.enableObjectFilterIfUnprotected(inputStream);
                 return deserializeV1(inputStream);
             }
         } else {

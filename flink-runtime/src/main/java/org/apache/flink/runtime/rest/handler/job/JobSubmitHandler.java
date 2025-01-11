@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.handler.job;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
@@ -140,6 +141,7 @@ public final class JobSubmitHandler
                     try (ObjectInputStream objectIn =
                             new ObjectInputStream(
                                     jobGraphFile.getFileSystem().open(jobGraphFile))) {
+                        ObjectInputFilters.enableObjectFilterIfUnprotected(objectIn);
                         jobGraph = (JobGraph) objectIn.readObject();
                     } catch (Exception e) {
                         throw new CompletionException(

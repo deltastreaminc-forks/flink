@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.sequencefile;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.hadoop.conf.Configuration;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -83,6 +84,7 @@ class SerializableHadoopConfigurationTest {
             throws IOException, ClassNotFoundException {
         try (ObjectInputStream in =
                 new ObjectInputStream(new ByteArrayInputStream(serializedConfig))) {
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
             return (SerializableHadoopConfiguration) in.readObject();
         }
     }

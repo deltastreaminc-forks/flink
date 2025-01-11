@@ -18,6 +18,7 @@
 
 package org.apache.flink.cep.nfa;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.base.EnumSerializer;
 import org.apache.flink.api.common.typeutils.base.LongSerializer;
@@ -86,6 +87,7 @@ class MigrationUtils {
 
             ByteArrayInputStream bais = new ByteArrayInputStream(serCondition);
             ObjectInputStream ois = new ObjectInputStream(bais);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
 
             ois.readObject();
             ois.close();

@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint.metadata;
 
+import static io.github.pixee.security.ObjectInputFilters.createSafeObjectInputStream;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.runtime.checkpoint.CheckpointProperties;
 
@@ -60,7 +61,7 @@ public class MetadataV4Serializer implements MetadataSerializer {
     private CheckpointProperties deserializeProperties(DataInputStream dis) throws IOException {
         try {
             // closed outside
-            return (CheckpointProperties) new ObjectInputStream(dis).readObject();
+            return (CheckpointProperties) createSafeObjectInputStream(dis).readObject();
         } catch (ClassNotFoundException e) {
             throw new IOException("Couldn't deserialize checkpoint properties", e);
         }

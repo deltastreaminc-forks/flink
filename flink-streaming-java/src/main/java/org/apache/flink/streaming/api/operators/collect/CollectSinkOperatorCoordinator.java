@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.api.operators.collect;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.core.memory.DataInputViewStreamWrapper;
 import org.apache.flink.core.memory.DataOutputViewStreamWrapper;
 import org.apache.flink.runtime.jobgraph.OperatorID;
@@ -221,6 +222,7 @@ public class CollectSinkOperatorCoordinator
         } else {
             ByteArrayInputStream bais = new ByteArrayInputStream(checkpointData);
             ObjectInputStream ois = new ObjectInputStream(bais);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             address = (InetSocketAddress) ois.readObject();
         }
     }

@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java.io;
 
+import io.github.pixee.security.ObjectInputFilters;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -108,6 +109,7 @@ class CollectionInputFormatTest {
 
             ObjectInputStream in =
                     new ObjectInputStream(new ByteArrayInputStream(buffer.toByteArray()));
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
 
             Object serializationResult = in.readObject();
 
@@ -191,6 +193,7 @@ class CollectionInputFormatTest {
             // deserialize
             ByteArrayInputStream bais = new ByteArrayInputStream(baos.toByteArray());
             ObjectInputStream ois = new ObjectInputStream(bais);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(ois);
             Object result = ois.readObject();
 
             assertThat(result).isInstanceOf(CollectionInputFormat.class);
@@ -250,6 +253,7 @@ class CollectionInputFormatTest {
 
             ByteArrayInputStream bais = new ByteArrayInputStream(buffer.toByteArray());
             ObjectInputStream in = new ObjectInputStream(bais);
+            ObjectInputFilters.enableObjectFilterIfUnprotected(in);
 
             try {
                 in.readObject();
