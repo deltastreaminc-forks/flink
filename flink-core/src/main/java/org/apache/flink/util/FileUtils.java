@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import io.github.pixee.security.ZipSecurity;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileStatus;
@@ -519,7 +520,7 @@ public final class FileUtils {
         FileSystem sourceFs = file.getFileSystem();
         FileSystem targetFs = targetDirectory.getFileSystem();
         Path rootDir = null;
-        try (ZipInputStream zis = new ZipInputStream(sourceFs.open(file))) {
+        try (ZipInputStream zis = ZipSecurity.createHardenedInputStream(sourceFs.open(file))) {
             ZipEntry entry;
             while ((entry = zis.getNextEntry()) != null) {
                 Path relativePath = new Path(entry.getName());
