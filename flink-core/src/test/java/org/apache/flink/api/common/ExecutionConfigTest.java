@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -103,7 +104,7 @@ public class ExecutionConfigTest {
 
     @Test
     void testExecutionConfigSerialization() throws IOException, ClassNotFoundException {
-        final Random r = new Random();
+        final Random r = new SecureRandom();
 
         final int parallelism = 1 + r.nextInt(10);
         final boolean closureCleanerEnabled = r.nextBoolean(),

@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.formats.avro.generated.Address;
 import org.apache.flink.formats.avro.generated.UnionLogicalType;
@@ -37,7 +38,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /** Tests for {@link AvroDeserializationSchema}. */
 class AvroSerializationSchemaTest {
 
-    private static final Address address = TestDataGenerator.generateRandomAddress(new Random());
+    private static final Address address = TestDataGenerator.generateRandomAddress(new SecureRandom());
 
     @Test
     void testGenericRecord() throws Exception {
@@ -61,7 +62,7 @@ class AvroSerializationSchemaTest {
 
     @Test
     void testSpecificRecordWithUnionLogicalType() throws Exception {
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         UnionLogicalType data = new UnionLogicalType(Instant.ofEpochMilli(rnd.nextLong()));
         AvroSerializationSchema<UnionLogicalType> serializer =
                 AvroSerializationSchema.forSpecific(UnionLogicalType.class);

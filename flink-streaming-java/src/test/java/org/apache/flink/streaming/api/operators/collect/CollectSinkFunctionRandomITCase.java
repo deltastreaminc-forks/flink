@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.api.operators.collect;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.base.IntSerializer;
@@ -145,7 +146,7 @@ public class CollectSinkFunctionRandomITCase extends TestLogger {
 
         @Override
         public void run() throws Exception {
-            Random random = new Random();
+            Random random = new SecureRandom();
             functionWrapper.openFunction();
 
             while (data.size() > 0) {
@@ -201,7 +202,7 @@ public class CollectSinkFunctionRandomITCase extends TestLogger {
 
         @Override
         public void run() throws Exception {
-            Random random = new Random();
+            Random random = new SecureRandom();
             functionWrapper.openFunctionWithState();
 
             while (data.size() > 0) {
@@ -330,7 +331,7 @@ public class CollectSinkFunctionRandomITCase extends TestLogger {
 
         @Override
         public void run() throws Exception {
-            Random random = new Random();
+            Random random = new SecureRandom();
 
             while (iterator.hasNext()) {
                 results.add(iterator.next());

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.api.serialization;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.memory.AbstractPagedInputView;
@@ -88,7 +89,7 @@ public class PagedViewsTest {
     public void testReadFully() {
         int bufferSize = 100;
         byte[] expected = new byte[bufferSize];
-        new Random().nextBytes(expected);
+        new SecureRandom().nextBytes(expected);
 
         TestOutputView outputView = new TestOutputView(bufferSize);
 
@@ -120,7 +121,7 @@ public class PagedViewsTest {
         int bufferSize = 100;
         int segmentSize = 30;
         byte[] expected = new byte[bufferSize];
-        new Random().nextBytes(expected);
+        new SecureRandom().nextBytes(expected);
 
         TestOutputView outputView = new TestOutputView(segmentSize);
 
@@ -153,7 +154,7 @@ public class PagedViewsTest {
         int bytes2Write = 75;
         int segmentSize = 30;
         byte[] expected = new byte[bytes2Write];
-        new Random().nextBytes(expected);
+        new SecureRandom().nextBytes(expected);
 
         TestOutputView outputView = new TestOutputView(segmentSize);
 
@@ -191,7 +192,7 @@ public class PagedViewsTest {
         int bytes2Write = 75;
         int segmentSize = 30;
         byte[] expected = new byte[bytes2Write];
-        new Random().nextBytes(expected);
+        new SecureRandom().nextBytes(expected);
 
         TestOutputView outputView = new TestOutputView(segmentSize);
 
@@ -238,7 +239,7 @@ public class PagedViewsTest {
         int bytes2Write = 99;
         int segmentSize = 30;
         byte[] expected = new byte[bytes2Write];
-        new Random().nextBytes(expected);
+        new SecureRandom().nextBytes(expected);
 
         TestOutputView outputView = new TestOutputView(segmentSize);
 
@@ -284,7 +285,7 @@ public class PagedViewsTest {
         int bufferSize = 100;
         int segmentSize = 30;
         byte[] expected = new byte[bufferSize];
-        new Random().nextBytes(expected);
+        new SecureRandom().nextBytes(expected);
 
         TestOutputView outputView = new TestOutputView(segmentSize);
 

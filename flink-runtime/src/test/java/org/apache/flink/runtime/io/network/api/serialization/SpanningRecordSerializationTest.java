@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.api.serialization;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.DataOutputSerializer;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
@@ -102,7 +103,7 @@ public class SpanningRecordSerializationTest extends TestLogger {
 
         List<SerializationTestType> originalRecords = new ArrayList<>((numValues + 1) / 2);
         LargeObjectType genLarge = new LargeObjectType();
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         for (int i = 0; i < numValues; i++) {
             if (i % 2 == 0) {

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.messages;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.execution.ExecutionState;
 import org.apache.flink.runtime.jobgraph.JobVertexID;
 import org.apache.flink.runtime.rest.messages.job.metrics.IOMetricsInfo;
@@ -41,7 +42,7 @@ public class JobVertexTaskManagersInfoTest
 
     @Override
     protected JobVertexTaskManagersInfo getTestResponseInstance() throws Exception {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         List<TaskManagersInfo> taskManagersInfoList = new ArrayList<>();
 
         final Map<ExecutionState, Integer> statusCounts =

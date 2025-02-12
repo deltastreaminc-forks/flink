@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.tests.verify;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.state.State;
 import org.apache.flink.api.common.state.StateDescriptor;
 import org.apache.flink.api.common.state.StateTtlConfig;
@@ -36,7 +37,7 @@ import java.util.Random;
 abstract class AbstractTtlStateVerifier<
                 D extends StateDescriptor<S, SV>, S extends State, SV, UV, GV>
         implements TtlStateVerifier<UV, GV> {
-    static final Random RANDOM = new Random();
+    static final Random RANDOM = new SecureRandom();
 
     @Nonnull final D stateDesc;
 

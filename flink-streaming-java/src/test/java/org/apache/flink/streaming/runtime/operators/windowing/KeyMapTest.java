@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.runtime.operators.windowing;
 
+import java.security.SecureRandom;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -117,7 +118,7 @@ public class KeyMapTest {
     public void testPutAndGetRandom() {
         try {
             final KeyMap<Integer, Integer> map = new KeyMap<>();
-            final Random rnd = new Random();
+            final Random rnd = new SecureRandom();
 
             final long seed = rnd.nextLong();
             final int numElements = 10000;

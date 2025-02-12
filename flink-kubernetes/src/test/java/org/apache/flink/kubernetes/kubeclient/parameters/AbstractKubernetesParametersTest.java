@@ -18,6 +18,7 @@
 
 package org.apache.flink.kubernetes.kubeclient.parameters;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.DeploymentOptionsInternal;
 import org.apache.flink.core.testutils.CommonTestUtils;
@@ -61,7 +62,7 @@ public class AbstractKubernetesParametersTest {
     void testClusterIdLengthLimitation() {
         final String stringWithIllegalLength =
                 StringUtils.generateRandomAlphanumericString(
-                        new Random(), Constants.MAXIMUM_CHARACTERS_OF_CLUSTER_ID + 1);
+                        new SecureRandom(), Constants.MAXIMUM_CHARACTERS_OF_CLUSTER_ID + 1);
         flinkConfig.set(KubernetesConfigOptions.CLUSTER_ID, stringWithIllegalLength);
         assertThatThrownBy(testingKubernetesParameters::getClusterId)
                 .satisfies(

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.JobException;
 import org.apache.flink.runtime.OperatorIDPair;
 import org.apache.flink.runtime.checkpoint.InflightDataRescalingDescriptor.InflightDataGateOrPartitionRescalingDescriptor;
@@ -756,7 +757,7 @@ public class StateAssignmentOperationTest extends TestLogger {
         // given: There is only input channel state for one subpartition.
         List<OperatorID> operatorIds = buildOperatorIds(2);
         Map<OperatorID, OperatorState> states = new HashMap<>();
-        Random random = new Random();
+        Random random = new SecureRandom();
         OperatorState upstreamState = new OperatorState(operatorIds.get(0), 2, MAX_P);
         OperatorSubtaskState state =
                 OperatorSubtaskState.builder()
@@ -794,7 +795,7 @@ public class StateAssignmentOperationTest extends TestLogger {
     @Test
     public void testOnlyUpstreamChannelRescaleStateAssignment()
             throws JobException, JobExecutionException {
-        Random random = new Random();
+        Random random = new SecureRandom();
         OperatorSubtaskState upstreamOpState =
                 OperatorSubtaskState.builder()
                         .setResultSubpartitionState(
@@ -811,7 +812,7 @@ public class StateAssignmentOperationTest extends TestLogger {
     @Test
     public void testOnlyDownstreamChannelRescaleStateAssignment()
             throws JobException, JobExecutionException {
-        Random random = new Random();
+        Random random = new SecureRandom();
         OperatorSubtaskState downstreamOpState =
                 OperatorSubtaskState.builder()
                         .setInputChannelState(
@@ -1008,7 +1009,7 @@ public class StateAssignmentOperationTest extends TestLogger {
 
     private Map<OperatorID, OperatorState> buildOperatorStates(
             List<OperatorID> operatorIDs, int numSubTasks) {
-        Random random = new Random();
+        Random random = new SecureRandom();
         final OperatorID lastId = operatorIDs.get(operatorIDs.size() - 1);
         return operatorIDs.stream()
                 .collect(

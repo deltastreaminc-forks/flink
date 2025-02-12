@@ -17,6 +17,7 @@
 
 package org.apache.flink.python.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.streaming.api.functions.source.SourceFunction;
 import org.apache.flink.types.Row;
 
@@ -30,7 +31,7 @@ public class MyCustomSourceFunction implements SourceFunction<Row> {
     private static final String[] NAMES = {"Bob", "Marry", "Henry", "Mike", "Ted", "Jack"};
 
     public void run(SourceContext sourceContext) {
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < NAMES.length; i++) {
             Row row = Row.of(i, NAMES[i]);
             sourceContext.collect(row);

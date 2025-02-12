@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.io.FilePathFilter;
 import org.apache.flink.api.common.state.CheckpointListener;
@@ -199,7 +200,7 @@ public class ContinuousFileProcessingCheckpointITCase extends StreamFaultToleran
             long failurePosMax = (long) (0.7 * LINES_PER_FILE);
 
             elementsToFailure =
-                    (new Random().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
+                    (new SecureRandom().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
         }
 
         @Override

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.iterative.concurrent;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.DataInputView;
 import org.apache.flink.core.memory.DataOutputView;
 import org.apache.flink.runtime.iterative.io.SerializedUpdateBuffer;
@@ -96,7 +97,7 @@ public class BlockingBackChannelTest {
             this.backChannel = backChannel;
             this.dataChannel = dataChannel;
             this.actionLog = actionLog;
-            random = new Random();
+            random = new SecureRandom();
         }
 
         @Override
@@ -141,7 +142,7 @@ public class BlockingBackChannelTest {
             this.backChannel = backChannel;
             this.dataChannel = dataChannel;
             this.actionLog = actionLog;
-            random = new Random();
+            random = new SecureRandom();
         }
 
         @Override

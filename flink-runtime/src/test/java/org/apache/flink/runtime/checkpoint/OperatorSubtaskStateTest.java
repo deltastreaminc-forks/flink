@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.checkpoint.channel.InputChannelInfo;
 import org.apache.flink.runtime.checkpoint.channel.ResultSubpartitionInfo;
 import org.apache.flink.runtime.jobgraph.JobVertexID;
@@ -67,7 +68,7 @@ public class OperatorSubtaskStateTest {
         // given: Initialized operator subtask state.
         JobVertexID jobVertexID = new JobVertexID();
         int index = 0;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         OperatorSubtaskState operatorSubtaskState =
                 OperatorSubtaskState.builder()

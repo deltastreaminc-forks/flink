@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro.typeutils;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeutils.SerializerTestBase;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.formats.avro.generated.UnionLogicalType;
@@ -45,7 +46,7 @@ class AvroUnionLogicalSerializerTest extends SerializerTestBase<UnionLogicalType
 
     @Override
     protected UnionLogicalType[] getTestData() {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final UnionLogicalType[] data = new UnionLogicalType[20];
 
         for (int i = 0; i < data.length; i++) {

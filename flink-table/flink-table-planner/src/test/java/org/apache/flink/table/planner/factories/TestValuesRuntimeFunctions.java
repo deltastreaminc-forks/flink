@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.factories;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.eventtime.Watermark;
 import org.apache.flink.api.common.eventtime.WatermarkGenerator;
 import org.apache.flink.api.common.eventtime.WatermarkOutput;
@@ -721,7 +722,7 @@ final class TestValuesRuntimeFunctions {
             this.converter = converter;
             this.projectable = generatedProjection.isPresent();
             this.generatedProjection = generatedProjection.orElse(null);
-            this.random = new Random();
+            this.random = new SecureRandom();
         }
 
         @Override

@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.tests;
 
+import java.security.SecureRandom;
 import org.apache.flink.streaming.api.functions.source.RichParallelSourceFunction;
 import org.apache.flink.streaming.tests.verify.TtlStateVerifier;
 
@@ -51,7 +52,7 @@ class TtlStateUpdateSource extends RichParallelSourceFunction<TtlStateUpdate> {
 
     @Override
     public void run(SourceContext<TtlStateUpdate> ctx) throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
         long elementsBeforeSleep = sleepAfterElements;
         while (running) {
             for (int i = 0; i < sleepAfterElements; i++) {

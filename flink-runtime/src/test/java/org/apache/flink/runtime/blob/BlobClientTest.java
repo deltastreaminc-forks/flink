@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.BlobServerOptions;
 import org.apache.flink.configuration.Configuration;
@@ -419,7 +420,7 @@ public class BlobClientTest extends TestLogger {
                         getBlobClientConfig())) {
 
             byte[] data = new byte[5000000];
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
             rnd.nextBytes(data);
 
             // put content addressable (like libraries)

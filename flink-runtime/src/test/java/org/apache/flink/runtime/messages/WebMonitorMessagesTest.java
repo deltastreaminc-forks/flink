@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.messages;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.runtime.execution.ExecutionState;
@@ -44,7 +45,7 @@ public class WebMonitorMessagesTest {
     @Test
     public void testStatusMessages() {
         try {
-            final Random rnd = new Random();
+            final Random rnd = new SecureRandom();
 
             GenericMessageTester.testMessageInstance(RequestJobsOverview.getInstance());
             GenericMessageTester.testMessageInstance(RequestJobsWithIDsOverview.getInstance());
@@ -80,7 +81,7 @@ public class WebMonitorMessagesTest {
     @Test
     public void testJobDetailsMessage() {
         try {
-            final Random rnd = new Random();
+            final Random rnd = new SecureRandom();
 
             int[] numVerticesPerState = new int[ExecutionState.values().length];
             int numTotal = 0;
@@ -132,7 +133,7 @@ public class WebMonitorMessagesTest {
     @Test
     public void testMultipleJobDetails() {
         try {
-            final Random rnd = new Random();
+            final Random rnd = new SecureRandom();
             GenericMessageTester.testMessageInstance(
                     new MultipleJobsDetails(randomJobDetails(rnd)));
         } catch (Exception e) {

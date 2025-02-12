@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.json;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.connector.testutils.formats.DummyInitializationContext;
 import org.apache.flink.core.testutils.FlinkAssertions;
@@ -215,7 +216,7 @@ class JsonRowDataSerDeSchemaTest {
      */
     @Test
     void testSlowDeserialization() throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
         boolean bool = random.nextBoolean();
         int integer = random.nextInt();
         long bigint = random.nextLong();

@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.data;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.base.LocalDateSerializer;
@@ -750,7 +751,7 @@ public class BinaryRowDataTest {
 
         BinaryRowData row = new BinaryRowData(1);
         BinaryRowWriter writer = new BinaryRowWriter(row);
-        Random random = new Random();
+        Random random = new SecureRandom();
         byte[] bytes = new byte[1024];
         random.nextBytes(bytes);
         writer.writeBinary(0, bytes);
@@ -825,7 +826,7 @@ public class BinaryRowDataTest {
         GenericTypeInfo<MyObj> info = new GenericTypeInfo<>(MyObj.class);
         TypeSerializer<MyObj> genericSerializer = info.createSerializer(new ExecutionConfig());
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         byte[] bytes = new byte[1024];
 
         BinaryRowData row = new BinaryRowData(1);
@@ -860,7 +861,7 @@ public class BinaryRowDataTest {
     @Test
     public void testZeroOutPaddingString() {
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         byte[] bytes = new byte[1024];
 
         BinaryRowData row = new BinaryRowData(1);

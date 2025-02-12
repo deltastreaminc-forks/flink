@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro;
 
+import java.security.SecureRandom;
 import org.apache.flink.formats.avro.generated.Address;
 import org.apache.flink.formats.avro.generated.SimpleRecord;
 import org.apache.flink.formats.avro.utils.TestDataGenerator;
@@ -40,7 +41,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /** Tests for {@link RegistryAvroDeserializationSchema}. */
 class RegistryAvroDeserializationSchemaTest {
 
-    private static final Address address = TestDataGenerator.generateRandomAddress(new Random());
+    private static final Address address = TestDataGenerator.generateRandomAddress(new SecureRandom());
 
     @Test
     void testGenericRecordReadWithCompatibleSchema() throws IOException {

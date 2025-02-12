@@ -17,6 +17,7 @@
 
 package org.apache.flink.state.changelog;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
@@ -86,7 +87,7 @@ import static org.junit.Assert.assertTrue;
  * StateChangelogWriter} created by {@link FsStateChangelogStorage}.
  */
 public class ChangelogStateDiscardTest {
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     @Test
     public void testPreEmptiveUploadDiscardedOnMaterialization() throws Exception {

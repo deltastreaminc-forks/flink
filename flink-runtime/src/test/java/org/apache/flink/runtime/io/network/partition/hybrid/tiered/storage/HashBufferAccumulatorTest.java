@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid.tiered.storage;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.network.api.EndOfPartitionEvent;
 import org.apache.flink.runtime.io.network.api.serialization.EventSerializer;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
@@ -65,7 +66,7 @@ class HashBufferAccumulatorTest {
         int numBuffers = 10;
         int numRecords = 1000;
         TieredStorageSubpartitionId subpartitionId = new TieredStorageSubpartitionId(0);
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         TieredStorageMemoryManager tieredStorageMemoryManager =
                 createStorageMemoryManager(numBuffers);
@@ -146,7 +147,7 @@ class HashBufferAccumulatorTest {
                                         ((subpartition, buffers) ->
                                                 buffers.forEach(Buffer::recycleBuffer)));
                                 bufferAccumulator.receive(
-                                        generateRandomData(1, new Random()),
+                                        generateRandomData(1, new SecureRandom()),
                                         new TieredStorageSubpartitionId(0),
                                         Buffer.DataType.DATA_BUFFER,
                                         false);

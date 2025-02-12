@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint.channel;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.runtime.jobgraph.JobVertexID;
 import org.apache.flink.runtime.state.CheckpointStorage;
@@ -44,7 +45,7 @@ public class ChannelStateWriteRequestExecutorFactoryTest {
 
     private void assertReuseExecutor(int maxSubtasksPerChannelStateFile) {
         JobID JOB_ID = new JobID();
-        Random RANDOM = new Random();
+        Random RANDOM = new SecureRandom();
         ChannelStateWriteRequestExecutorFactory executorFactory =
                 new ChannelStateWriteRequestExecutorFactory(JOB_ID);
         int numberOfTasks = 100;

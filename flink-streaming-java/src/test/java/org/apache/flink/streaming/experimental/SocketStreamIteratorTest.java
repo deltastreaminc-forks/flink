@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.experimental;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.base.LongSerializer;
 import org.apache.flink.core.memory.DataOutputViewStreamWrapper;
@@ -45,7 +46,7 @@ public class SocketStreamIteratorTest {
 
         final AtomicReference<Throwable> error = new AtomicReference<>();
 
-        final long seed = new Random().nextLong();
+        final long seed = new SecureRandom().nextLong();
         final int numElements = 1000;
 
         final SocketStreamIterator<Long> iterator =

@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.runtime.operators.join;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.AbstractRichFunction;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
@@ -340,7 +341,7 @@ public class AsyncLookupJoinHarnessTest {
 
         private static final Map<Integer, List<RowData>> data = new HashMap<>();
 
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
 
         static {
             data.put(1, Collections.singletonList(GenericRowData.of(1, fromString("Julian"))));

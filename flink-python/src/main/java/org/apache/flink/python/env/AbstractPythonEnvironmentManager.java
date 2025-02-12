@@ -18,6 +18,7 @@
 
 package org.apache.flink.python.env;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.JobID;
@@ -196,7 +197,7 @@ public abstract class AbstractPythonEnvironmentManager implements PythonEnvironm
     }
 
     private static String createBaseDirectory(String[] tmpDirectories) throws IOException {
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         // try to find a unique file name for the base directory
         int maxAttempts = 10;
         for (int attempt = 0; attempt < maxAttempts; attempt++) {

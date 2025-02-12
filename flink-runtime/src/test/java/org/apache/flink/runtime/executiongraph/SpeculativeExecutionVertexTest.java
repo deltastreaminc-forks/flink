@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.executiongraph;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.api.common.io.GenericInputFormat;
 import org.apache.flink.core.io.GenericInputSplit;
@@ -252,7 +253,7 @@ class SpeculativeExecutionVertexTest {
         final List<Execution> executions = new ArrayList<>(ev.getCurrentExecutions());
 
         final Map<Integer, List<InputSplit>> splitsOfAttempts = new HashMap<>();
-        final Random rand = new Random();
+        final Random rand = new SecureRandom();
         while (executions.size() > 0) {
             final int index = rand.nextInt(executions.size());
             final Execution execution = executions.get(index);

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.HighAvailabilityOptions;
@@ -94,7 +95,7 @@ public class BlobCacheRecoveryTest extends TestLogger {
         final String clusterId = config.getString(HighAvailabilityOptions.HA_CLUSTER_ID);
         String storagePath =
                 config.getString(HighAvailabilityOptions.HA_STORAGE_PATH) + "/" + clusterId;
-        Random rand = new Random();
+        Random rand = new SecureRandom();
 
         try (BlobServer server0 =
                         new BlobServer(config, new File(blobStorage, "server0"), blobStore);

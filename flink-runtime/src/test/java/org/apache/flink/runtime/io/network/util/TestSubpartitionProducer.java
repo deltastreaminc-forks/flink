@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
@@ -62,7 +63,7 @@ public class TestSubpartitionProducer implements Callable<Boolean> {
 
         this.subpartition = checkNotNull(subpartition);
         this.isSlowProducer = isSlowProducer;
-        this.random = isSlowProducer ? new Random() : null;
+        this.random = isSlowProducer ? new SecureRandom() : null;
         this.source = checkNotNull(source);
     }
 

@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.operators;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.DataSet;
 import org.apache.flink.api.java.ExecutionEnvironment;
@@ -45,7 +46,7 @@ import static org.junit.Assert.assertEquals;
 @RunWith(Parameterized.class)
 public class SampleITCase extends MultipleProgramsTestBase {
 
-    private static final Random RNG = new Random();
+    private static final Random RNG = new SecureRandom();
 
     public SampleITCase(TestExecutionMode mode) {
         super(mode);

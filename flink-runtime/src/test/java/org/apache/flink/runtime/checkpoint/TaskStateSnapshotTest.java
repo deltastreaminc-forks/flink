@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.jobgraph.OperatorID;
 import org.apache.flink.runtime.state.InputChannelStateHandle;
 import org.apache.flink.runtime.state.OperatorStateHandle;
@@ -139,7 +140,7 @@ public class TaskStateSnapshotTest extends TestLogger {
 
     @Test
     public void testSizeIncludesChannelState() {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         InputChannelStateHandle inputChannelStateHandle =
                 createNewInputChannelStateHandle(10, random);
         ResultSubpartitionStateHandle resultSubpartitionStateHandle =

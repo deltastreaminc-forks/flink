@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.messages;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.execution.ExecutionState;
 import org.apache.flink.runtime.jobgraph.JobVertexID;
 import org.apache.flink.runtime.rest.messages.job.SubtaskExecutionAttemptDetailsInfo;
@@ -40,7 +41,7 @@ public class JobVertexDetailsInfoTest
 
     @Override
     protected JobVertexDetailsInfo getTestResponseInstance() throws Exception {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         final IOMetricsInfo jobVertexMetrics =
                 new IOMetricsInfo(
                         random.nextLong(),

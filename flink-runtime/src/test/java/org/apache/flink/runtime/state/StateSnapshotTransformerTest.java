@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.state.ListStateDescriptor;
 import org.apache.flink.api.common.state.MapStateDescriptor;
 import org.apache.flink.api.common.state.ValueStateDescriptor;
@@ -91,7 +92,7 @@ class StateSnapshotTransformerTest {
         final Random rnd;
 
         private TestState() {
-            this.rnd = new Random();
+            this.rnd = new SecureRandom();
         }
 
         abstract void setToRandomValue() throws Exception;

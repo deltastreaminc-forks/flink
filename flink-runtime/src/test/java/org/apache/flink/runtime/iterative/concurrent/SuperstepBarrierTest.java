@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.iterative.concurrent;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.event.TaskEvent;
 import org.apache.flink.runtime.iterative.event.AllWorkersDoneEvent;
 import org.apache.flink.runtime.iterative.event.TerminationEvent;
@@ -80,7 +81,7 @@ public class SuperstepBarrierTest {
         IterationHead(SuperstepBarrier barrier, TerminationSignaled terminationSignaled) {
             this.barrier = barrier;
             this.terminationSignaled = terminationSignaled;
-            random = new Random();
+            random = new SecureRandom();
         }
 
         @Override
@@ -111,7 +112,7 @@ public class SuperstepBarrierTest {
         IterationSync(SuperstepBarrier barrier, TaskEvent event) {
             this.barrier = barrier;
             this.event = event;
-            random = new Random();
+            random = new SecureRandom();
         }
 
         @Override

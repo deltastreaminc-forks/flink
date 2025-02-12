@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.iterative.concurrent;
 
+import java.security.SecureRandom;
 import org.apache.flink.util.Preconditions;
 
 import org.junit.Test;
@@ -39,7 +40,7 @@ public class BrokerTest {
 
     @Test
     public void mediation() throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int n = 0; n < 20; n++) {
             mediate(random.nextInt(10) + 1);
         }
@@ -89,7 +90,7 @@ public class BrokerTest {
             this.broker = broker;
             this.key = String.valueOf(key);
             this.value = value;
-            random = new Random();
+            random = new SecureRandom();
         }
 
         @Override
@@ -113,7 +114,7 @@ public class BrokerTest {
         IterationTail(Broker<String> broker, Integer key) {
             this.broker = broker;
             this.key = String.valueOf(key);
-            random = new Random();
+            random = new SecureRandom();
         }
 
         @Override

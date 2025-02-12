@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.runtime.io.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.checkpoint.CheckpointOptions;
 import org.apache.flink.runtime.checkpoint.channel.InputChannelInfo;
 import org.apache.flink.runtime.event.TaskEvent;
@@ -109,7 +110,7 @@ public class AlignedCheckpointsMassiveRandomTest {
 
     private static class RandomBarrier implements BarrierGenerator {
 
-        private static final Random rnd = new Random();
+        private static final Random rnd = new SecureRandom();
 
         private final double threshold;
 

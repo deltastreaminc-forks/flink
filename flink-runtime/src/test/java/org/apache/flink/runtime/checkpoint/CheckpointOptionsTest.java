@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.execution.SavepointFormatType;
 import org.apache.flink.core.testutils.CommonTestUtils;
 import org.apache.flink.runtime.checkpoint.CheckpointOptions.AlignmentType;
@@ -52,7 +53,7 @@ public class CheckpointOptionsTest {
 
     @Test
     public void testSavepoint() throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final byte[] locationBytes = new byte[rnd.nextInt(41) + 1];
         rnd.nextBytes(locationBytes);
 

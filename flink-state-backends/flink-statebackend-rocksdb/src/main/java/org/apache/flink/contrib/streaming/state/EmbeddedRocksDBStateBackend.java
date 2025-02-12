@@ -18,6 +18,7 @@
 
 package org.apache.flink.contrib.streaming.state;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.PublicEvolving;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.ExecutionConfig;
@@ -381,7 +382,7 @@ public class EmbeddedRocksDBStateBackend extends AbstractManagedMemoryStateBacke
             }
         }
 
-        nextDirectory = new Random().nextInt(initializedDbBasePaths.length);
+        nextDirectory = new SecureRandom().nextInt(initializedDbBasePaths.length);
 
         isInitialized = true;
     }

@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.runtime.io;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeutils.base.LongSerializer;
 import org.apache.flink.core.memory.DataOutputSerializer;
 import org.apache.flink.runtime.checkpoint.CheckpointException;
@@ -234,7 +235,7 @@ public class StreamTaskNetworkInputTest {
     @Test
     public void testRecordsAreProcessedInBatches() throws Exception {
         int numInputChannels = 2;
-        Random random = new Random();
+        Random random = new SecureRandom();
         LongSerializer inSerializer = LongSerializer.INSTANCE;
         StreamTestSingleInputGate<Long> inputGate =
                 new StreamTestSingleInputGate<>(numInputChannels, 0, inSerializer, 1024);
@@ -269,7 +270,7 @@ public class StreamTaskNetworkInputTest {
     @Test
     public void testBatchProcessingRecordsCanBeInterrupted() throws Exception {
         int numInputChannels = 2;
-        Random random = new Random();
+        Random random = new SecureRandom();
         LongSerializer inSerializer = LongSerializer.INSTANCE;
         StreamTestSingleInputGate<Long> inputGate =
                 new StreamTestSingleInputGate<>(numInputChannels, 0, inSerializer, 1024);

@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.api.operators.collect.utils;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.accumulators.SerializedListAccumulator;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.base.array.BytePrimitiveArraySerializer;
@@ -74,7 +75,7 @@ public abstract class AbstractTestCoordinationRequestHandler<T>
 
         this.accumulatorResults = new HashMap<>();
 
-        this.random = new Random();
+        this.random = new SecureRandom();
         this.closed = false;
     }
 

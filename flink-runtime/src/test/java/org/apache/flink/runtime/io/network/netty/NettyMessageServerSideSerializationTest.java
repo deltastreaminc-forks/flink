@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.netty;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.event.task.IntegerTaskEvent;
 import org.apache.flink.runtime.io.network.partition.ResultPartitionID;
 import org.apache.flink.runtime.io.network.partition.consumer.InputChannelID;
@@ -40,7 +41,7 @@ import static org.junit.Assert.assertEquals;
  */
 public class NettyMessageServerSideSerializationTest extends TestLogger {
 
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     private EmbeddedChannel channel;
 

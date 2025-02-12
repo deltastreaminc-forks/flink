@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.RichFilterFunction;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.functions.RichReduceFunction;
@@ -166,7 +167,7 @@ public class CoStreamCheckpointingITCase extends AbstractTestBase {
 
         @Override
         public void run(SourceContext<String> ctx) throws Exception {
-            final Random rnd = new Random();
+            final Random rnd = new SecureRandom();
             final StringBuilder stringBuilder = new StringBuilder();
 
             final Object lockingObject = ctx.getCheckpointLock();
@@ -301,7 +302,7 @@ public class CoStreamCheckpointingITCase extends AbstractTestBase {
                     (long) (0.7 * numElements / getRuntimeContext().getNumberOfParallelSubtasks());
 
             failurePos =
-                    (new Random().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
+                    (new SecureRandom().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
             count = 0;
         }
 

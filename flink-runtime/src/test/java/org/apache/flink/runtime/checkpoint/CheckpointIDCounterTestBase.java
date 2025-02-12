@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.util.TestLoggerExtension;
 
@@ -181,7 +182,7 @@ abstract class CheckpointIDCounterTestBase {
 
         @Override
         public List<Long> call() throws Exception {
-            final Random rand = new Random();
+            final Random rand = new SecureRandom();
             final List<Long> counts = new ArrayList<>();
 
             // Wait for the main thread to kick off execution

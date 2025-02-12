@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint.channel;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
 import org.apache.flink.runtime.io.network.buffer.BufferBuilder;
@@ -157,7 +158,7 @@ class ChannelStateSerializerImplTest {
 
     static byte[] generateData(int len) {
         byte[] bytes = new byte[len];
-        new Random().nextBytes(bytes);
+        new SecureRandom().nextBytes(bytes);
         return bytes;
     }
 }

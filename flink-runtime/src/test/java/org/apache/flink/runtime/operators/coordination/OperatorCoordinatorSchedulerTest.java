@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators.coordination;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.core.fs.CloseableRegistry;
@@ -282,7 +283,7 @@ public class OperatorCoordinatorSchedulerTest extends TestLogger {
     @Test
     public void testTakeCheckpoint() throws Exception {
         final byte[] checkpointData = new byte[656];
-        new Random().nextBytes(checkpointData);
+        new SecureRandom().nextBytes(checkpointData);
 
         final DefaultScheduler scheduler = createSchedulerAndDeployTasks();
         final TestingOperatorCoordinator coordinator = getCoordinator(scheduler);
@@ -335,7 +336,7 @@ public class OperatorCoordinatorSchedulerTest extends TestLogger {
     @Test
     public void testSavepointRestoresCoordinator() throws Exception {
         final byte[] testCoordinatorState = new byte[123];
-        new Random().nextBytes(testCoordinatorState);
+        new SecureRandom().nextBytes(testCoordinatorState);
 
         final DefaultScheduler scheduler =
                 createSchedulerWithRestoredSavepoint(testCoordinatorState);

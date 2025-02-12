@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.runtime.operators.join;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.AbstractRichFunction;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.core.memory.ManagedMemoryUseCase;
@@ -262,7 +263,7 @@ public abstract class Int2HashJoinOperatorTestBase implements Serializable {
         testHarness.invoke();
         testHarness.waitForTaskRunning();
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         do {
             BinaryRowData row1 = null;
             BinaryRowData row2 = null;

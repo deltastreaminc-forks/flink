@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.tests.queryablestate;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
 import org.apache.flink.api.common.state.CheckpointListener;
 import org.apache.flink.api.common.state.MapState;
@@ -106,7 +107,7 @@ public class QsStateProducer {
         @Override
         public void open(Configuration parameters) throws Exception {
             super.open(parameters);
-            this.random = new Random();
+            this.random = new SecureRandom();
             this.isRunning = true;
         }
 

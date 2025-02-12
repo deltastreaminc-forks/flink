@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.examples.statemachine.generator;
 
+import java.security.SecureRandom;
 import org.apache.flink.streaming.examples.statemachine.dfa.EventTypeAndState;
 import org.apache.flink.streaming.examples.statemachine.dfa.State;
 import org.apache.flink.streaming.examples.statemachine.event.Event;
@@ -60,7 +61,7 @@ public class EventsGenerator {
         checkArgument(errorProb >= 0.0 && errorProb <= 1.0, "Invalid error probability");
         this.errorProb = errorProb;
 
-        this.rnd = new Random();
+        this.rnd = new SecureRandom();
         this.states = new LinkedHashMap<>();
     }
 

@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint.channel;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.checkpoint.CheckpointFailureReason;
@@ -202,7 +203,7 @@ class ChannelStateWriteRequestDispatcherImplTest {
             processor.dispatch(ChannelStateWriteRequest.registerSubtask(JOB_VERTEX_ID, i));
         }
         long checkpointId = 1L;
-        int abortedSubtaskIndex = new Random().nextInt(numberOfSubtask);
+        int abortedSubtaskIndex = new SecureRandom().nextInt(numberOfSubtask);
         processor.dispatch(
                 ChannelStateWriteRequest.abort(
                         JOB_VERTEX_ID, abortedSubtaskIndex, checkpointId, new TestException()));

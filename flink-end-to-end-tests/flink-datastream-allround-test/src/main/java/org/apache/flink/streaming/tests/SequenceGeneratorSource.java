@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.tests;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.RuntimeContext;
 import org.apache.flink.api.common.state.ListState;
 import org.apache.flink.api.common.state.ListStateDescriptor;
@@ -104,7 +105,7 @@ public class SequenceGeneratorSource extends RichParallelSourceFunction<Event>
     }
 
     private void runActive(SourceContext<Event> ctx) throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         // this holds the current event time, from which generated events can up to +/-
         // (maxOutOfOrder).

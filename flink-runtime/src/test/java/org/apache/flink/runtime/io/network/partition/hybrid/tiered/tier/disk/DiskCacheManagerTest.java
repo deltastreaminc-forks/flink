@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid.tiered.tier.disk;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.event.AbstractEvent;
 import org.apache.flink.runtime.io.network.api.EndOfSegmentEvent;
@@ -50,7 +51,7 @@ class DiskCacheManagerTest {
         int numAddBuffers = 100;
         int maxBufferSizeBytes = 100;
         int subpartitionId = 0;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         TestingTieredStorageMemoryManager memoryManager =
                 new TestingTieredStorageMemoryManager.Builder().build();

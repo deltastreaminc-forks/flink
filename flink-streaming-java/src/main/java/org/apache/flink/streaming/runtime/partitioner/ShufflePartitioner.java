@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.runtime.partitioner;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.runtime.io.network.api.writer.SubtaskStateMapper;
 import org.apache.flink.runtime.plugable.SerializationDelegate;
@@ -33,7 +34,7 @@ import java.util.Random;
 public class ShufflePartitioner<T> extends StreamPartitioner<T> {
     private static final long serialVersionUID = 1L;
 
-    private Random random = new Random();
+    private Random random = new SecureRandom();
 
     @Override
     public int selectChannel(SerializationDelegate<StreamRecord<T>> record) {

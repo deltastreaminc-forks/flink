@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.filesystem;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileSystem;
@@ -110,7 +111,7 @@ public class CheckpointStateOutputStreamTest extends TestLogger {
         final Path folder = baseFolder();
         final String fileName = "fooBarName";
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final byte[] data = new byte[1694523];
 
         // write the data (mixed single byte writes and array writes)
@@ -153,7 +154,7 @@ public class CheckpointStateOutputStreamTest extends TestLogger {
 
         // write some test data and close the stream
         try (FSDataOutputStream stream = createTestStream(fs, folder, fileName)) {
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
             for (int i = 0; i < rnd.nextInt(1000); i++) {
                 stream.write(rnd.nextInt(100));
             }

@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.streaming.runtime;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.RuntimeExecutionMode;
 import org.apache.flink.api.common.eventtime.Watermark;
 import org.apache.flink.api.common.eventtime.WatermarkGenerator;
@@ -697,7 +698,7 @@ public class SortingBoundedInputITCase extends AbstractTestBase {
 
         private final long numberOfRecords;
         private long generatedRecords;
-        private final Random rnd = new Random();
+        private final Random rnd = new SecureRandom();
         private final byte[] bytes = new byte[500];
 
         private InputGenerator(long numberOfRecords) {

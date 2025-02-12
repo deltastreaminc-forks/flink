@@ -18,13 +18,14 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid.tiered.netty;
 
+import java.security.SecureRandom;
 import java.util.Objects;
 import java.util.Random;
 
 /** {@link NettyConnectionId} indicates the unique id of netty connection. */
 public class NettyConnectionId {
 
-    private static final Random RANDOM_SEED = new Random();
+    private static final Random RANDOM_SEED = new SecureRandom();
 
     private final long lowerPart;
 

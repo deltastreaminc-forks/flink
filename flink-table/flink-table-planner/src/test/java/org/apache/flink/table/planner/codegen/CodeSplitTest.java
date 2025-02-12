@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.codegen;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.ReadableConfig;
 import org.apache.flink.core.testutils.FlinkMatchers;
@@ -84,7 +85,7 @@ public class CodeSplitTest {
 
         GenericRowData rowData1 = new GenericRowData(numFields);
         GenericRowData rowData2 = new GenericRowData(numFields);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < numFields; i++) {
             rowData1.setField(i, 0);
             rowData2.setField(i, 1);
@@ -157,7 +158,7 @@ public class CodeSplitTest {
 
         GenericRowData rowData1 = new GenericRowData(numFields);
         GenericRowData rowData2 = new GenericRowData(numFields);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < numFields; i++) {
             int x = random.nextInt(100);
             rowData1.setField(i, x);

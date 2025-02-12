@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.messages;
 
+import java.security.SecureRandom;
 import java.util.HashMap;
 import java.util.Map;
 import java.util.Random;
@@ -25,7 +26,7 @@ import java.util.Random;
 /** Test for (un)marshalling of the {@link ResourceProfileInfo}. */
 public class ResourceProfileInfoTest extends RestResponseMarshallingTestBase<ResourceProfileInfo> {
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     @Override
     protected Class<ResourceProfileInfo> getTestResponseClass() {

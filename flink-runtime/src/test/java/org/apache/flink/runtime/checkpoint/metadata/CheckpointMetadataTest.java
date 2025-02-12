@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint.metadata;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.checkpoint.MasterState;
 import org.apache.flink.runtime.checkpoint.OperatorState;
 
@@ -35,7 +36,7 @@ public class CheckpointMetadataTest {
 
     @Test
     public void testConstructAndDispose() throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final long checkpointId = rnd.nextInt(Integer.MAX_VALUE) + 1;
         final int numTaskStates = 4;

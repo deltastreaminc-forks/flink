@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.consumer;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.core.testutils.OneShotLatch;
@@ -1987,7 +1988,7 @@ public class RemoteInputChannelTest {
         return new Callable<Void>() {
             @Override
             public Void call() throws Exception {
-                Random random = new Random();
+                Random random = new SecureRandom();
 
                 while (!exclusiveBuffers.isEmpty() && !floatingBuffers.isEmpty()) {
                     if (random.nextBoolean()) {

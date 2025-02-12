@@ -18,6 +18,7 @@
 
 package org.apache.flink.contrib.streaming.state;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.CloseableRegistry;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.runtime.state.IncrementalRemoteKeyedStateHandle;
@@ -194,7 +195,7 @@ public class RocksDBStateDownloaderTest extends TestLogger {
     }
 
     private byte[][][] createContents(int numRemoteHandles, int numSubHandles) {
-        Random random = new Random();
+        Random random = new SecureRandom();
         byte[][][] contents = new byte[numRemoteHandles][numSubHandles][];
         for (int i = 0; i < numRemoteHandles; ++i) {
             for (int j = 0; j < numSubHandles; ++j) {

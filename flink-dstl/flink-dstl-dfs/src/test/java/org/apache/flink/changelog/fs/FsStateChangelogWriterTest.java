@@ -17,6 +17,7 @@
 
 package org.apache.flink.changelog.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.mailbox.SyncMailboxExecutor;
 import org.apache.flink.runtime.state.KeyGroupRange;
@@ -45,7 +46,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /** {@link FsStateChangelogWriter} test. */
 class FsStateChangelogWriterTest {
     private static final int KEY_GROUP = 0;
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     @Test
     void testAppend() throws Exception {

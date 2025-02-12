@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.filesystem;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileStatus;
@@ -89,7 +90,7 @@ public abstract class AbstractFileCheckpointStorageAccessTestBase {
         final CheckpointStorageAccess storage = createCheckpointStorage(randomTempPath());
 
         final byte[] data = new byte[23686];
-        new Random().nextBytes(data);
+        new SecureRandom().nextBytes(data);
         try (FSDataOutputStream out = fs.create(metadataFile, WriteMode.NO_OVERWRITE)) {
             out.write(data);
         }

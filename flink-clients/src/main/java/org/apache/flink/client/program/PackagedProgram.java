@@ -18,6 +18,7 @@
 
 package org.apache.flink.client.program;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ProgramDescription;
 import org.apache.flink.client.ClientUtils;
 import org.apache.flink.configuration.Configuration;
@@ -530,7 +531,7 @@ public class PackagedProgram implements AutoCloseable {
             boolean incomplete = true;
 
             try {
-                final Random rnd = new Random();
+                final Random rnd = new SecureRandom();
                 final byte[] buffer = new byte[4096];
 
                 for (final JarEntry entry : containedJarFileEntries) {

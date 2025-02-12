@@ -18,6 +18,7 @@
 
 package org.apache.flink.kubernetes.highavailability;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
@@ -216,7 +217,7 @@ class KubernetesHighAvailabilityRecoverFromSavepointITCase {
 
         @Override
         public void run(SourceContext<Integer> ctx) throws Exception {
-            final Random random = new Random();
+            final Random random = new SecureRandom();
             while (running) {
                 synchronized (ctx.getCheckpointLock()) {
                     ctx.collect(random.nextInt());

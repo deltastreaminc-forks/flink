@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.disk.iomanager;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
 import org.apache.flink.runtime.io.network.buffer.BufferRecycler;
@@ -50,7 +51,7 @@ public class BufferFileWriterFileSegmentReaderTest {
 
     private static final BufferRecycler BUFFER_RECYCLER = FreeingBufferRecycler.INSTANCE;
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     private static final IOManager ioManager = new IOManagerAsync();
 

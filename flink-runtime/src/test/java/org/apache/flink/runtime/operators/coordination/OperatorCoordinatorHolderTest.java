@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators.coordination;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.testutils.OneShotLatch;
 import org.apache.flink.runtime.concurrent.ComponentMainThreadExecutor;
@@ -338,7 +339,7 @@ public class OperatorCoordinatorHolderTest extends TestLogger {
         // but it randomly alters the timings between the coordinator's thread (event sender) and
         // the main thread (holder). This should produce a flaky test if we missed some corner
         // cases.
-        Thread.sleep(new Random().nextInt(10));
+        Thread.sleep(new SecureRandom().nextInt(10));
         executor.triggerAll();
 
         // trigger the checkpoint - this should also close the gateway as soon as the future is
@@ -349,7 +350,7 @@ public class OperatorCoordinatorHolderTest extends TestLogger {
 
         // give the coordinator some time to emit some events. Same as above, this adds some
         // randomization
-        Thread.sleep(new Random().nextInt(10));
+        Thread.sleep(new SecureRandom().nextInt(10));
         holder.close();
         executor.triggerAll();
 

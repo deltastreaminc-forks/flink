@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java.typeutils.runtime.kryo;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeutils.ComparatorTestBase;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
@@ -87,7 +88,7 @@ public class KryoGenericTypeSerializerTest extends AbstractGenericTypeSerializer
             String str;
             {
                 char[] charData = new char[40000];
-                Random rnd = new Random();
+                Random rnd = new SecureRandom();
 
                 for (int i = 0; i < charData.length; i++) {
                     charData[i] = (char) rnd.nextInt(10000);

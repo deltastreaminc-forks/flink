@@ -18,6 +18,7 @@
 
 package org.apache.flink.fs.gs.writer;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.fs.gs.GSFileSystemOptions;
 import org.apache.flink.fs.gs.TestUtils;
@@ -113,7 +114,7 @@ public class GSRecoverableWriterCommitterTest {
         }
         options = new GSFileSystemOptions(flinkConfig);
 
-        random = new Random();
+        random = new SecureRandom();
         random.setSeed(TestUtils.RANDOM_SEED);
 
         blobStorage = new MockBlobStorage();

@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.PublicEvolving;
 
 import java.util.Random;
@@ -28,7 +29,7 @@ public class AbstractID implements Comparable<AbstractID>, java.io.Serializable 
 
     private static final long serialVersionUID = 1L;
 
-    private static final Random RND = new Random();
+    private static final Random RND = new SecureRandom();
 
     /** The size of a long in bytes. */
     private static final int SIZE_OF_LONG = 8;

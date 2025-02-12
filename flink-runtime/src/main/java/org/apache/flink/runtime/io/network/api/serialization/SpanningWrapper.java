@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.io.network.api.serialization;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.RefCountedFile;
 import org.apache.flink.core.memory.DataInputDeserializer;
 import org.apache.flink.core.memory.DataInputView;
@@ -64,7 +65,7 @@ final class SpanningWrapper {
 
     private String[] tempDirs;
 
-    private final Random rnd = new Random();
+    private final Random rnd = new SecureRandom();
 
     private final DataInputDeserializer serializationReadBuffer;
 

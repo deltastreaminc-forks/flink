@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.restartstrategy.RestartStrategies;
 import org.apache.flink.api.common.state.CheckpointListener;
@@ -158,7 +159,7 @@ public class KeyedStateCheckpointingITCase extends TestLogger {
         final int failurePosMin = (int) (0.6 * NUM_STRINGS / PARALLELISM);
         final int failurePosMax = (int) (0.8 * NUM_STRINGS / PARALLELISM);
         final int failurePos =
-                (new Random().nextInt(failurePosMax - failurePosMin) + failurePosMin);
+                (new SecureRandom().nextInt(failurePosMax - failurePosMin) + failurePosMin);
 
         final DataStream<Integer> stream1 =
                 env.addSource(new IntGeneratingSourceFunction(NUM_STRINGS / 2, NUM_STRINGS / 4));

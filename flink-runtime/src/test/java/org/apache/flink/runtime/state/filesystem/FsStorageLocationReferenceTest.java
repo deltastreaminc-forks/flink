@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.filesystem;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.runtime.state.CheckpointStorageLocationReference;
 import org.apache.flink.util.StringUtils;
@@ -36,7 +37,7 @@ public class FsStorageLocationReferenceTest extends TestLogger {
 
     @Test
     public void testEncodeAndDecode() throws Exception {
-        final Path path = randomPath(new Random());
+        final Path path = randomPath(new SecureRandom());
 
         try {
             CheckpointStorageLocationReference ref = encodePathAsReference(path);

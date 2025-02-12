@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators.coordination;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobExecutionResult;
 import org.apache.flink.api.common.accumulators.ListAccumulator;
 import org.apache.flink.configuration.ConfigOption;
@@ -339,7 +340,7 @@ public class CoordinatorEventsExactlyOnceITCase extends TestLogger {
                                     "Coordinator Periodic Actions for " + name));
 
             this.nextNumber = 0;
-            this.maxNumberBeforeFailure = numEvents * 2 / 3 + new Random().nextInt(numEvents / 6);
+            this.maxNumberBeforeFailure = numEvents * 2 / 3 + new SecureRandom().nextInt(numEvents / 6);
         }
 
         @Override

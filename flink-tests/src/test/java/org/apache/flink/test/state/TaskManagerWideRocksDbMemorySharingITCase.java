@@ -17,6 +17,7 @@
 
 package org.apache.flink.test.state;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.common.state.ListState;
@@ -145,7 +146,7 @@ public class TaskManagerWideRocksDbMemorySharingITCase extends TestLogger {
                                 // let each task to grow its state at a different speed
                                 // to increase the probability of reporting different memory usages
                                 // among different tasks
-                                this.payloadSize = 4 + new Random().nextInt(7);
+                                this.payloadSize = 4 + new SecureRandom().nextInt(7);
                             }
 
                             @Override

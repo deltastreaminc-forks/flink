@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.io.disk.BatchShuffleReadBufferPool;
@@ -114,7 +115,7 @@ public class SortMergeResultPartitionTest {
         int numBuffers = useHashDataBuffer ? 100 : 15;
         int numSubpartitions = 10;
         int numRecords = 1000;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         BufferPool bufferPool = globalPool.createBufferPool(numBuffers, numBuffers);
         SortMergeResultPartition partition =
@@ -252,7 +253,7 @@ public class SortMergeResultPartitionTest {
         BufferPool bufferPool = globalPool.createBufferPool(numBuffers, numBuffers);
         SortMergeResultPartition partition = createSortMergedPartition(10, bufferPool);
 
-        ByteBuffer recordWritten = generateRandomData(bufferSize * numBuffers, new Random());
+        ByteBuffer recordWritten = generateRandomData(bufferSize * numBuffers, new SecureRandom());
         partition.emitRecord(recordWritten, 0);
         assertThat(bufferPool.bestEffortGetNumOfUsedBuffers())
                 .isEqualTo(useHashDataBuffer ? numBuffers : 0);
@@ -294,7 +295,7 @@ public class SortMergeResultPartitionTest {
                 createSortMergedPartition(numSubpartitions, bufferPool);
 
         for (int i = 0; i < numRecords; ++i) {
-            ByteBuffer record = generateRandomData(bufferSize, new Random());
+            ByteBuffer record = generateRandomData(bufferSize, new SecureRandom());
             partition.broadcastRecord(record);
         }
         partition.finish();

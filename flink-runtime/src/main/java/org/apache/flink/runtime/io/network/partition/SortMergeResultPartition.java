@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.configuration.NettyShuffleEnvironmentOptions;
 import org.apache.flink.core.memory.MemorySegment;
@@ -574,7 +575,7 @@ public class SortMergeResultPartition extends ResultPartition {
 
     private int[] getRandomSubpartitionOrder(int numSubpartitions) {
         int[] order = new int[numSubpartitions];
-        Random random = new Random();
+        Random random = new SecureRandom();
         int shift = random.nextInt(numSubpartitions);
         for (int channel = 0; channel < numSubpartitions; ++channel) {
             order[(channel + shift) % numSubpartitions] = channel;

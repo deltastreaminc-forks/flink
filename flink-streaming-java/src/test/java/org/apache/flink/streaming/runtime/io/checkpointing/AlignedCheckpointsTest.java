@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.runtime.io.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.runtime.checkpoint.CheckpointException;
 import org.apache.flink.runtime.checkpoint.CheckpointFailureReason;
@@ -72,7 +73,7 @@ public class AlignedCheckpointsTest {
 
     protected static final int PAGE_SIZE = 512;
 
-    private static final Random RND = new Random();
+    private static final Random RND = new SecureRandom();
 
     private static int sizeCounter = 1;
 

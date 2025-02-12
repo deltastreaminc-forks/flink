@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.functions.AggregateFunction;
 import org.apache.flink.api.common.functions.ReduceFunction;
@@ -3901,7 +3902,7 @@ public abstract class StateBackendTestBase<B extends AbstractStateBackend> exten
                 targetParallelism <= maxParallelism,
                 "Maximum parallelism must not be smaller than parallelism.");
 
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         List<ValueStateDescriptor<String>> stateDescriptors = new ArrayList<>(maxParallelism);
         List<Integer> keyInKeyGroups = new ArrayList<>(maxParallelism);

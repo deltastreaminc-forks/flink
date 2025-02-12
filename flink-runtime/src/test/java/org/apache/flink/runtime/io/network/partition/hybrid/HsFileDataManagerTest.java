@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.testutils.CheckedThread;
 import org.apache.flink.runtime.concurrent.ManuallyTriggeredScheduledExecutorService;
@@ -86,7 +87,7 @@ class HsFileDataManagerTest {
 
     @BeforeEach
     void before(@TempDir Path tempDir) throws IOException {
-        Random random = new Random();
+        Random random = new SecureRandom();
         random.nextBytes(dataBytes);
         bufferPool = new BatchShuffleReadBufferPool(BUFFER_POOL_SIZE * BUFFER_SIZE, BUFFER_SIZE);
         ioExecutor = new ManuallyTriggeredScheduledExecutorService();

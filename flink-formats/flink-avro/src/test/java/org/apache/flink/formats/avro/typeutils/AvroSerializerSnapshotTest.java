@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro.typeutils;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.TypeSerializerSnapshot;
 import org.apache.flink.api.common.typeutils.TypeSerializerSnapshotSerializationUtil;
@@ -176,7 +177,7 @@ class AvroSerializerSnapshotTest {
     @Test
     void recordSerializedShouldBeDeserializeWithTheResortedSerializer() throws IOException {
         // user is an avro generated test object.
-        final User user = TestDataGenerator.generateRandomUser(new Random());
+        final User user = TestDataGenerator.generateRandomUser(new SecureRandom());
         final AvroSerializer<User> originalSerializer = new AvroSerializer<>(User.class);
         //
         // first serialize the record

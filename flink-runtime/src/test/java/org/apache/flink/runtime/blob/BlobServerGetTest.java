@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.HighAvailabilityOptions;
@@ -77,7 +78,7 @@ import static org.junit.Assume.assumeTrue;
  */
 public class BlobServerGetTest extends TestLogger {
 
-    private final Random rnd = new Random();
+    private final Random rnd = new SecureRandom();
 
     @Rule public TemporaryFolder temporaryFolder = new TemporaryFolder();
 

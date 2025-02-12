@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid.tiered.storage;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
 import org.apache.flink.runtime.io.network.buffer.BufferPool;
 import org.apache.flink.runtime.io.network.buffer.NetworkBufferPool;
@@ -108,7 +109,7 @@ class SortBufferAccumulatorTest {
     @Test
     void testWriteLargeRecord() throws IOException {
         int numBuffers = 15;
-        Random random = new Random();
+        Random random = new SecureRandom();
         TieredStorageMemoryManager memoryManager = createStorageMemoryManager(numBuffers);
 
         // The test use only one buffer for sort, and when it is full, the sort buffer will be

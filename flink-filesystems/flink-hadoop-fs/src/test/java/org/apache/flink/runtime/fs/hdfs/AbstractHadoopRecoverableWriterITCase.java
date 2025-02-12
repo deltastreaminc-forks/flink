@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.fs.hdfs;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FileSystem;
@@ -53,7 +54,7 @@ import java.util.stream.Stream;
 public abstract class AbstractHadoopRecoverableWriterITCase extends TestLogger {
     // ----------------------- Test Specific configuration -----------------------
 
-    private static final Random RND = new Random();
+    private static final Random RND = new SecureRandom();
 
     protected static Path basePath;
 

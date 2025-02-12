@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.util.TestLogger;
 
@@ -38,7 +39,7 @@ public class DualKeyLinkedMapTest extends TestLogger {
 
     @Test
     public void testKeySets() {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         final Set<Tuple2<Integer, Integer>> keys = new HashSet<>();
 
         for (int i = 0; i < 10; i++) {

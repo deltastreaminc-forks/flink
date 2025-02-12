@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.parquet.vector;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.serialization.BulkWriter;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -132,7 +133,7 @@ class ParquetColumnarRowSplitReaderTest {
         int number = 10000;
         List<RowData> records = new ArrayList<>(number);
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < number; i++) {
             Integer v = random.nextInt(number / 2);
             if (v % 10 == 0) {
@@ -153,7 +154,7 @@ class ParquetColumnarRowSplitReaderTest {
         // prepare parquet file
         int number = 5;
         List<RowData> records = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < number; i++) {
             Integer v = random.nextInt(number / 2);
             if (v % 10 == 0) {
@@ -425,7 +426,7 @@ class ParquetColumnarRowSplitReaderTest {
         int number = 10000;
         List<RowData> records = new ArrayList<>(number);
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         int[] intValues = new int[10];
         // test large values in dictionary
         for (int i = 0; i < intValues.length; i++) {
@@ -452,7 +453,7 @@ class ParquetColumnarRowSplitReaderTest {
         int number = 10000;
         List<RowData> records = new ArrayList<>(number);
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         int[] intValues = new int[10];
         // test large values in dictionary
         for (int i = 0; i < intValues.length; i++) {
@@ -479,7 +480,7 @@ class ParquetColumnarRowSplitReaderTest {
         int number = 10000;
         List<RowData> records = new ArrayList<>(number);
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < 100; i++) {
             Integer v = random.nextInt(10);
             for (int j = 0; j < 100; j++) {
@@ -503,7 +504,7 @@ class ParquetColumnarRowSplitReaderTest {
         int number = 10000;
         List<RowData> records = new ArrayList<>(number);
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < number; i++) {
             Integer v = random.nextInt();
             if (v % 10 == 0) {

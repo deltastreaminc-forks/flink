@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.disk.iomanager;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
@@ -59,7 +60,7 @@ public class AsynchronousFileIOChannelTest {
 
         final ExecutorService executor = Executors.newFixedThreadPool(3);
 
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final RequestQueue<WriteRequest> requestQueue = new RequestQueue<WriteRequest>();
 

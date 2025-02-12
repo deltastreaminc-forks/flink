@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.memory;
 
+import java.security.SecureRandom;
 import org.junit.Test;
 
 import java.util.Random;
@@ -48,7 +49,7 @@ public class EndiannessAccessChecks {
     }
 
     private void testBigAndLittleEndianAccessUnaligned(MemorySegment segment) {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         // longs
         {

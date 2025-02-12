@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -524,7 +525,7 @@ public class FileUtilsTest {
             throws IOException, NoSuchAlgorithmException {
         MessageDigest messageDigest = MessageDigest.getInstance("MD5");
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         char startChar = 32, endChar = 127;
         for (int i = 0; i < length; i++) {
             int rnd = random.nextInt(endChar - startChar);

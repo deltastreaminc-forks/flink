@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.runtime.operators.sort;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.memory.MemorySegment;
@@ -153,7 +154,7 @@ public class BufferedKVExternalSorterTest {
             List<Integer> expecteds,
             int length)
             throws IOException {
-        Random random = new Random();
+        Random random = new SecureRandom();
         int stringLength = 30;
         for (int i = 0; i < length; i++) {
             BinaryRowData key = randomRow(random, stringLength);

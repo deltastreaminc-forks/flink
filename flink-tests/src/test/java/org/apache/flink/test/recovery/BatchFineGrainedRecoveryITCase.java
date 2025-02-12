@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.recovery;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionMode;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.functions.RichMapPartitionFunction;
@@ -191,7 +192,7 @@ public class BatchFineGrainedRecoveryITCase extends TestLogger {
 
     private static AtomicInteger lastTaskManagerIndexInMiniCluster;
 
-    private static final Random rnd = new Random();
+    private static final Random rnd = new SecureRandom();
 
     private static GlobalMapFailureTracker failureTracker;
 
