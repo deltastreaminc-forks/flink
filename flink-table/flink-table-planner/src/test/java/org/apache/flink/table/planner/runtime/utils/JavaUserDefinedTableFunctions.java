@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.runtime.utils;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.java.tuple.Tuple12;
@@ -118,7 +119,7 @@ public class JavaUserDefinedTableFunctions {
     /** Non-deterministic table function. */
     public static class NonDeterministicTableFunc extends TableFunction<String> {
 
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         public void eval(String str) {
             String[] values = str.split("#");

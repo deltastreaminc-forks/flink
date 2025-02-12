@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.io.network.api.serialization;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
 import org.apache.flink.util.CloseableIterator;
@@ -37,7 +38,7 @@ import static org.junit.Assert.assertArrayEquals;
 /** {@link SpanningWrapper} test. */
 public class SpanningWrapperTest {
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     @Rule public TemporaryFolder folder = new TemporaryFolder();
 

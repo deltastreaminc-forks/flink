@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.runtime.operators.join;
 
+import java.security.SecureRandom;
 import org.apache.flink.streaming.api.functions.async.AsyncRetryStrategy;
 import org.apache.flink.streaming.util.MockStreamingRuntimeContext;
 import org.apache.flink.streaming.util.retryable.AsyncRetryStrategies;
@@ -134,7 +135,7 @@ public class RetryableAsyncLookupFunctionDelegatorTest {
 
         private static final long serialVersionUID = 1L;
 
-        private final Random random = new Random();
+        private final Random random = new SecureRandom();
         private transient ExecutorService executor;
 
         @Override

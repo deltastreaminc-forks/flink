@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint.channel;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.checkpoint.OperatorSubtaskState;
@@ -111,7 +112,7 @@ public class SequentialChannelStateReaderImplTest {
     @BeforeEach
     void before() {
         serializer = new ChannelStateSerializerImpl();
-        random = new Random();
+        random = new SecureRandom();
         // will read without waiting for consumption
         buffersPerChannel =
                 Math.max(

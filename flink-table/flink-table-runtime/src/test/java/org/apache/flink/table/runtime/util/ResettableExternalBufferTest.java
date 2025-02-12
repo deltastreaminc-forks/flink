@@ -17,6 +17,7 @@
 
 package org.apache.flink.table.runtime.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.disk.iomanager.IOManager;
 import org.apache.flink.runtime.io.disk.iomanager.IOManagerAsync;
 import org.apache.flink.runtime.memory.MemoryManager;
@@ -56,7 +57,7 @@ public class ResettableExternalBufferTest {
     public void before() {
         this.memManager = MemoryManagerBuilder.newBuilder().setMemorySize(MEMORY_SIZE).build();
         this.ioManager = new IOManagerAsync();
-        this.random = new Random();
+        this.random = new SecureRandom();
         this.serializer = new BinaryRowDataSerializer(1);
         this.multiColumnFixedLengthSerializer = new BinaryRowDataSerializer(3);
         this.multiColumnVariableLengthSerializer = new BinaryRowDataSerializer(5);
@@ -896,7 +897,7 @@ public class ResettableExternalBufferTest {
         private final int col2;
 
         FixedLengthRowData() {
-            Random random = new Random();
+            Random random = new SecureRandom();
             col0 = random.nextBoolean();
             col1 = random.nextLong();
             col2 = random.nextInt();
@@ -930,7 +931,7 @@ public class ResettableExternalBufferTest {
         private final StringData col4;
 
         public VariableLengthRowData() {
-            Random random = new Random();
+            Random random = new SecureRandom();
             col0 = random.nextBoolean();
             col1 = random.nextLong();
             col2 = StringData.fromString(RandomStringUtils.random(random.nextInt(50) + 1));

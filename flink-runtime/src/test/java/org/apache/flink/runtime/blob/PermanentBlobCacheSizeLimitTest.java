@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.util.concurrent.FutureUtils;
@@ -53,7 +54,7 @@ import static org.junit.Assert.assertTrue;
  */
 public class PermanentBlobCacheSizeLimitTest {
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     private static final BlobKey.BlobType BLOB_TYPE = BlobKey.BlobType.PERMANENT_BLOB;
     private static final int BLOB_SIZE = 10_000;

@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.memory;
 
+import java.security.SecureRandom;
 import org.junit.Test;
 
 import java.util.Arrays;
@@ -43,7 +44,7 @@ public class CrossSegmentTypeTest {
         MemorySegment[] segs1 = createSegments(pageSize);
         MemorySegment[] segs2 = createSegments(pageSize);
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         for (MemorySegment seg1 : segs1) {
             for (MemorySegment seg2 : segs2) {
@@ -99,7 +100,7 @@ public class CrossSegmentTypeTest {
         MemorySegment[] segs1 = createSegments(pageSize);
         MemorySegment[] segs2 = createSegments(halfPageSize);
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         for (MemorySegment seg1 : segs1) {
             for (MemorySegment seg2 : segs2) {
@@ -145,7 +146,7 @@ public class CrossSegmentTypeTest {
         MemorySegment[] segs1 = createSegments(pageSize);
         MemorySegment[] segs2 = createSegments(pageSize);
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         for (MemorySegment seg1 : segs1) {
             for (MemorySegment seg2 : segs2) {

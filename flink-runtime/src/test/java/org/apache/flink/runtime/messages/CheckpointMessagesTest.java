@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.messages;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.testutils.CommonTestUtils;
@@ -53,7 +54,7 @@ public class CheckpointMessagesTest {
 
     @Test
     public void testConfirmTaskCheckpointed() {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         try {
             AcknowledgeCheckpoint noState =
                     new AcknowledgeCheckpoint(new JobID(), createExecutionAttemptId(), 569345L);

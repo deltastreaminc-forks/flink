@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.runtime.tasks;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
@@ -797,7 +798,7 @@ class SourceStreamTaskTest extends SourceStreamTaskTestBase {
 
             long sum = 0;
             for (int i = 0; i < checkpointDelay; i++) {
-                sum += new Random().nextLong();
+                sum += new SecureRandom().nextLong();
             }
 
             if (startCount != count) {

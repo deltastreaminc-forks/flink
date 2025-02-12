@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.HighAvailabilityOptions;
@@ -157,7 +158,7 @@ public class BlobCacheCorruptionTest extends TestLogger {
                 "corrupt HA file requires a HA setup",
                 !corruptOnHAStore || blobType == PERMANENT_BLOB);
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         try (BlobServer server =
                         new BlobServer(config, new File(blobStorage, "server"), blobStore);

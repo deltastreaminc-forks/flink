@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.runtime.operators.sort;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.table.data.DecimalData;
@@ -38,7 +39,7 @@ public class SortUtilTest {
     @Test
     public void testNormalizedKey() {
         int len = 10;
-        Random random = new Random();
+        Random random = new SecureRandom();
         MemorySegment[] segments = new MemorySegment[len];
         MemorySegment[] compareSegs = new MemorySegment[len];
         for (int i = 0; i < len; i++) {

@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.gateway.service;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.client.program.rest.RestClusterClient;
 import org.apache.flink.configuration.CheckpointingOptions;
@@ -256,7 +257,7 @@ public class SqlGatewayServiceITCase {
                 Collections.singletonList(GenericRowData.of(StringData.fromString("core"), true)));
 
         // ADD JAR
-        String udfClassName = GENERATED_LOWER_UDF_CLASS + new Random().nextInt(50);
+        String udfClassName = GENERATED_LOWER_UDF_CLASS + new SecureRandom().nextInt(50);
         String jarPath =
                 UserClassLoaderJarTestUtils.createJarFile(
                                 new File(tmpDir.toUri()),

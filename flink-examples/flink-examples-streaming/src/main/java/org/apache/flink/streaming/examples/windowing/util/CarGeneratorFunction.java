@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.examples.windowing.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple4;
 import org.apache.flink.connector.datagen.source.GeneratorFunction;
 
@@ -48,7 +49,7 @@ public class CarGeneratorFunction
     private static final double HOURS_IN_MILLI = 1d / MILLIS_IN_HOUR;
     private static final int METERS_IN_KILOMETER = 1000;
 
-    private final Random rand = new Random();
+    private final Random rand = new SecureRandom();
 
     // Previous version (CarSource) was overestimating the speed. This factor is used to preserve
     // the original behaviour of the example.

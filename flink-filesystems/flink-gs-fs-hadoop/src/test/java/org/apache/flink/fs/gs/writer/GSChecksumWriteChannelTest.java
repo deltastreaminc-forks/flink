@@ -18,6 +18,7 @@
 
 package org.apache.flink.fs.gs.writer;
 
+import java.security.SecureRandom;
 import org.apache.flink.fs.gs.storage.GSBlobIdentifier;
 import org.apache.flink.fs.gs.storage.GSBlobStorage;
 import org.apache.flink.fs.gs.storage.MockBlobStorage;
@@ -93,7 +94,7 @@ public class GSChecksumWriteChannelTest {
 
     @Before
     public void before() throws IOException {
-        Random random = new Random();
+        Random random = new SecureRandom();
         random.setSeed(RANDOM_SEED);
 
         blobIdentifier = new GSBlobIdentifier("foo", "bar");

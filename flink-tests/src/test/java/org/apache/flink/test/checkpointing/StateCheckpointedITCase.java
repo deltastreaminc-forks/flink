@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.RichFilterFunction;
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
 import org.apache.flink.api.common.functions.RichMapFunction;
@@ -77,7 +78,7 @@ public class StateCheckpointedITCase extends StreamFaultToleranceTestBase {
         final long failurePosMax = (long) (0.7 * NUM_STRINGS / PARALLELISM);
 
         final long failurePos =
-                (new Random().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
+                (new SecureRandom().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
 
         env.enableCheckpointing(200);
 
@@ -156,7 +157,7 @@ public class StateCheckpointedITCase extends StreamFaultToleranceTestBase {
         public void run(SourceContext<String> ctx) throws Exception {
             final Object lockingObject = ctx.getCheckpointLock();
 
-            final Random rnd = new Random();
+            final Random rnd = new SecureRandom();
             final StringBuilder stringBuilder = new StringBuilder();
 
             final int step = getRuntimeContext().getNumberOfParallelSubtasks();

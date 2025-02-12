@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.api.operators.sort;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.api.common.typeutils.base.IntSerializer;
@@ -242,7 +243,7 @@ public class LargeSortingDataInputITCase {
         private final long numberOfRecords;
         private final int inputIdx;
         private int recordsGenerated;
-        private final Random rnd = new Random();
+        private final Random rnd = new SecureRandom();
         private final byte[] buffer;
 
         private GeneratedRecordsDataInput(int numberOfRecords, int inputIdx) {

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.executiongraph;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.api.common.time.Deadline;
 import org.apache.flink.api.common.time.Time;
@@ -366,7 +367,7 @@ public class ExecutionGraphTestUtils {
     // ------------------------------------------------------------------------
 
     public static ExecutionVertexID createRandomExecutionVertexId() {
-        return new ExecutionVertexID(new JobVertexID(), new Random().nextInt(Integer.MAX_VALUE));
+        return new ExecutionVertexID(new JobVertexID(), new SecureRandom().nextInt(Integer.MAX_VALUE));
     }
 
     public static JobVertex createJobVertex(

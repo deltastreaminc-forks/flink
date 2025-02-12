@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid.tiered.storage;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.network.buffer.Buffer;
 import org.apache.flink.runtime.io.network.buffer.NetworkBufferPool;
 import org.apache.flink.runtime.io.network.partition.hybrid.tiered.TestingBufferAccumulator;
@@ -78,7 +79,7 @@ public class TieredStorageProducerClientTest {
     void testWriteRecordsToEmptyStorageTiers() {
         int numSubpartitions = 10;
         int bufferSize = 1024;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         TieredStorageProducerClient tieredStorageProducerClient =
                 createTieredStorageProducerClient(numSubpartitions, Collections.emptyList());
@@ -98,7 +99,7 @@ public class TieredStorageProducerClientTest {
         int numSubpartitions = 10;
         int numToWriteRecords = 20;
         int bufferSize = 1024;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         AtomicInteger numReceivedBuffers = new AtomicInteger(0);
         AtomicInteger numReceivedBytes = new AtomicInteger(0);
@@ -162,7 +163,7 @@ public class TieredStorageProducerClientTest {
     void testTierCanNotStartNewSegment() {
         int numSubpartitions = 10;
         int bufferSize = 1024;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         TestingTierProducerAgent tierProducerAgent =
                 new TestingTierProducerAgent.Builder()
@@ -187,7 +188,7 @@ public class TieredStorageProducerClientTest {
     void testUpdateMetrics() throws IOException {
         int numSubpartitions = 10;
         int bufferSize = 1024;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         TestingTierProducerAgent tierProducerAgent = new TestingTierProducerAgent.Builder().build();
         TieredStorageProducerClient tieredStorageProducerClient =

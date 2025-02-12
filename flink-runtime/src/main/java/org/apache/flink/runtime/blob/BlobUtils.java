@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.BlobServerOptions;
@@ -71,7 +72,7 @@ public class BlobUtils {
     /** The prefix of all job-unrelated directories created by the BLOB server. */
     static final String NO_JOB_DIR_PREFIX = "no_job";
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     /**
      * Creates a BlobStore based on the parameters set in the configuration.

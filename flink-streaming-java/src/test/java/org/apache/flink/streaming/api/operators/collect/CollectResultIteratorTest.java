@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.api.operators.collect;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
@@ -55,7 +56,7 @@ public class CollectResultIteratorTest extends TestLogger {
 
     @Test
     public void testUncheckpointedIterator() throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         // run this random test multiple times
         for (int testCount = 200; testCount > 0; testCount--) {

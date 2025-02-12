@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.core.execution.SavepointFormatType;
 import org.apache.flink.runtime.OperatorIDPair;
@@ -214,7 +215,7 @@ public class CheckpointMetadataLoadingTest {
             final long checkpointId, final OperatorID operatorId, final int parallelism)
             throws IOException {
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final OperatorSubtaskState subtaskState =
                 OperatorSubtaskState.builder()

@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.functions.hive;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.table.functions.ScalarFunction;
 import org.apache.flink.util.FlinkUserCodeClassLoaders;
@@ -39,7 +40,7 @@ public class HiveFunctionWrapperTest {
 
     @TempDir private static File tempFolder;
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
     private static String udfClassName;
     private static File udfJar;
 

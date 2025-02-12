@@ -17,6 +17,7 @@
 
 package org.apache.flink.test.streaming.runtime;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.client.deployment.StandaloneClusterId;
 import org.apache.flink.client.program.rest.RestClusterClient;
@@ -55,7 +56,7 @@ public class BigUserProgramJobSubmitITCase extends TestLogger {
     public static final MiniClusterResource MINI_CLUSTER_RESOURCE =
             new MiniClusterResource(new MiniClusterResourceConfiguration.Builder().build());
 
-    private final Random rnd = new Random();
+    private final Random rnd = new SecureRandom();
 
     /** Use a map function that references a 100MB byte array. */
     @Test

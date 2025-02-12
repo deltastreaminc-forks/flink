@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import java.security.SecureRandom;
 import org.junit.Test;
 
 import java.time.DayOfWeek;
@@ -72,7 +73,7 @@ public class StringUtilsTest extends TestLogger {
 
     @Test
     public void testGenerateAlphanumeric() {
-        String str = StringUtils.generateRandomAlphanumericString(new Random(), 256);
+        String str = StringUtils.generateRandomAlphanumericString(new SecureRandom(), 256);
 
         if (!str.matches("[a-zA-Z0-9]{256}")) {
             fail("Not alphanumeric: " + str);

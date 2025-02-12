@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.messages.taskmanager;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.runtime.clusterframework.types.ResourceProfile;
 import org.apache.flink.runtime.resourcemanager.TaskManagerInfoWithSlots;
@@ -33,7 +34,7 @@ import java.util.UUID;
 public class TaskManagerDetailsInfoTest
         extends RestResponseMarshallingTestBase<TaskManagerDetailsInfo> {
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
 
     @Override
     protected Class<TaskManagerDetailsInfo> getTestResponseClass() {

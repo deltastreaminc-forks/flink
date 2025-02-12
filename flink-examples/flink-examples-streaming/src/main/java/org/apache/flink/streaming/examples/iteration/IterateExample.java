@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.examples.iteration;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.serialization.SimpleStringEncoder;
@@ -162,7 +163,7 @@ public class IterateExample {
             implements GeneratorFunction<Long, Tuple2<Integer, Integer>> {
         private static final long serialVersionUID = 1L;
 
-        private final Random rnd = new Random();
+        private final Random rnd = new SecureRandom();
 
         @Override
         public Tuple2<Integer, Integer> map(Long ignoredIndex) throws Exception {

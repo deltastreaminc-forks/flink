@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.core.testutils.CheckedThread;
@@ -88,7 +89,7 @@ class HsSubpartitionFileReaderImplTest {
 
     @BeforeEach
     void before(@TempDir Path tempPath) throws Exception {
-        random = new Random();
+        random = new SecureRandom();
         Path dataFilePath = Files.createFile(tempPath.resolve(UUID.randomUUID().toString()));
         indexFilePath = tempPath.resolve(UUID.randomUUID().toString());
         dataFileChannel = openFileChannel(dataFilePath);

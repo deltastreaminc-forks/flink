@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.codegen;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.Types;
 import org.apache.flink.api.common.typeutils.TypeComparator;
@@ -147,7 +148,7 @@ public class SortCodeGeneratorTest {
     @Test
     public void testOneKey() throws Exception {
         for (int time = 0; time < 100; time++) {
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
             LogicalType[] fields = new LogicalType[rnd.nextInt(9) + 1];
             for (int i = 0; i < fields.length; i++) {
                 fields[i] = types[rnd.nextInt(types.length)];
@@ -164,7 +165,7 @@ public class SortCodeGeneratorTest {
     }
 
     private void randomKeysAndOrders() {
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         LogicalType[] fields = new LogicalType[rnd.nextInt(9) + 1];
         for (int i = 0; i < fields.length; i++) {
             fields[i] = types[rnd.nextInt(types.length)];
@@ -226,7 +227,7 @@ public class SortCodeGeneratorTest {
 
     private Object[] generateValues(LogicalType type) {
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
 
         int seedNum = RECORD_NUM / 5;
         Object[] seeds = new Object[seedNum];

@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.runtime.io;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.compression.BlockCompressionFactory;
 import org.apache.flink.runtime.io.disk.iomanager.BufferFileWriter;
 import org.apache.flink.runtime.io.disk.iomanager.FileIOChannel;
@@ -67,7 +68,7 @@ public class CompressedHeaderlessChannelTest {
     @Test
     public void testCompressedView() throws IOException {
         for (int testTime = 0; testTime < 10; testTime++) {
-            int testRounds = new Random().nextInt(20000);
+            int testRounds = new SecureRandom().nextInt(20000);
             FileIOChannel.ID channel = ioManager.createChannel();
             BufferFileWriter writer = this.ioManager.createBufferFileWriter(channel);
             CompressedHeaderlessChannelWriterOutputView outputView =

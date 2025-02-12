@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.event.AbstractEvent;
 import org.apache.flink.runtime.io.network.api.EndOfPartitionEvent;
 import org.apache.flink.runtime.io.network.api.serialization.EventSerializer;
@@ -67,7 +68,7 @@ public class TestSubpartitionConsumer implements Callable<Boolean>, BufferAvaila
     public TestSubpartitionConsumer(boolean isSlowConsumer, TestConsumerCallback callback) {
 
         this.isSlowConsumer = isSlowConsumer;
-        this.random = isSlowConsumer ? new Random() : null;
+        this.random = isSlowConsumer ? new SecureRandom() : null;
         this.callback = checkNotNull(callback);
     }
 

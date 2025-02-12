@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.network.partition.BufferWritingResultPartition;
 import org.apache.flink.runtime.io.network.util.TestProducerSource.BufferAndChannel;
 
@@ -60,7 +61,7 @@ public class TestPartitionProducer implements Callable<Boolean> {
 
         this.partition = checkNotNull(partition);
         this.isSlowProducer = isSlowProducer;
-        this.random = isSlowProducer ? new Random() : null;
+        this.random = isSlowProducer ? new SecureRandom() : null;
         this.source = checkNotNull(source);
     }
 

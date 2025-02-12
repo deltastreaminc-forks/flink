@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.runtime.io.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.checkpoint.CheckpointException;
 import org.apache.flink.runtime.checkpoint.CheckpointMetaData;
 import org.apache.flink.runtime.checkpoint.CheckpointMetricsBuilder;
@@ -776,7 +777,7 @@ public class UnalignedCheckpointsTest {
             throws Exception {
 
         final long cancelledCheckpointId =
-                new Random().nextBoolean() ? DEFAULT_CHECKPOINT_ID : DEFAULT_CHECKPOINT_ID + 1L;
+                new SecureRandom().nextBoolean() ? DEFAULT_CHECKPOINT_ID : DEFAULT_CHECKPOINT_ID + 1L;
         // should abort current checkpoint while processing CancelCheckpointMarker
         handler.processCancellationBarrier(
                 new CancelCheckpointMarker(cancelledCheckpointId), new InputChannelInfo(0, 0));

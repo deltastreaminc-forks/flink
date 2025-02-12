@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeutils.base.DoubleValueSerializer;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.io.IOReadableWritable;
@@ -250,7 +251,7 @@ public class InstantiationUtilTest extends TestLogger {
         private long aLong;
 
         public WritableType() {
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
             this.aInt = rnd.nextInt();
             this.aLong = rnd.nextLong();
         }

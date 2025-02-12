@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.checkpointing;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.ReduceFunction;
 import org.apache.flink.api.common.functions.RichMapFunction;
 import org.apache.flink.api.java.tuple.Tuple;
@@ -182,7 +183,7 @@ public class UdfStreamOperatorCheckpointingITCase extends StreamFaultToleranceTe
                     (long) (0.7 * numElements / getRuntimeContext().getNumberOfParallelSubtasks());
 
             failurePos =
-                    (new Random().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
+                    (new SecureRandom().nextLong() % (failurePosMax - failurePosMin)) + failurePosMin;
         }
 
         @Override

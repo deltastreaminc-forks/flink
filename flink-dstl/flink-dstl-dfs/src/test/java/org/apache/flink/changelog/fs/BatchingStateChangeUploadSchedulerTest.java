@@ -17,6 +17,7 @@
 
 package org.apache.flink.changelog.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.time.Deadline;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.changelog.fs.StateChangeUploadScheduler.UploadTask;
@@ -64,7 +65,7 @@ import static org.assertj.core.api.Assertions.fail;
 class BatchingStateChangeUploadSchedulerTest {
 
     private static final int MAX_BYTES_IN_FLIGHT = 10_000;
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     @Test
     void testNoDelayAndThreshold() throws Exception {

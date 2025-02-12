@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.handler.legacy.utils;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ArchivedExecutionConfig;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
@@ -40,7 +41,7 @@ import java.util.Random;
 /** Utility class for constructing an ArchivedExecutionGraph. */
 public class ArchivedExecutionGraphBuilder {
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     private JobID jobID;
     private String jobName;

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.disk;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.io.disk.iomanager.FileIOChannel.Enumerator;
 import org.apache.flink.runtime.io.disk.iomanager.FileIOChannel.ID;
 import org.apache.flink.util.FileUtils;
@@ -69,7 +70,7 @@ public class FileChannelManagerImpl implements FileChannelManager {
         checkNotNull(tempDirs, "The temporary directories must not be null.");
         checkArgument(tempDirs.length > 0, "The temporary directories must not be empty.");
 
-        this.random = new Random();
+        this.random = new SecureRandom();
         this.prefix = prefix;
 
         shutdownHook =

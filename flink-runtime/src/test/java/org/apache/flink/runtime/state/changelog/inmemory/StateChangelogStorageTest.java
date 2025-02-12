@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.state.changelog.inmemory;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.jobgraph.OperatorID;
 import org.apache.flink.runtime.mailbox.SyncMailboxExecutor;
 import org.apache.flink.runtime.state.KeyGroupRange;
@@ -54,7 +55,7 @@ import static org.assertj.core.api.Assertions.assertThatThrownBy;
 /** {@link InMemoryStateChangelogStorage} test. */
 public class StateChangelogStorageTest<T extends ChangelogStateHandle> {
 
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
 
     @TempDir public File temporaryFolder;
 

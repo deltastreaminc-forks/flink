@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FileSystem.WriteMode;
 
 import org.junit.Rule;
@@ -58,7 +59,7 @@ public class LimitedConnectionsFileSystemDelegationTest {
                 .thenReturn(mock(FSDataOutputStream.class));
 
         final LimitedConnectionsFileSystem lfs = new LimitedConnectionsFileSystem(fs, 1000);
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         lfs.isDistributedFS();
         verify(fs).isDistributedFS();

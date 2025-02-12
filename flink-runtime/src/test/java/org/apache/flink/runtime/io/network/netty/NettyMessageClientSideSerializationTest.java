@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.netty;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.io.network.TestingPartitionRequestClient;
@@ -65,7 +66,7 @@ class NettyMessageClientSideSerializationTest {
 
     private static final int BUFFER_SIZE = 1024;
 
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
     private static BufferCompressor compressor;
 
     private static BufferDecompressor decompressor;

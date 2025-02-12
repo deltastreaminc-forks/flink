@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro;
 
+import java.security.SecureRandom;
 import org.apache.flink.formats.avro.generated.Address;
 import org.apache.flink.formats.avro.generated.Colors;
 import org.apache.flink.formats.avro.generated.Fixed16;
@@ -273,7 +274,7 @@ class EncoderDecoderTest {
         map.put("3", 3L);
 
         byte[] b = new byte[16];
-        new Random().nextBytes(b);
+        new SecureRandom().nextBytes(b);
         Fixed16 f = new Fixed16(b);
         Address addr = new Address(239, "6th Main", "Bangalore", "Karnataka", "560075");
         User user =

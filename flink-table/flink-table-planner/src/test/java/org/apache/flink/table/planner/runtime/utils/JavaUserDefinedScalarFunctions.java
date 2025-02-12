@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.runtime.utils;
 
+import java.security.SecureRandom;
 import org.apache.flink.table.annotation.DataTypeHint;
 import org.apache.flink.table.annotation.InputGroup;
 import org.apache.flink.table.data.TimestampData;
@@ -121,7 +122,7 @@ public class JavaUserDefinedScalarFunctions {
 
     /** Non-deterministic scalar function. */
     public static class NonDeterministicUdf extends ScalarFunction {
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         public int eval() {
             return random.nextInt();

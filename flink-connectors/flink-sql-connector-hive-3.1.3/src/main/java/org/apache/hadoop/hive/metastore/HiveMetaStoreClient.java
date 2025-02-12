@@ -18,6 +18,7 @@
 
 package org.apache.hadoop.hive.metastore;
 
+import java.security.SecureRandom;
 import static org.apache.hadoop.hive.metastore.Warehouse.DEFAULT_DATABASE_NAME;
 import static org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.getDefaultCatalog;
 import static org.apache.hadoop.hive.metastore.utils.MetaStoreUtils.prependCatalogToDbName;
@@ -313,7 +314,7 @@ public class HiveMetaStoreClient implements IMetaStoreClient, AutoCloseable {
     if (metastoreUris.length <= 1) {
       return;
     }
-    Random rng = new Random();
+    Random rng = new SecureRandom();
     int index = rng.nextInt(metastoreUris.length - 1) + 1;
     URI tmp = metastoreUris[0];
     metastoreUris[0] = metastoreUris[index];

@@ -17,6 +17,7 @@
 
 package org.apache.flink.runtime.checkpoint.channel;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.checkpoint.channel.ChannelStateWriter.ChannelStateWriteResult;
@@ -67,7 +68,7 @@ import static org.assertj.core.api.Assertions.fail;
 /** {@link ChannelStateCheckpointWriter} test. */
 class ChannelStateCheckpointWriterTest {
     private static final RunnableWithException NO_OP_RUNNABLE = () -> {};
-    private final Random random = new Random();
+    private final Random random = new SecureRandom();
     private static final JobVertexID JOB_VERTEX_ID = new JobVertexID();
     private static final int SUBTASK_INDEX = 0;
     private static final SubtaskID SUBTASK_ID = SubtaskID.of(JOB_VERTEX_ID, SUBTASK_INDEX);

@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro.registry.confluent;
 
+import java.security.SecureRandom;
 import org.apache.flink.formats.avro.AvroRowDataDeserializationSchema;
 import org.apache.flink.formats.avro.AvroRowDataSerializationSchema;
 import org.apache.flink.formats.avro.AvroToRowDataConverters;
@@ -84,7 +85,7 @@ class RegistryAvroRowDataSeDeSchemaTest {
 
     @BeforeEach
     void before() {
-        this.address = TestDataGenerator.generateRandomAddress(new Random());
+        this.address = TestDataGenerator.generateRandomAddress(new SecureRandom());
     }
 
     @AfterEach

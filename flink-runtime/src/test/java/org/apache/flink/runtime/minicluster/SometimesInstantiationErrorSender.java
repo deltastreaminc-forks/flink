@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.minicluster;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.execution.Environment;
 import org.apache.flink.runtime.testtasks.BlockingNoOpInvokable;
 
@@ -34,7 +35,7 @@ public class SometimesInstantiationErrorSender extends BlockingNoOpInvokable {
 
     private static Set<Integer> failingSenders;
 
-    private static final Random RANDOM = new Random();
+    private static final Random RANDOM = new SecureRandom();
 
     public SometimesInstantiationErrorSender(Environment environment) {
         super(environment);

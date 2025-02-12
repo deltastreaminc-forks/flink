@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.buffer;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 
 import org.junit.After;
@@ -414,7 +415,7 @@ public class BufferPoolFactoryTest {
     public void testAllDistributed() throws IOException {
         // try multiple times for various orders during redistribution
         for (int i = 0; i < 1_000; ++i) {
-            Random random = new Random();
+            Random random = new SecureRandom();
 
             List<BufferPool> pools = new ArrayList<>();
 

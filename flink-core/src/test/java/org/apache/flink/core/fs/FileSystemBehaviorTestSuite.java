@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FileSystem.WriteMode;
 import org.apache.flink.util.StringUtils;
 
@@ -36,7 +37,7 @@ import static org.assertj.core.api.Assumptions.assumeThat;
 /** Common tests for the behavior of {@link FileSystem} methods. */
 public abstract class FileSystemBehaviorTestSuite {
 
-    private static final Random RND = new Random();
+    private static final Random RND = new SecureRandom();
 
     /** The cached file system instance. */
     private FileSystem fs;

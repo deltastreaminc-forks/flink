@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.messages;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.execution.ExecutionState;
 import org.apache.flink.runtime.rest.messages.job.SubtaskExecutionAttemptDetailsInfo;
 import org.apache.flink.runtime.rest.messages.job.metrics.IOMetricsInfo;
@@ -41,7 +42,7 @@ public class AggregatedTaskDetailsInfoTest
 
     @Override
     protected AggregatedTaskDetailsInfo getTestResponseInstance() throws Exception {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         final IOMetricsInfo ioMetricsInfo =
                 new IOMetricsInfo(

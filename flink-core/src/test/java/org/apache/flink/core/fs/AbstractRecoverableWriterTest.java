@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.io.SimpleVersionedSerializer;
 import org.apache.flink.util.IOUtils;
 import org.apache.flink.util.StringUtils;
@@ -42,7 +43,7 @@ import static org.junit.Assert.fail;
  */
 public abstract class AbstractRecoverableWriterTest extends TestLogger {
 
-    private static final Random RND = new Random();
+    private static final Random RND = new SecureRandom();
 
     private static final String testData1 = "THIS IS A TEST 1.";
     private static final String testData2 = "THIS IS A TEST 2.";

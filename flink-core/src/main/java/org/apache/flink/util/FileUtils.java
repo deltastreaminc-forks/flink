@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileStatus;
@@ -119,7 +120,7 @@ public final class FileUtils {
      * @return the generated random filename with the given prefix
      */
     public static String getRandomFilename(final String prefix) {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final StringBuilder stringBuilder = new StringBuilder(prefix);
 
         for (int i = 0; i < RANDOM_FILE_NAME_LENGTH; i++) {

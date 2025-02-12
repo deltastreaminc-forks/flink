@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.gateway.rest.serde;
 
+import java.security.SecureRandom;
 import org.apache.flink.table.api.DataTypes;
 import org.apache.flink.table.catalog.ResolvedSchema;
 import org.apache.flink.table.data.GenericRowData;
@@ -121,7 +122,7 @@ class ResultInfoJsonSerDeTest {
     void testResultInfoSerDeWithNullValues(RowFormat rowFormat) throws Exception {
         List<Integer> positions =
                 IntStream.range(0, 20)
-                        .mapToObj(i -> new Random().nextInt(20))
+                        .mapToObj(i -> new SecureRandom().nextInt(20))
                         .collect(Collectors.toList());
 
         serDeTest(
@@ -229,7 +230,7 @@ class ResultInfoJsonSerDeTest {
     }
 
     private static void setRandomKind(Row testRow) {
-        int i = new Random().nextInt() % 4;
+        int i = new SecureRandom().nextInt() % 4;
         switch (i) {
             case 0:
                 testRow.setKind(RowKind.INSERT);

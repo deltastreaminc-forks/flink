@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators.sort;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -103,7 +104,7 @@ public class LargeRecordHandlerITCase extends TestLogger {
             assertFalse(handler.hasData());
 
             // add the test data
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
 
             for (int i = 0; i < NUM_RECORDS; i++) {
                 long val = rnd.nextLong();
@@ -238,7 +239,7 @@ public class LargeRecordHandlerITCase extends TestLogger {
                             ioMan.createBlockChannelWriter(channel), memMan, memory, PAGE_SIZE);
 
             // add the test data
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
             List<Long> offsets = new ArrayList<Long>();
 
             for (int i = 0; i < NUM_RECORDS; i++) {

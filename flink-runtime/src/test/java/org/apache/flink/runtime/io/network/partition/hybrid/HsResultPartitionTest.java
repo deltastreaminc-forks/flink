@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
@@ -121,7 +122,7 @@ class HsResultPartitionTest {
         int numBuffers = 100;
         int numSubpartitions = 10;
         int numRecords = 1000;
-        Random random = new Random();
+        Random random = new SecureRandom();
 
         BufferPool bufferPool = globalPool.createBufferPool(numBuffers, numBuffers);
 
@@ -235,7 +236,7 @@ class HsResultPartitionTest {
         final int numRecords = 10;
         final int numConsumers = 2;
         final int targetChannel = 0;
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         BufferPool bufferPool = globalPool.createBufferPool(numBuffers, numBuffers);
         try (HsResultPartition resultPartition = createHsResultPartition(2, bufferPool)) {
@@ -290,7 +291,7 @@ class HsResultPartitionTest {
         final int numBuffers = 10;
         final int numRecords = 10;
         final int numConsumers = 2;
-        final Random random = new Random();
+        final Random random = new SecureRandom();
 
         BufferPool bufferPool = globalPool.createBufferPool(numBuffers, numBuffers);
         try (HsResultPartition resultPartition = createHsResultPartition(2, bufferPool, true)) {

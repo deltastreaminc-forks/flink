@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.execution.librarycache;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.BlobServerOptions;
 import org.apache.flink.configuration.Configuration;
@@ -71,7 +72,7 @@ public class BlobLibraryCacheRecoveryITCase extends TestLogger {
      */
     @Test
     public void testRecoveryRegisterAndDownload() throws Exception {
-        Random rand = new Random();
+        Random rand = new SecureRandom();
 
         BlobServer[] server = new BlobServer[2];
         InetSocketAddress[] serverAddress = new InetSocketAddress[2];

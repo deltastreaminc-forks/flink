@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.functions.GroupCombineFunction;
 import org.apache.flink.api.common.typeutils.TypeComparator;
@@ -97,7 +98,7 @@ public class CombinerOversizedRecordsTest
 
             // create a long heavy string payload
             StringBuilder bld = new StringBuilder(10 * 1024 * 1024);
-            Random rnd = new Random();
+            Random rnd = new SecureRandom();
 
             for (int i = 0; i < 10000000; i++) {
                 bld.append((char) (rnd.nextInt(26) + 'a'));

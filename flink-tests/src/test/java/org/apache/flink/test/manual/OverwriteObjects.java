@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.manual;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.functions.CrossFunction;
 import org.apache.flink.api.common.functions.FilterFunction;
 import org.apache.flink.api.common.functions.JoinFunction;
@@ -59,7 +60,7 @@ public class OverwriteObjects {
 
     private static final int MAX_PARALLELISM = 4;
 
-    private static final long RANDOM_SEED = new Random().nextLong();
+    private static final long RANDOM_SEED = new SecureRandom().nextLong();
 
     private static final Tuple2Comparator<IntValue, IntValue> comparator = new Tuple2Comparator<>();
 

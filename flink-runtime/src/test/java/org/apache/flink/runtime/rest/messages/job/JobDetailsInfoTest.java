@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.rest.messages.job;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.runtime.execution.ExecutionState;
@@ -42,7 +43,7 @@ public class JobDetailsInfoTest extends RestResponseMarshallingTestBase<JobDetai
 
     @Override
     protected JobDetailsInfo getTestResponseInstance() throws Exception {
-        final Random random = new Random();
+        final Random random = new SecureRandom();
         final int numJobVertexDetailsInfos = 4;
         final String jsonPlan = "{\"id\":\"1234\"}";
 

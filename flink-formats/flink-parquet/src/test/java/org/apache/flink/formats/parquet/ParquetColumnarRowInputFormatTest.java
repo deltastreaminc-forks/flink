@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.parquet;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.serialization.BulkWriter;
 import org.apache.flink.connector.file.src.FileSourceSplit;
 import org.apache.flink.connector.file.src.reader.BulkFormat;
@@ -137,7 +138,7 @@ class ParquetColumnarRowInputFormatTest {
     void testTypesReadWithSplits(int rowGroupSize) throws IOException {
         int number = 10000;
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < number; i++) {
             int v = random.nextInt(number / 2);
             values.add(v % 10 == 0 ? null : v);
@@ -151,7 +152,7 @@ class ParquetColumnarRowInputFormatTest {
     void testDictionary(int rowGroupSize) throws IOException {
         int number = 10000;
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         int[] intValues = new int[10];
         // test large values in dictionary
         for (int i = 0; i < intValues.length; i++) {
@@ -171,7 +172,7 @@ class ParquetColumnarRowInputFormatTest {
         // prepare parquet file
         int number = 10000;
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         int[] intValues = new int[10];
         // test large values in dictionary
         for (int i = 0; i < intValues.length; i++) {
@@ -190,7 +191,7 @@ class ParquetColumnarRowInputFormatTest {
     void testContinuousRepetition(int rowGroupSize) throws IOException {
         int number = 10000;
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < 100; i++) {
             int v = random.nextInt(10);
             for (int j = 0; j < 100; j++) {
@@ -206,7 +207,7 @@ class ParquetColumnarRowInputFormatTest {
     void testLargeValue(int rowGroupSize) throws IOException {
         int number = 10000;
         List<Integer> values = new ArrayList<>(number);
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < number; i++) {
             int v = random.nextInt();
             values.add(v % 10 == 0 ? null : v);

@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.runtime.tasks;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobExecutionResult;
 import org.apache.flink.api.common.accumulators.ListAccumulator;
 import org.apache.flink.api.common.state.ListState;
@@ -286,7 +287,7 @@ public class CoordinatorEventsToStreamOperatorRecipientExactlyOnceITCase
         public EventSendingCoordinatorWithGuaranteedCheckpoint(
                 Context context, String name, int numEvents, int delay) {
             super(context, name, numEvents, delay);
-            this.maxNumberBeforeFirstCheckpoint = new Random().nextInt(numEvents / 6);
+            this.maxNumberBeforeFirstCheckpoint = new SecureRandom().nextInt(numEvents / 6);
             this.isEventSentAfterFirstCheckpoint = false;
             this.isCoordinatorFirstCheckpointCompleted = false;
             this.isJobFirstCheckpointCompleted = false;
@@ -492,7 +493,7 @@ public class CoordinatorEventsToStreamOperatorRecipientExactlyOnceITCase
 
         private EventReceivingOperatorWithFailure(String name, int numEvents) {
             this.name = name;
-            this.maxNumberBeforeFailure = numEvents / 3 + new Random().nextInt(numEvents / 6);
+            this.maxNumberBeforeFailure = numEvents / 3 + new SecureRandom().nextInt(numEvents / 6);
         }
 
         @Override

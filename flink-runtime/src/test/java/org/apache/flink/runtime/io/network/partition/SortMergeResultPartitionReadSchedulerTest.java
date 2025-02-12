@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.memory.MemorySegment;
 import org.apache.flink.core.memory.MemorySegmentFactory;
 import org.apache.flink.runtime.concurrent.ManuallyTriggeredScheduledExecutorService;
@@ -81,7 +82,7 @@ class SortMergeResultPartitionReadSchedulerTest {
 
     @BeforeEach
     void before(@TempDir Path basePath) throws Exception {
-        Random random = new Random();
+        Random random = new SecureRandom();
         random.nextBytes(dataBytes);
         partitionedFile =
                 PartitionTestUtils.createPartitionedFile(

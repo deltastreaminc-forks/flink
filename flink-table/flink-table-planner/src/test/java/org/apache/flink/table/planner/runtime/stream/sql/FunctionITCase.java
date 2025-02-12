@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.runtime.stream.sql;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.java.typeutils.runtime.kryo.KryoSerializer;
 import org.apache.flink.core.fs.Path;
@@ -94,7 +95,7 @@ public class FunctionITCase extends StreamingTestBase {
 
     private static final String TEST_FUNCTION = TestUDF.class.getName();
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
     private String udfClassName;
     private String jarPath;
 

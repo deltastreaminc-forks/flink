@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.jobmaster;
 
+import java.security.SecureRandom;
 import org.apache.flink.runtime.checkpoint.CheckpointRetentionPolicy;
 import org.apache.flink.runtime.checkpoint.Checkpoints;
 import org.apache.flink.runtime.checkpoint.OperatorState;
@@ -65,7 +66,7 @@ public class TestUtils {
     }
 
     private static Collection<OperatorState> createOperatorState(OperatorID... operatorIds) {
-        Random random = new Random();
+        Random random = new SecureRandom();
         Collection<OperatorState> operatorStates = new ArrayList<>(operatorIds.length);
 
         for (OperatorID operatorId : operatorIds) {

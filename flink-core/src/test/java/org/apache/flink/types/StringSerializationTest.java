@@ -18,6 +18,7 @@
 
 package org.apache.flink.types;
 
+import java.security.SecureRandom;
 import org.apache.flink.util.StringUtils;
 
 import org.junit.Test;
@@ -95,7 +96,7 @@ public class StringSerializationTest {
                                 "\uD800\uDF01"
                     };
             String[] buffer = new String[100];
-            Random random = new Random();
+            Random random = new SecureRandom();
             for (int i = 0; i < 100; i++) {
                 StringBuilder builder = new StringBuilder();
                 for (int j = 0; j < 100; j++) {

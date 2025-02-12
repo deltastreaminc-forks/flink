@@ -18,6 +18,7 @@
 
 package org.apache.flink.changelog.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.ConfigurationUtils;
 import org.apache.flink.core.fs.Path;
@@ -76,7 +77,7 @@ class ChangelogStreamHandleReaderWithCache implements ChangelogStreamHandleReade
                         .toArray(File[]::new);
         Arrays.stream(this.cacheDirectories).forEach(File::mkdirs);
 
-        this.next = new AtomicInteger(new Random().nextInt(this.cacheDirectories.length));
+        this.next = new AtomicInteger(new SecureRandom().nextInt(this.cacheDirectories.length));
 
         this.cacheCleanScheduler =
                 SchedulerFactory.create(1, "ChangelogCacheFileCleanScheduler", LOG);

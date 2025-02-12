@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.network.partition.hybrid.tiered.file;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.io.network.partition.hybrid.tiered.common.TieredStorageSubpartitionId;
 
@@ -63,7 +64,7 @@ class ProducerMergedPartitionFileIndexTest {
             List<ProducerMergedPartitionFileIndex.FlushedBuffer> flushedBuffers) {
         int numExpectedRegions = 0;
         int maxBufferIndex = 0;
-        Random random = new Random();
+        Random random = new SecureRandom();
         for (int i = 0; i < numSubpartitions; i++) {
             int bufferIndex = 0;
             for (int j = 0; j < numBuffersPerSubpartition; j++) {

@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro.typeutils;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.typeutils.SerializerTestBase;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
 import org.apache.flink.formats.avro.generated.User;
@@ -45,7 +46,7 @@ class AvroSerializerTest extends SerializerTestBase<User> {
 
     @Override
     protected User[] getTestData() {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final User[] users = new User[20];
 
         for (int i = 0; i < users.length; i++) {

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.ttl;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.runtime.state.internal.InternalMergingState;
 
@@ -28,7 +29,7 @@ import java.util.Random;
 abstract class TtlMergingStateTestContext<
                 S extends InternalMergingState<?, String, ?, ?, GV>, UV, GV>
         extends TtlStateTestContextBase<S, UV, GV> {
-    static final Random RANDOM = new Random();
+    static final Random RANDOM = new SecureRandom();
 
     static final List<String> NAMESPACES =
             Arrays.asList(

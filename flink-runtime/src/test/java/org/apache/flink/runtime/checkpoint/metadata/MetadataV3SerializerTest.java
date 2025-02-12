@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint.metadata;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -64,7 +65,7 @@ public class MetadataV3SerializerTest {
 
     @Test
     public void testCheckpointWithNoState() throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         for (int i = 0; i < 100; ++i) {
             final long checkpointId = rnd.nextLong() & 0x7fffffffffffffffL;
@@ -77,7 +78,7 @@ public class MetadataV3SerializerTest {
 
     @Test
     public void testCheckpointWithOnlyMasterState() throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final int maxNumMasterStates = 5;
 
         for (int i = 0; i < 100; ++i) {
@@ -104,7 +105,7 @@ public class MetadataV3SerializerTest {
     }
 
     private void testCheckpointWithOnlyTaskState(String basePath) throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final int maxTaskStates = 20;
         final int maxNumSubtasks = 20;
 
@@ -134,7 +135,7 @@ public class MetadataV3SerializerTest {
     }
 
     private void testCheckpointWithMasterAndTaskState(String basePath) throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final int maxNumMasterStates = 5;
         final int maxTaskStates = 20;
@@ -168,7 +169,7 @@ public class MetadataV3SerializerTest {
     }
 
     private void testCheckpointWithFinishedTasks(String basePath) throws Exception {
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final int maxNumMasterStates = 5;
         final int maxNumSubtasks = 20;

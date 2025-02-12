@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.core.fs.FileSystem.WriteMode;
 import org.apache.flink.core.fs.local.LocalFileSystem;
 import org.apache.flink.core.testutils.CheckedThread;
@@ -103,7 +104,7 @@ public class LimitedConnectionsFileSystemTest {
                         0,
                         0);
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final ReaderThread[] threads = new ReaderThread[numThreads];
         for (int i = 0; i < numThreads; i++) {
@@ -131,7 +132,7 @@ public class LimitedConnectionsFileSystemTest {
                 new LimitedConnectionsFileSystem(
                         LocalFileSystem.getSharedInstance(), maxConcurrentOpen); // limited total
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final CheckedThread[] threads = new CheckedThread[numThreads];
         for (int i = 0; i < numThreads; i++) {
@@ -212,7 +213,7 @@ public class LimitedConnectionsFileSystemTest {
                         0L); // infinite inactivity timeout
 
         // create the threads that block all streams
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final BlockingReaderThread[] threads = new BlockingReaderThread[maxConcurrentOpen];
         for (int i = 0; i < maxConcurrentOpen; i++) {
             File file = tempFolder.newFile();
@@ -318,7 +319,7 @@ public class LimitedConnectionsFileSystemTest {
                         0,
                         50); // timeout of 50 ms
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final ReaderThread[] threads = new ReaderThread[numThreads];
         final BlockingReaderThread[] blockers = new BlockingReaderThread[numThreads];
@@ -381,7 +382,7 @@ public class LimitedConnectionsFileSystemTest {
                         0L, // no opening timeout
                         50L); // inactivity timeout of 50 ms
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
 
         final CheckedThread[] threads = new CheckedThread[numThreads];
         final BlockingThread[] blockers = new BlockingThread[numThreads];
@@ -477,7 +478,7 @@ public class LimitedConnectionsFileSystemTest {
                 new LimitedConnectionsFileSystem(LocalFileSystem.getSharedInstance(), 1, 0L, 1000L);
 
         // some competing threads
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         final ReaderThread[] threads = new ReaderThread[10];
         for (int i = 0; i < threads.length; i++) {
             File file = tempFolder.newFile();
@@ -517,7 +518,7 @@ public class LimitedConnectionsFileSystemTest {
     @Test
     public void testSlowInputStreamNotClosed() throws Exception {
         final File file = tempFolder.newFile();
-        createRandomContents(file, new Random(), 50);
+        createRandomContents(file, new SecureRandom(), 50);
 
         final LimitedConnectionsFileSystem fs =
                 new LimitedConnectionsFileSystem(LocalFileSystem.getSharedInstance(), 1, 0L, 1000L);
@@ -600,7 +601,7 @@ public class LimitedConnectionsFileSystemTest {
                 assertTrue(fs.getNumberOfOpenOutputStreams() <= maxConcurrentOutputStreams);
                 assertTrue(fs.getTotalNumberOfOpenStreams() <= maxConcurrentStreamsTotal);
 
-                final Random rnd = new Random();
+                final Random rnd = new SecureRandom();
                 final byte[] data = new byte[rnd.nextInt(10000) + 1];
                 rnd.nextBytes(data);
                 stream.write(data);
@@ -687,7 +688,7 @@ public class LimitedConnectionsFileSystemTest {
                 assertTrue(fs.getNumberOfOpenOutputStreams() <= maxConcurrentOutputStreams);
                 assertTrue(fs.getTotalNumberOfOpenStreams() <= maxConcurrentStreamsTotal);
 
-                final Random rnd = new Random();
+                final Random rnd = new SecureRandom();
                 final byte[] data = new byte[rnd.nextInt(10000) + 1];
                 rnd.nextBytes(data);
                 stream.write(data);

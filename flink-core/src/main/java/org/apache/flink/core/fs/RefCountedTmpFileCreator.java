@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.fs;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.util.function.FunctionWithException;
 
@@ -59,7 +60,7 @@ public class RefCountedTmpFileCreator
         }
 
         this.tempDirectories = tempDirectories.clone();
-        this.next = new AtomicInteger(new Random().nextInt(this.tempDirectories.length));
+        this.next = new AtomicInteger(new SecureRandom().nextInt(this.tempDirectories.length));
     }
 
     /**

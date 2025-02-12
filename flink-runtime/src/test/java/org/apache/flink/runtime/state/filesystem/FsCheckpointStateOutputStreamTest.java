@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.state.filesystem;
 
+import java.security.SecureRandom;
 import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileSystem;
@@ -226,7 +227,7 @@ public class FsCheckpointStateOutputStreamTest {
                         threshold,
                         relativePaths);
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         byte[] original = new byte[numBytes];
         byte[] bytes = new byte[original.length];
 
@@ -306,7 +307,7 @@ public class FsCheckpointStateOutputStreamTest {
         final byte[] state3 = new byte[0];
         final byte[] state4 = new byte[177];
 
-        final Random rnd = new Random();
+        final Random rnd = new SecureRandom();
         rnd.nextBytes(state1);
         rnd.nextBytes(state2);
         rnd.nextBytes(state3);

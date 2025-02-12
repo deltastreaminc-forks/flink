@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.runtime.batch.sql;
 
+import java.security.SecureRandom;
 import org.apache.flink.table.api.Table;
 import org.apache.flink.table.planner.factories.utils.TestCollectionTableFactory;
 import org.apache.flink.table.planner.runtime.utils.BatchTestBase;
@@ -41,7 +42,7 @@ import static org.assertj.core.api.Assertions.assertThat;
 /** Tests for catalog and system functions in a table environment. */
 public class FunctionITCase extends BatchTestBase {
 
-    private static final Random random = new Random();
+    private static final Random random = new SecureRandom();
     private String udfClassName;
     private String jarPath;
 

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.BlobServerOptions;
 import org.apache.flink.configuration.Configuration;
@@ -92,7 +93,7 @@ public class BlobServerCorruptionTest extends TestLogger {
     public static void testGetFailsFromCorruptFile(
             Configuration config, BlobStore blobStore, File blobStorage) throws IOException {
 
-        Random rnd = new Random();
+        Random rnd = new SecureRandom();
         JobID jobId = new JobID();
 
         try (BlobServer server = new BlobServer(config, blobStorage, blobStore)) {

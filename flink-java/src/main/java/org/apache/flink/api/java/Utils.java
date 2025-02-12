@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java;
 
+import java.security.SecureRandom;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.api.common.accumulators.Accumulator;
 import org.apache.flink.api.common.accumulators.SerializedListAccumulator;
@@ -44,7 +45,7 @@ import java.util.Random;
 @Internal
 public final class Utils {
 
-    public static final Random RNG = new Random();
+    public static final Random RNG = new SecureRandom();
 
     public static String getCallLocationName() {
         return getCallLocationName(4);

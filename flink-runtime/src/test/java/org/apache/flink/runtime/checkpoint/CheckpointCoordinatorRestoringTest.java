@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.checkpoint;
 
+import java.security.SecureRandom;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.core.execution.SavepointFormatType;
@@ -345,7 +346,7 @@ class CheckpointCoordinatorRestoringTest extends TestLogger {
                             .setRawKeyedState(keyedStateRaw)
                             .setInputChannelState(
                                     StateObjectCollection.singleton(
-                                            createNewInputChannelStateHandle(3, new Random())))
+                                            createNewInputChannelStateHandle(3, new SecureRandom())))
                             .build();
             TaskStateSnapshot taskOperatorSubtaskStates = new TaskStateSnapshot();
             taskOperatorSubtaskStates.putSubtaskStateByOperatorID(
@@ -998,7 +999,7 @@ class CheckpointCoordinatorRestoringTest extends TestLogger {
         List<KeyGroupRange> keyGroupPartitions1 =
                 StateAssignmentOperation.createKeyGroupPartitions(maxParallelism1, parallelism1);
 
-        Random random = new Random();
+        Random random = new SecureRandom();
         // fill the states and complete the checkpoint.
         for (int index = 0; index < jobVertex.getParallelism(); index++) {
             OperatorSubtaskState operatorSubtaskState =
