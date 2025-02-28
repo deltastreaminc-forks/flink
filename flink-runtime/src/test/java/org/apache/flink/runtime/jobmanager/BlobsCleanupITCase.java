@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.jobmanager;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobSubmissionResult;
 import org.apache.flink.api.common.time.Deadline;
@@ -162,7 +163,7 @@ public class BlobsCleanupITCase extends TestLogger {
         final JobID jid = jobGraph.getJobID();
 
         // upload a blob
-        final File tempBlob = File.createTempFile("Required", ".jar");
+        final File tempBlob = Files.createTempFile("Required", ".jar").toFile();
         final int blobPort = miniCluster.getClusterInformation().getBlobServerPort();
         List<PermanentBlobKey> keys =
                 BlobClient.uploadFiles(

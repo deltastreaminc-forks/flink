@@ -38,7 +38,7 @@ public class TempDirUtils {
     }
 
     public static File newFile(Path path) throws IOException {
-        return File.createTempFile(TMP_PREFIX, null, path.toFile());
+        return Files.createTempFile(path.toFile().toPath(), TMP_PREFIX, null).toFile();
     }
 
     public static File newFolder(Path base, String... paths) throws IOException {

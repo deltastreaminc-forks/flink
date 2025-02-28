@@ -361,7 +361,7 @@ class CliClientTest {
     }
 
     private Path historyTempFile() throws IOException {
-        return File.createTempFile("history", "tmp").toPath();
+        return Files.createTempFile("history", "tmp").toFile().toPath();
     }
 
     private String executeSqlFromContent(MockExecutor executor, String content) throws IOException {

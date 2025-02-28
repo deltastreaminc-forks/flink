@@ -63,7 +63,7 @@ class ProcessPythonEnvironmentManagerTest {
 
     @BeforeAll
     static void prepareTempDirectory() throws IOException {
-        File tmpFile = File.createTempFile("process_environment_manager_test", "");
+        File tmpFile = Files.createTempFile("process_environment_manager_test", "").toFile();
         if (tmpFile.delete() && tmpFile.mkdirs()) {
             tmpDir = tmpFile.getAbsolutePath();
         } else {

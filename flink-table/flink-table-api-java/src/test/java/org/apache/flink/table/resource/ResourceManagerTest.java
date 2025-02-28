@@ -76,7 +76,7 @@ public class ResourceManagerTest {
                         "test-classloader-udf.jar",
                         GENERATED_LOWER_UDF_CLASS,
                         String.format(GENERATED_LOWER_UDF_CODE, GENERATED_LOWER_UDF_CLASS));
-        file = File.createTempFile("ResourceManagerTest", ".txt", tempFolder);
+        file = Files.createTempFile(tempFolder.toPath(), "ResourceManagerTest", ".txt").toFile();
         FileUtils.writeFileUtf8(file, "Hello World");
     }
 

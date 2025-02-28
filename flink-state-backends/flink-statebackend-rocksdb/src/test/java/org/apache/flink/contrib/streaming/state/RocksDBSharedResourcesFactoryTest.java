@@ -17,6 +17,7 @@
 
 package org.apache.flink.contrib.streaming.state;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.ConfigOption;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.MemorySize;
@@ -157,7 +158,7 @@ public class RocksDBSharedResourcesFactoryTest {
                                 tmConfig,
                                 resourceSpecFromConfigForLocalExecution(tmConfig),
                                 "localhost",
-                                File.createTempFile("prefix", "suffix")))
+                                Files.createTempFile("prefix", "suffix").toFile()))
                 .build();
     }
 }

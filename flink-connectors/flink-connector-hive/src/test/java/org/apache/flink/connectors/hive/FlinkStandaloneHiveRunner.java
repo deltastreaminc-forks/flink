@@ -18,6 +18,7 @@
 
 package org.apache.flink.connectors.hive;
 
+import java.nio.file.Files;
 import org.apache.flink.table.catalog.hive.HiveTestUtils;
 
 import org.apache.flink.shaded.guava31.com.google.common.base.Joiner;
@@ -131,7 +132,7 @@ public class FlinkStandaloneHiveRunner extends FlinkEmbeddedHiveRunner {
                         METASTORECONNECTURLKEY.varname,
                         outsideConf.getVar(METASTORECONNECTURLKEY)));
         // config derby.log file
-        File derbyLog = File.createTempFile("derby", ".log");
+        File derbyLog = Files.createTempFile("derby", ".log").toFile();
         derbyLog.deleteOnExit();
         args.add(hiveCmdLineConfig("derby.stream.error.file", derbyLog.getAbsolutePath()));
         // config whether in test

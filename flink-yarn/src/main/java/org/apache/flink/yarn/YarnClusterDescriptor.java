@@ -18,6 +18,7 @@
 
 package org.apache.flink.yarn;
 
+import java.nio.file.Files;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.cache.DistributedCache;
 import org.apache.flink.api.java.tuple.Tuple2;
@@ -1009,7 +1010,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
         if (jobGraph != null) {
             File tmpJobGraphFile = null;
             try {
-                tmpJobGraphFile = File.createTempFile(appId.toString(), null);
+                tmpJobGraphFile = Files.createTempFile(appId.toString(), null).toFile();
                 try (FileOutputStream output = new FileOutputStream(tmpJobGraphFile);
                         ObjectOutputStream obOutput = new ObjectOutputStream(output)) {
                     obOutput.writeObject(jobGraph);
@@ -1040,7 +1041,7 @@ public class YarnClusterDescriptor implements ClusterDescriptor<ApplicationId> {
         // write out configuration file
         File tmpConfigurationFile = null;
         try {
-            tmpConfigurationFile = File.createTempFile(appId + "-flink-conf.yaml", null);
+            tmpConfigurationFile = Files.createTempFile(appId + "-flink-conf.yaml", null).toFile();
 
             // remove localhost bind hosts as they render production clusters unusable
             removeLocalhostBindHostSetting(configuration, JobManagerOptions.BIND_HOST);

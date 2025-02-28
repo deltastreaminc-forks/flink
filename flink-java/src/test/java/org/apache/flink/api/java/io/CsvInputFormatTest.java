@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java.io;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.ParseException;
 import org.apache.flink.api.common.io.compression.InflaterInputStreamFactory;
 import org.apache.flink.api.java.tuple.Tuple1;
@@ -83,7 +84,7 @@ class CsvInputFormatTest {
         final File tempFile;
 
         if (compressed) {
-            tempFile = File.createTempFile("TextInputFormatTest", ".compressed");
+            tempFile = Files.createTempFile("TextInputFormatTest", ".compressed").toFile();
             TextInputFormat.registerInflaterInputStreamFactory(
                     "compressed",
                     new InflaterInputStreamFactory<InputStream>() {
@@ -98,7 +99,7 @@ class CsvInputFormatTest {
                         }
                     });
         } else {
-            tempFile = File.createTempFile("input-stream-decoration-test", ".tmp");
+            tempFile = Files.createTempFile("input-stream-decoration-test", ".tmp").toFile();
         }
         tempFile.deleteOnExit();
 
@@ -917,7 +918,7 @@ class CsvInputFormatTest {
     }
 
     private FileInputSplit createTempFile(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
 
         OutputStreamWriter wrt =
@@ -964,7 +965,7 @@ class CsvInputFormatTest {
 
         try {
             // create input file
-            tempFile = File.createTempFile("CsvInputFormatTest", "tmp");
+            tempFile = Files.createTempFile("CsvInputFormatTest", "tmp").toFile();
             tempFile.deleteOnExit();
             tempFile.setWritable(true);
 
@@ -1024,7 +1025,7 @@ class CsvInputFormatTest {
 
     @Test
     void testPojoType() throws Exception {
-        File tempFile = File.createTempFile("CsvReaderPojoType", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderPojoType", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1049,7 +1050,7 @@ class CsvInputFormatTest {
 
     @Test
     void testPojoTypeWithPrivateField() throws Exception {
-        File tempFile = File.createTempFile("CsvReaderPojoType", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderPojoType", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1116,7 +1117,7 @@ class CsvInputFormatTest {
 
     @Test
     void testPojoTypeWithMappingInformation() throws Exception {
-        File tempFile = File.createTempFile("CsvReaderPojoType", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderPojoType", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1144,7 +1145,7 @@ class CsvInputFormatTest {
 
     @Test
     void testPojoTypeWithPartialFieldInCSV() throws Exception {
-        File tempFile = File.createTempFile("CsvReaderPojoType", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderPojoType", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1172,7 +1173,7 @@ class CsvInputFormatTest {
 
     @Test
     void testPojoTypeWithMappingInfoAndPartialField() throws Exception {
-        File tempFile = File.createTempFile("CsvReaderPojoType", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderPojoType", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1205,7 +1206,7 @@ class CsvInputFormatTest {
 
     @Test
     void testPojoTypeWithInvalidFieldMapping() throws Exception {
-        File tempFile = File.createTempFile("CsvReaderPojoType", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderPojoType", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1250,7 +1251,7 @@ class CsvInputFormatTest {
                 "\"20:41:52-1-3-2015\"|\"Re: Taskmanager memory error in Eclipse\"|"
                         + "\"Blahblah <blah@blahblah.org>\"|\"blaaa|\"blubb\"";
 
-        final File tempFile = File.createTempFile("CsvReaderQuotedString", "tmp");
+        final File tempFile = Files.createTempFile("CsvReaderQuotedString", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1285,7 +1286,7 @@ class CsvInputFormatTest {
     void testQuotedStringParsingWithEscapedQuotes() throws Exception {
         final String fileContent = "\"\\\"Hello\\\" World\"|\"We are\\\" young\"";
 
-        final File tempFile = File.createTempFile("CsvReaderQuotedString", "tmp");
+        final File tempFile = Files.createTempFile("CsvReaderQuotedString", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -1322,7 +1323,7 @@ class CsvInputFormatTest {
     void testPojoSubclassType() throws Exception {
         final String fileContent = "t1,foobar,tweet2\nt2,barfoo,tweet2";
 
-        final File tempFile = File.createTempFile("CsvReaderPOJOSubclass", "tmp");
+        final File tempFile = Files.createTempFile("CsvReaderPOJOSubclass", "tmp").toFile();
         tempFile.deleteOnExit();
 
         OutputStreamWriter writer = new OutputStreamWriter(new FileOutputStream(tempFile));

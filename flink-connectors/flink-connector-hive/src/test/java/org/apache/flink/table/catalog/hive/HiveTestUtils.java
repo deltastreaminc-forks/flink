@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.catalog.hive;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.BatchExecutionOptions;
 import org.apache.flink.configuration.CoreOptions;
 import org.apache.flink.configuration.JobManagerOptions;
@@ -232,7 +233,7 @@ public class HiveTestUtils {
         }
 
         public void commit(String partitionSpec) throws Exception {
-            File file = File.createTempFile("table_data_", null);
+            File file = Files.createTempFile("table_data_", null).toFile();
             try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
                 for (int i = 0; i < rows.size(); i++) {
                     if (i > 0) {

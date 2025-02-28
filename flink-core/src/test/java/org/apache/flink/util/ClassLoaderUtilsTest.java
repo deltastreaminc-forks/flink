@@ -18,6 +18,7 @@
 
 package org.apache.flink.util;
 
+import java.nio.file.Files;
 import org.junit.Test;
 
 import java.io.File;
@@ -45,7 +46,7 @@ public class ClassLoaderUtilsTest {
 
         try {
             // file with jar contents
-            validJar = File.createTempFile("flink-url-test", ".tmp");
+            validJar = Files.createTempFile("flink-url-test", ".tmp").toFile();
             createValidJar(validJar);
 
             // validate that the JAR is correct and the test setup is not broken
@@ -62,7 +63,7 @@ public class ClassLoaderUtilsTest {
             }
 
             // file with some random contents
-            invalidJar = File.createTempFile("flink-url-test", ".tmp");
+            invalidJar = Files.createTempFile("flink-url-test", ".tmp").toFile();
             try (FileOutputStream invalidout = new FileOutputStream(invalidJar)) {
                 invalidout.write(
                         new byte[] {
@@ -71,7 +72,7 @@ public class ClassLoaderUtilsTest {
             }
 
             // non existing file
-            File nonExisting = File.createTempFile("flink-url-test", ".tmp");
+            File nonExisting = Files.createTempFile("flink-url-test", ".tmp").toFile();
             assertTrue("Cannot create and delete temp file", nonExisting.delete());
 
             // create a URL classloader with

@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java.io;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FileInputSplit;
 import org.apache.flink.core.fs.Path;
@@ -175,7 +176,7 @@ class PrimitiveInputFormatTest {
     }
 
     private FileInputSplit createInputSplit(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
 
         try (FileWriter wrt = new FileWriter(tempFile)) {

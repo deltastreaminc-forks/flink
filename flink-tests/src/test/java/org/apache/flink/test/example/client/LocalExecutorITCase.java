@@ -19,6 +19,7 @@
 
 package org.apache.flink.test.example.client;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.Plan;
 import org.apache.flink.api.java.ExecutionEnvironment;
@@ -67,8 +68,8 @@ public class LocalExecutorITCase extends TestLogger {
     public void testLocalExecutorWithWordCount() throws InterruptedException {
         try {
             // set up the files
-            File inFile = File.createTempFile("wctext", ".in");
-            File outFile = File.createTempFile("wctext", ".out");
+            File inFile = Files.createTempFile("wctext", ".in").toFile();
+            File outFile = Files.createTempFile("wctext", ".out").toFile();
             inFile.deleteOnExit();
             outFile.deleteOnExit();
 

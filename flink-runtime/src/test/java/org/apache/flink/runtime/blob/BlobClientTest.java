@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.blob;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.BlobServerOptions;
 import org.apache.flink.configuration.Configuration;
@@ -470,7 +471,7 @@ public class BlobClientTest extends TestLogger {
      */
     static void uploadJarFile(BlobServer blobServer, Configuration blobClientConfig)
             throws Exception {
-        final File testFile = File.createTempFile("testfile", ".dat");
+        final File testFile = Files.createTempFile("testfile", ".dat").toFile();
         testFile.deleteOnExit();
         prepareTestFile(testFile);
 

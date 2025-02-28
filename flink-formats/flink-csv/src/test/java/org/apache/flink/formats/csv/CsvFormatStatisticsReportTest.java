@@ -126,7 +126,7 @@ public class CsvFormatStatisticsReportTest extends StatisticsReportTestBase {
     }
 
     private static Path createTempFile(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
         OutputStreamWriter wrt =
                 new OutputStreamWriter(

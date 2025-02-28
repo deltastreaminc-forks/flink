@@ -33,7 +33,7 @@ public class TestFileUtils {
     private static final String FILE_SUFFIX = ".tmp";
 
     public static String createTempFile(long bytes) throws IOException {
-        File f = File.createTempFile(FILE_PREFIX, FILE_SUFFIX);
+        File f = Files.createTempFile(FILE_PREFIX, FILE_SUFFIX).toFile();
         f.deleteOnExit();
 
         BufferedOutputStream out = new BufferedOutputStream(new FileOutputStream(f));
@@ -80,7 +80,7 @@ public class TestFileUtils {
     }
 
     public static String createTempFile(String contents) throws IOException {
-        File f = File.createTempFile(FILE_PREFIX, FILE_SUFFIX);
+        File f = Files.createTempFile(FILE_PREFIX, FILE_SUFFIX).toFile();
         f.deleteOnExit();
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(f))) {

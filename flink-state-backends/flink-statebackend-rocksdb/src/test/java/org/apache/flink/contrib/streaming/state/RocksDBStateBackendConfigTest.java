@@ -18,6 +18,7 @@
 
 package org.apache.flink.contrib.streaming.state;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.typeutils.base.IntSerializer;
 import org.apache.flink.configuration.CheckpointingOptions;
 import org.apache.flink.configuration.ConfigOption;
@@ -98,7 +99,7 @@ public class RocksDBStateBackendConfigTest {
     @Test
     public void testDefaultDbLogDir() throws Exception {
         final EmbeddedRocksDBStateBackend backend = new EmbeddedRocksDBStateBackend();
-        final File logFile = File.createTempFile(getClass().getSimpleName() + "-", ".log");
+        final File logFile = Files.createTempFile(getClass().getSimpleName() + "-", ".log").toFile();
         // set the environment variable 'log.file' with the Flink log file location
         System.setProperty("log.file", logFile.getPath());
         try (RocksDBResourceContainer container = backend.createOptionsAndResourceContainer(null)) {

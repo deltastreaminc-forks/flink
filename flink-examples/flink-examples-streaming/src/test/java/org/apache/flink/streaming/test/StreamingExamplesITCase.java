@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.test;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.eventtime.AscendingTimestampsWatermarks;
 import org.apache.flink.api.common.eventtime.TimestampAssigner;
 import org.apache.flink.api.common.eventtime.TimestampAssignerSupplier;
@@ -64,7 +65,7 @@ public class StreamingExamplesITCase extends AbstractTestBase {
     @Test
     public void testWindowJoin() throws Exception {
 
-        final String resultPath = File.createTempFile("result-path", "dir").toURI().toString();
+        final String resultPath = Files.createTempFile("result-path", "dir").toFile().toURI().toString();
 
         final class Parser implements MapFunction<String, Tuple2<String, Integer>> {
 
