@@ -18,6 +18,7 @@
 
 package org.apache.flink.connector.file.sink.compactor;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.annotation.PublicEvolving;
 import org.apache.flink.connector.file.sink.compactor.DecoderBasedReader.Decoder;
 
@@ -43,7 +44,7 @@ public class SimpleStringDecoder implements Decoder<String> {
 
     @Override
     public String decodeNext() throws IOException {
-        String nextLine = reader.readLine();
+        String nextLine = BoundedLineReader.readLine(reader, 5_000_000);
         // String read will be write directly to the compacted file, so the '\n' should be appended.
         return nextLine == null ? null : (nextLine + '\n');
     }

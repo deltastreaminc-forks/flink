@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.manual;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeutils.TypeComparator;
@@ -120,7 +121,7 @@ public class MassiveStringSorting {
                 verifyReader = new BufferedReader(new FileReader(sorted));
                 String next;
 
-                while ((next = verifyReader.readLine()) != null) {
+                while ((next = BoundedLineReader.readLine(verifyReader, 5_000_000)) != null) {
                     String nextFromStratoSort = sortedData.next("");
 
                     Assert.assertNotNull(nextFromStratoSort);
@@ -314,12 +315,12 @@ public class MassiveStringSorting {
 
         @Override
         public String next(String reuse) throws IOException {
-            return reader.readLine();
+            return BoundedLineReader.readLine(reader, 5_000_000);
         }
 
         @Override
         public String next() throws IOException {
-            return reader.readLine();
+            return BoundedLineReader.readLine(reader, 5_000_000);
         }
     }
 
@@ -334,7 +335,7 @@ public class MassiveStringSorting {
 
         @Override
         public Tuple2<String, String[]> next(Tuple2<String, String[]> reuse) throws IOException {
-            String line = reader.readLine();
+            String line = BoundedLineReader.readLine(reader, 5_000_000);
             if (line == null) {
                 return null;
             }

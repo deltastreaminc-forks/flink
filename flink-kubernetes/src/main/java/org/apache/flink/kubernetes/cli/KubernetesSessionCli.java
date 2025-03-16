@@ -18,6 +18,7 @@
 
 package org.apache.flink.kubernetes.cli;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.client.cli.AbstractCustomCommandLine;
@@ -170,7 +171,7 @@ public class KubernetesSessionCli {
         // ------------- handle interactive command by user. ----------------------
 
         if (in.ready()) {
-            final String command = in.readLine();
+            final String command = BoundedLineReader.readLine(in, 5_000_000);
             switch (command) {
                 case "quit":
                     return new Tuple2<>(false, false);

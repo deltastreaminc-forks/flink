@@ -18,6 +18,7 @@
 
 package org.apache.flink.yarn.cli;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.client.cli.CliArgsException;
 import org.apache.flink.client.cli.CliFrontend;
 import org.apache.flink.client.cli.CliFrontendParser;
@@ -941,7 +942,7 @@ public class FlinkYarnSessionCli extends AbstractYarnCli {
         // ------------- handle interactive command by user. ----------------------
 
         if (readConsoleInput && in.ready()) {
-            String command = in.readLine();
+            String command = BoundedLineReader.readLine(in, 5_000_000);
             switch (command) {
                 case "quit":
                 case "stop":

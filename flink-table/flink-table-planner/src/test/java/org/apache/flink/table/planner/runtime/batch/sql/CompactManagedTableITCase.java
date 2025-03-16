@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.runtime.batch.sql;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.core.fs.FileStatus;
 import org.apache.flink.core.fs.Path;
 import org.apache.flink.table.api.ValidationException;
@@ -374,7 +375,7 @@ public class CompactManagedTableITCase extends BatchTestBase {
         List<RowData> elements = new ArrayList<>();
         try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
             String line;
-            while ((line = reader.readLine()) != null) {
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                 elements.add(GenericRowData.of(StringData.fromString(line)));
             }
         } catch (IOException e) {

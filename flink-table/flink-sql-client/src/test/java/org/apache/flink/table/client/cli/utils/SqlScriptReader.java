@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.client.cli.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.table.api.SqlDialect;
 import org.apache.flink.table.client.cli.parser.SqlClientParserState;
 
@@ -73,7 +74,7 @@ public final class SqlScriptReader implements AutoCloseable {
     }
 
     private void readLine() throws IOException {
-        this.currentLine = reader.readLine();
+        this.currentLine = BoundedLineReader.readLine(reader, 5_000_000);
     }
 
     private @Nullable TestSqlStatement readNext() throws IOException {

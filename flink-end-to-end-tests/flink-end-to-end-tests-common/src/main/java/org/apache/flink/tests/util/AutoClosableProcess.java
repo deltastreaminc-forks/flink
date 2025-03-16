@@ -18,6 +18,7 @@
 
 package org.apache.flink.tests.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.time.Deadline;
 import org.apache.flink.util.Preconditions;
 
@@ -210,7 +211,7 @@ public class AutoClosableProcess implements AutoCloseable {
                                             new InputStreamReader(
                                                     stream, StandardCharsets.UTF_8))) {
                                 String line;
-                                while ((line = bufferedReader.readLine()) != null) {
+                                while ((line = BoundedLineReader.readLine(bufferedReader, 5_000_000)) != null) {
                                     streamConsumer.accept(line);
                                 }
                             } catch (IOException e) {

@@ -18,6 +18,7 @@
 
 package org.apache.flink.fs.s3.common;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.testutils.EachCallbackWrapper;
 import org.apache.flink.core.testutils.TestContainerExtension;
@@ -83,7 +84,7 @@ public class MinioTestContainerTest {
                 new BufferedReader(
                         new InputStreamReader(
                                 getClient().getObject(bucketName, objectId).getObjectContent()));
-        assertThat(reader.readLine()).isEqualTo(content);
+        assertThat(BoundedLineReader.readLine(reader, 5_000_000)).isEqualTo(content);
     }
 
     @Test

@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.testcsv;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.serialization.DeserializationSchema;
 import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.configuration.ConfigOption;
@@ -157,7 +158,7 @@ public class TestCsvFormatFactory
                                 BufferedReader br = new BufferedReader(isr)) {
                             String line;
                             while (sampledRowCnt < totalSampleLineCnt
-                                    && (line = br.readLine()) != null) {
+                                    && (line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                                 sampledRowCnt += 1;
                                 sampledRowSize += line.getBytes(StandardCharsets.UTF_8).length;
                             }

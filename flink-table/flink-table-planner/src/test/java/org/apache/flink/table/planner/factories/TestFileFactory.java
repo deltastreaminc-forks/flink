@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.planner.factories;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.eventtime.WatermarkStrategy;
 import org.apache.flink.api.common.serialization.Encoder;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
@@ -183,7 +184,7 @@ public class TestFileFactory implements DynamicTableSourceFactory, DynamicTableS
             return new Reader<RowData>() {
                 @Override
                 public RowData read() throws IOException {
-                    String line = reader.readLine();
+                    String line = BoundedLineReader.readLine(reader, 5_000_000);
                     if (line == null) {
                         return null;
                     }

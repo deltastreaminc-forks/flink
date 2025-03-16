@@ -18,6 +18,7 @@
 
 package org.apache.flink.networking;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -93,7 +94,7 @@ public class EchoServer extends Thread implements AutoCloseable {
         public void run() {
             try {
                 String inputLine;
-                while (!close && (inputLine = input.readLine()) != null) {
+                while (!close && (inputLine = BoundedLineReader.readLine(input, 5_000_000)) != null) {
                     output.println(inputLine);
                 }
             } catch (IOException e) {

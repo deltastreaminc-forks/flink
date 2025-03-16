@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.distributedcache;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.functions.RichFlatMapFunction;
 import org.apache.flink.api.java.ExecutionEnvironment;
 import org.apache.flink.api.java.tuple.Tuple1;
@@ -72,7 +73,7 @@ public class DistributedCacheTest extends AbstractTestBase {
             File file = getRuntimeContext().getDistributedCache().getFile("cache_test");
             try (BufferedReader reader = new BufferedReader(new FileReader(file))) {
                 String tempString;
-                while ((tempString = reader.readLine()) != null) {
+                while ((tempString = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                     wordList.add(tempString);
                 }
             }

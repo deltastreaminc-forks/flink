@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.migration;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.FlinkVersion;
 
 import java.io.BufferedReader;
@@ -39,7 +40,7 @@ public class PublishedVersionUtils {
                                         "/" + MOST_RECENTLY_PUBLISHED_VERSION_FILE),
                                 "The most-recently published version file does not exist");
                 BufferedReader reader = new BufferedReader(new InputStreamReader(input))) {
-            String versionName = reader.readLine();
+            String versionName = BoundedLineReader.readLine(reader, 5_000_000);
             return FlinkVersion.valueOf(versionName);
         } catch (IOException e) {
             throw new RuntimeException("Failed to parse the latest published version", e);

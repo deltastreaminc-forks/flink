@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.io.FileOutputFormat;
 import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.configuration.Configuration;
@@ -88,7 +89,7 @@ public class DataSinkTaskTest extends TaskTestBase {
             HashMap<Integer, HashSet<Integer>> keyValueCountMap = new HashMap<>(keyCnt);
 
             while (br.ready()) {
-                String line = br.readLine();
+                String line = BoundedLineReader.readLine(br, 5_000_000);
 
                 Integer key = Integer.parseInt(line.substring(0, line.indexOf("_")));
                 Integer val =
@@ -188,7 +189,7 @@ public class DataSinkTaskTest extends TaskTestBase {
             HashMap<Integer, HashSet<Integer>> keyValueCountMap = new HashMap<>(keyCnt);
 
             while (br.ready()) {
-                String line = br.readLine();
+                String line = BoundedLineReader.readLine(br, 5_000_000);
 
                 Integer key = Integer.parseInt(line.substring(0, line.indexOf("_")));
                 Integer val =
@@ -285,7 +286,7 @@ public class DataSinkTaskTest extends TaskTestBase {
 
             int curVal = -1;
             while (br.ready()) {
-                String line = br.readLine();
+                String line = BoundedLineReader.readLine(br, 5_000_000);
 
                 Integer key = Integer.parseInt(line.substring(0, line.indexOf("_")));
                 Integer val =

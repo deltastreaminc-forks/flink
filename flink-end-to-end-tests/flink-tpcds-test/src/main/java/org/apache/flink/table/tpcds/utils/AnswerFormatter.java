@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.tpcds.utils;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.java.utils.ParameterTool;
 
 import java.io.BufferedReader;
@@ -187,7 +188,7 @@ public class AnswerFormatter {
         String line;
         List<Integer> colLengthList;
         List<String> content = new ArrayList<>();
-        while ((line = reader.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
             content.add(line);
         }
 
