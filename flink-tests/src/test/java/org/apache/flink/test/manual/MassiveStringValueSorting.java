@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.manual;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeutils.TypeComparator;
@@ -76,7 +77,7 @@ public class MassiveStringValueSorting {
 
             Process p = null;
             try {
-                p = Runtime.getRuntime().exec(command);
+                p = SystemCommand.runCommand(Runtime.getRuntime(), command);
                 int retCode = p.waitFor();
                 if (retCode != 0) {
                     throw new Exception("Command failed with return code " + retCode);
@@ -188,7 +189,7 @@ public class MassiveStringValueSorting {
 
             Process p = null;
             try {
-                p = Runtime.getRuntime().exec(command);
+                p = SystemCommand.runCommand(Runtime.getRuntime(), command);
                 int retCode = p.waitFor();
                 if (retCode != 0) {
                     throw new Exception("Command failed with return code " + retCode);

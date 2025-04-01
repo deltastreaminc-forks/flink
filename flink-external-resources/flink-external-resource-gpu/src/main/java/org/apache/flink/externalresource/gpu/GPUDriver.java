@@ -18,6 +18,7 @@
 
 package org.apache.flink.externalresource.gpu;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.flink.annotation.VisibleForTesting;
 import org.apache.flink.api.common.externalresource.ExternalResourceDriver;
 import org.apache.flink.configuration.ConfigConstants;
@@ -132,7 +133,7 @@ class GPUDriver implements ExternalResourceDriver {
     private String executeDiscoveryScript(File discoveryScript, long gpuAmount, String args)
             throws Exception {
         final String cmd = discoveryScript.getAbsolutePath() + " " + gpuAmount + " " + args;
-        final Process process = Runtime.getRuntime().exec(cmd);
+        final Process process = SystemCommand.runCommand(Runtime.getRuntime(), cmd);
         try (final BufferedReader stdoutReader =
                         new BufferedReader(
                                 new InputStreamReader(

@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.io.disk;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.flink.api.common.time.Deadline;
 import org.apache.flink.runtime.io.disk.iomanager.FileIOChannel;
 import org.apache.flink.runtime.testutils.TestJvmProcess;
@@ -127,8 +128,7 @@ public class FileChannelManagerImplTest extends TestLogger {
             TestJvmProcess.waitForMarkerFile(signalFile, 3 * TEST_TIMEOUT.toMillis());
 
             Process kill =
-                    Runtime.getRuntime()
-                            .exec("kill " + fileChannelManagerTestProcess.getProcessId());
+                    SystemCommand.runCommand(Runtime.getRuntime(), "kill " + fileChannelManagerTestProcess.getProcessId());
             kill.waitFor();
             assertEquals("Failed to send SIG_TERM to process", 0, kill.exitValue());
 
