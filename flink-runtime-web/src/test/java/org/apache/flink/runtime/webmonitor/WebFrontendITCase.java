@@ -18,6 +18,8 @@
 
 package org.apache.flink.runtime.webmonitor;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.time.Deadline;
 import org.apache.flink.client.program.ClusterClient;
@@ -134,7 +136,7 @@ class WebFrontendITCase {
     void testResponseHeaders(@InjectClusterRESTAddress URI restAddress) throws Exception {
         // check headers for successful json response
         URL taskManagersUrl =
-                new URL("http://localhost:" + restAddress.getPort() + "/taskmanagers");
+                Urls.create("http://localhost:" + restAddress.getPort() + "/taskmanagers", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         HttpURLConnection taskManagerConnection =
                 (HttpURLConnection) taskManagersUrl.openConnection();
         taskManagerConnection.setConnectTimeout(100000);
@@ -153,7 +155,7 @@ class WebFrontendITCase {
 
         // check headers in case of an error
         URL notFoundJobUrl =
-                new URL("http://localhost:" + restAddress.getPort() + "/jobs/dontexist");
+                Urls.create("http://localhost:" + restAddress.getPort() + "/jobs/dontexist", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         HttpURLConnection notFoundJobConnection =
                 (HttpURLConnection) notFoundJobUrl.openConnection();
         notFoundJobConnection.setConnectTimeout(100000);
@@ -465,7 +467,7 @@ class WebFrontendITCase {
     }
 
     private static String getFromHTTP(String url) throws Exception {
-        final URL u = new URL(url);
+        final URL u = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         LOG.info("Accessing URL " + url + " as URL: " + u);
 
         final Deadline deadline = Deadline.fromNow(Duration.ofSeconds(10L));

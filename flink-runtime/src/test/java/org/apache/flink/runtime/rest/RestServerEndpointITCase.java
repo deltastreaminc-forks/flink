@@ -18,6 +18,8 @@
 
 package org.apache.flink.runtime.rest;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.time.Time;
 import org.apache.flink.configuration.Configuration;
@@ -453,7 +455,7 @@ public class RestServerEndpointITCase extends TestLogger {
         final File file = temporaryFolder.newFile();
         Files.write(file.toPath(), Collections.singletonList("foobar"));
 
-        final URL url = new URL(serverEndpoint.getRestBaseUrl() + "/" + file.getName());
+        final URL url = Urls.create(serverEndpoint.getRestBaseUrl() + "/" + file.getName(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         final HttpURLConnection connection = (HttpURLConnection) url.openConnection();
         connection.setRequestMethod("GET");
         final String fileContents = IOUtils.toString(connection.getInputStream());
@@ -737,7 +739,7 @@ public class RestServerEndpointITCase extends TestLogger {
             throws IOException {
         final HttpURLConnection connection =
                 (HttpURLConnection)
-                        new URL(serverEndpoint.getRestBaseUrl() + "/upload").openConnection();
+                        Urls.create(serverEndpoint.getRestBaseUrl() + "/upload", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS).openConnection();
         connection.setDoOutput(true);
         connection.setRequestProperty("Content-Type", "multipart/form-data; boundary=" + boundary);
         return connection;

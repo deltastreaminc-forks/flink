@@ -18,6 +18,8 @@
 
 package org.apache.flink.runtime.webmonitor.history;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.HistoryServerOptions;
 import org.apache.flink.configuration.SecurityOptions;
@@ -50,7 +52,7 @@ public enum HistoryServerUtils {
             final int port = getPort(configuration);
 
             try {
-                return Optional.of(new URL(protocol, hostname, port, ""));
+                return Optional.of(Urls.create(protocol, hostname, port, "", Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS));
             } catch (MalformedURLException e) {
                 LOG.debug(
                         "Could not create the HistoryServer's URL from protocol: {}, hostname: {} and port: {}.",

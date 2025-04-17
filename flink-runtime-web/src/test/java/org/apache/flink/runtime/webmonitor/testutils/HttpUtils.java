@@ -17,6 +17,8 @@
 
 package org.apache.flink.runtime.webmonitor.testutils;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.api.java.tuple.Tuple2;
 
 import org.apache.commons.io.IOUtils;
@@ -28,7 +30,7 @@ import java.net.URL;
 /** Collection of HTTP utils. */
 public class HttpUtils {
     public static Tuple2<Integer, String> getFromHTTP(String url) throws Exception {
-        URL u = new URL(url);
+        URL u = Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
         HttpURLConnection connection = (HttpURLConnection) u.openConnection();
         connection.setConnectTimeout(100000);
         connection.connect();

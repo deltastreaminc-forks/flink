@@ -18,6 +18,8 @@
 
 package org.apache.flink.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.core.fs.FSDataInputStream;
 import org.apache.flink.core.fs.FSDataOutputStream;
 import org.apache.flink.core.fs.FileStatus;
@@ -681,7 +683,7 @@ public final class FileUtils {
      */
     public static URL toURL(java.nio.file.Path path) throws MalformedURLException {
         final String scheme = path.toUri().getScheme();
-        return new URL(scheme, null, -1, path.toString());
+        return Urls.create(scheme, null, -1, path.toString(), Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
     }
 
     private static final class FilterFileVisitor extends SimpleFileVisitor<java.nio.file.Path> {
