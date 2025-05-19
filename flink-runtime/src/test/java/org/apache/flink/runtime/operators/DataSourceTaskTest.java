@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.operators;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.DelimitedInputFormat;
 import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.runtime.operators.testutils.NirvanaOutputList;
@@ -215,7 +216,7 @@ public class DataSourceTaskTest extends TaskTestBase {
                 MutableObjectIterator<Record> inIt, File inputFile, boolean insertInvalidData)
                 throws IOException {
 
-            try (BufferedWriter bw = new BufferedWriter(new FileWriter(inputFile))) {
+            try (BufferedWriter bw = Files.newBufferedWriter(inputFile.toPath())) {
                 if (insertInvalidData) {
                     bw.write("####_I_AM_INVALID_########\n");
                 }

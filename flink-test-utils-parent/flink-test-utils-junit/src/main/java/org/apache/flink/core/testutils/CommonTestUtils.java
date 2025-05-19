@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.testutils;
 
+import java.nio.file.Files;
 import org.junit.Assert;
 
 import java.io.BufferedWriter;
@@ -84,7 +85,7 @@ public class CommonTestUtils {
         File f = File.createTempFile("flink_test_", ".tmp");
         f.deleteOnExit();
 
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(f))) {
+        try (BufferedWriter out = Files.newBufferedWriter(f.toPath())) {
             out.write(contents);
         }
         return f.toURI().toString();

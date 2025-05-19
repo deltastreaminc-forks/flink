@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.misc;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.java.typeutils.runtime.kryo.KryoSerializer;
 
@@ -117,7 +118,7 @@ public class KryoSerializerRegistrationsTest {
         final Kryo kryo = new KryoSerializer<>(Integer.class, new ExecutionConfig()).getKryo();
         final int nextId = kryo.getNextRegistrationId();
 
-        try (BufferedWriter writer = new BufferedWriter(new FileWriter(file))) {
+        try (BufferedWriter writer = Files.newBufferedWriter(file.toPath())) {
             for (int i = 0; i < nextId; i++) {
                 Registration registration = kryo.getRegistration(i);
                 String str = registration.getId() + "," + registration.getType().getName();

@@ -18,6 +18,7 @@
 
 package org.apache.flink.connector.file.sink.compactor;
 
+import java.nio.file.Files;
 import org.apache.flink.connector.file.sink.FileSinkCommittable;
 import org.apache.flink.connector.file.sink.FileSinkCommittableSerializer;
 import org.apache.flink.connector.file.sink.compactor.operator.CompactorOperator;
@@ -519,7 +520,7 @@ class CompactorOperatorTest extends AbstractCompactTestBase {
                     @Override
                     public void write(Integer element, long currentTime) throws IOException {
                         if (writer == null) {
-                            writer = new BufferedWriter(new FileWriter(path.toString()));
+                            writer = Files.newBufferedWriter(path.toString().toPath());
                         }
                         writer.write(element);
                         size += 1;

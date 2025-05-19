@@ -18,6 +18,7 @@
 
 package org.apache.flink.examples.java.relational.util;
 
+import java.nio.file.Files;
 import org.apache.flink.examples.java.relational.WebLogAnalysis;
 
 import java.io.BufferedWriter;
@@ -127,7 +128,7 @@ public class WebLogDataGenerator {
 
         Random rand = new Random(Calendar.getInstance().getTimeInMillis());
 
-        try (BufferedWriter fw = new BufferedWriter(new FileWriter(path))) {
+        try (BufferedWriter fw = Files.newBufferedWriter(path.toPath())) {
             for (int i = 0; i < noDocs; i++) {
 
                 int wordsInDoc = rand.nextInt(40) + 10;
@@ -163,7 +164,7 @@ public class WebLogDataGenerator {
 
         Random rand = new Random(Calendar.getInstance().getTimeInMillis());
 
-        try (BufferedWriter fw = new BufferedWriter(new FileWriter(path))) {
+        try (BufferedWriter fw = Files.newBufferedWriter(path.toPath())) {
             for (int i = 0; i < noDocs; i++) {
                 // Rank
                 StringBuilder rank = new StringBuilder(rand.nextInt(100) + "|");
@@ -192,7 +193,7 @@ public class WebLogDataGenerator {
 
         Random rand = new Random(Calendar.getInstance().getTimeInMillis());
 
-        try (BufferedWriter fw = new BufferedWriter(new FileWriter(path))) {
+        try (BufferedWriter fw = Files.newBufferedWriter(path.toPath())) {
             for (int i = 0; i < noVisits; i++) {
 
                 int year = 2000 + rand.nextInt(10); // yearFilter 3

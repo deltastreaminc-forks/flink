@@ -236,7 +236,7 @@ class FileSystemBlobStoreTest {
                 Files.createTempFile(
                         String.format("filesystemblobstoretest-%s-", operationLabel), "");
         try (BufferedWriter writer =
-                new BufferedWriter(new FileWriter(temporaryFile.toAbsolutePath().toString()))) {
+                Files.newBufferedWriter(temporaryFile.toAbsolutePath().toString().toPath())) {
             writer.write(actualContent);
         }
 

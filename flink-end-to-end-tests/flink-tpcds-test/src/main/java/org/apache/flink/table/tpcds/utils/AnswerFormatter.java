@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.tpcds.utils;
 
+import java.nio.file.Files;
 import org.apache.flink.api.java.utils.ParameterTool;
 
 import java.io.BufferedReader;
@@ -182,7 +183,7 @@ public class AnswerFormatter {
      */
     private static void format(File originFile, File destFile) throws Exception {
         BufferedReader reader = new BufferedReader(new FileReader(originFile));
-        BufferedWriter writer = new BufferedWriter(new FileWriter(destFile));
+        BufferedWriter writer = Files.newBufferedWriter(destFile.toPath());
 
         String line;
         List<Integer> colLengthList;

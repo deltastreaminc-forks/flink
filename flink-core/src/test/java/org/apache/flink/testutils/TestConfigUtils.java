@@ -18,6 +18,7 @@
 
 package org.apache.flink.testutils;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.GlobalConfiguration;
 
@@ -45,7 +46,7 @@ public final class TestConfigUtils {
             final File confFile = new File(confDir, GlobalConfiguration.FLINK_CONF_FILENAME);
 
             try {
-                BufferedWriter writer = new BufferedWriter(new FileWriter(confFile));
+                BufferedWriter writer = Files.newBufferedWriter(confFile.toPath());
                 try {
                     writer.write(contents);
                 } finally {

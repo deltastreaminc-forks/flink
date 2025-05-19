@@ -18,6 +18,7 @@
 
 package org.apache.flink.examples.java.clustering.util;
 
+import java.nio.file.Files;
 import org.apache.flink.api.java.utils.ParameterTool;
 import org.apache.flink.examples.java.clustering.KMeans;
 
@@ -95,7 +96,7 @@ public class KMeansDataGenerator {
         // write the points out
         BufferedWriter pointsOut = null;
         try {
-            pointsOut = new BufferedWriter(new FileWriter(new File(outDir + "/" + POINTS_FILE)));
+            pointsOut = Files.newBufferedWriter(new File(outDir + "/" + POINTS_FILE).toPath());
             StringBuilder buffer = new StringBuilder();
 
             double[] point = new double[DIMENSIONALITY];
@@ -119,7 +120,7 @@ public class KMeansDataGenerator {
         // write the uniformly distributed centers to a file
         BufferedWriter centersOut = null;
         try {
-            centersOut = new BufferedWriter(new FileWriter(new File(outDir + "/" + CENTERS_FILE)));
+            centersOut = Files.newBufferedWriter(new File(outDir + "/" + CENTERS_FILE).toPath());
             StringBuilder buffer = new StringBuilder();
 
             double[][] centers = uniformRandomCenters(random, k, DIMENSIONALITY, range);

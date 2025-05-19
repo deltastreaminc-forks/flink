@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.manual;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeutils.TypeComparator;
@@ -390,7 +391,7 @@ public class MassiveStringValueSorting {
         File f = File.createTempFile("strings", "txt");
         BufferedWriter wrt = null;
         try {
-            wrt = new BufferedWriter(new FileWriter(f));
+            wrt = Files.newBufferedWriter(f.toPath());
 
             for (int i = 0; i < numStrings; i++) {
                 bld.setLength(resetValue);
@@ -422,7 +423,7 @@ public class MassiveStringValueSorting {
         File f = File.createTempFile("strings", "txt");
         BufferedWriter wrt = null;
         try {
-            wrt = new BufferedWriter(new FileWriter(f));
+            wrt = Files.newBufferedWriter(f.toPath());
 
             for (int i = 0; i < numStrings; i++) {
                 bld.setLength(0);

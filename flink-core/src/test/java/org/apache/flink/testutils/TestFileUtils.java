@@ -56,7 +56,7 @@ public class TestFileUtils {
         f.createNewFile();
         f.deleteOnExit();
 
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(f))) {
+        try (BufferedWriter out = Files.newBufferedWriter(f.toPath())) {
             out.write(contents);
         }
         return f.toURI().toString();
@@ -83,7 +83,7 @@ public class TestFileUtils {
         File f = File.createTempFile(FILE_PREFIX, FILE_SUFFIX);
         f.deleteOnExit();
 
-        try (BufferedWriter out = new BufferedWriter(new FileWriter(f))) {
+        try (BufferedWriter out = Files.newBufferedWriter(f.toPath())) {
             out.write(contents);
         }
         return f.toURI().toString();
@@ -129,7 +129,7 @@ public class TestFileUtils {
             File child = new File(f, randomFileName(fileExtension));
             child.deleteOnExit();
 
-            try (BufferedWriter out = new BufferedWriter(new FileWriter(child))) {
+            try (BufferedWriter out = Files.newBufferedWriter(child.toPath())) {
                 out.write(s);
             }
         }

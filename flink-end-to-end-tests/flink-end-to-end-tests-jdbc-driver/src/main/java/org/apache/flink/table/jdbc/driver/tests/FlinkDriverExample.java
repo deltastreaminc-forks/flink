@@ -20,6 +20,7 @@ package org.apache.flink.table.jdbc.driver.tests;
 
 import java.io.BufferedWriter;
 import java.io.FileWriter;
+import java.nio.file.Files;
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.ResultSet;
@@ -98,7 +99,7 @@ public class FlinkDriverExample {
                     }
                 }
                 Collections.sort(resultList);
-                BufferedWriter bw = new BufferedWriter(new FileWriter(tableOutput));
+                BufferedWriter bw = Files.newBufferedWriter(tableOutput.toPath());
                 for (String result : resultList) {
                     bw.write(result);
                     bw.newLine();
