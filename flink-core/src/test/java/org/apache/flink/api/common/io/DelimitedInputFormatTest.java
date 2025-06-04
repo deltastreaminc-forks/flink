@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common.io;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.FileInputFormat.FileBaseStatistics;
 import org.apache.flink.api.common.io.statistics.BaseStatistics;
 import org.apache.flink.configuration.ConfigConstants;
@@ -577,7 +578,7 @@ public class DelimitedInputFormatTest {
     }
 
     static FileInputSplit createTempFile(String contents) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
 
         try (Writer out = new OutputStreamWriter(new FileOutputStream(tempFile))) {
@@ -593,7 +594,7 @@ public class DelimitedInputFormatTest {
     }
 
     static FileInputSplit createTempFile(String contents, String charset) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
 
         try (Writer out = new OutputStreamWriter(new FileOutputStream(tempFile), charset)) {
@@ -623,7 +624,7 @@ public class DelimitedInputFormatTest {
     }
 
     private static Path createTempFilePath(String contents) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
 
         try (OutputStreamWriter wrt = new OutputStreamWriter(new FileOutputStream(tempFile))) {

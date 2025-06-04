@@ -18,6 +18,7 @@
 
 package org.apache.flink.core.testutils;
 
+import java.nio.file.Files;
 import org.junit.Assert;
 
 import java.io.BufferedWriter;
@@ -81,7 +82,7 @@ public class CommonTestUtils {
      * @return The temp file URI.
      */
     public static String createTempFile(String contents) throws IOException {
-        File f = File.createTempFile("flink_test_", ".tmp");
+        File f = Files.createTempFile("flink_test_", ".tmp").toFile();
         f.deleteOnExit();
 
         try (BufferedWriter out = new BufferedWriter(new FileWriter(f))) {

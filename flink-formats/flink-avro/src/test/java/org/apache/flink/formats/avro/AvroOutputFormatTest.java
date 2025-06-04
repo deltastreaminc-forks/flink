@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FileSystem;
 import org.apache.flink.core.fs.Path;
@@ -132,13 +133,13 @@ class AvroOutputFormatTest {
     void testCompression() throws Exception {
         // given
         final Path outputPath =
-                new Path(File.createTempFile("avro-output-file", "avro").getAbsolutePath());
+                new Path(Files.createTempFile("avro-output-file", "avro").toFile().getAbsolutePath());
         final AvroOutputFormat<User> outputFormat = new AvroOutputFormat<>(outputPath, User.class);
         outputFormat.setWriteMode(FileSystem.WriteMode.OVERWRITE);
 
         final Path compressedOutputPath =
                 new Path(
-                        File.createTempFile("avro-output-file", "compressed.avro")
+                        Files.createTempFile("avro-output-file", "compressed.avro").toFile()
                                 .getAbsolutePath());
         final AvroOutputFormat<User> compressedOutputFormat =
                 new AvroOutputFormat<>(compressedOutputPath, User.class);
@@ -197,7 +198,7 @@ class AvroOutputFormatTest {
     @Test
     void testGenericRecord() throws IOException {
         final Path outputPath =
-                new Path(File.createTempFile("avro-output-file", "generic.avro").getAbsolutePath());
+                new Path(Files.createTempFile("avro-output-file", "generic.avro").toFile().getAbsolutePath());
         final AvroOutputFormat<GenericRecord> outputFormat =
                 new AvroOutputFormat<>(outputPath, GenericRecord.class);
         Schema schema =

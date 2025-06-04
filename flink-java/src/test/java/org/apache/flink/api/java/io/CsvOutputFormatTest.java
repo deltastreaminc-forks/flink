@@ -44,7 +44,7 @@ class CsvOutputFormatTest {
 
     @BeforeEach
     void createFile() throws Exception {
-        path = File.createTempFile("csv_output_test_file", ".csv").getAbsolutePath();
+        path = Files.createTempFile("csv_output_test_file", ".csv").toFile().getAbsolutePath();
     }
 
     @Test

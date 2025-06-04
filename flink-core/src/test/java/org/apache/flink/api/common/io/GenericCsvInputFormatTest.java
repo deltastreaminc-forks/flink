@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common.io;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FileInputSplit;
 import org.apache.flink.core.fs.Path;
@@ -621,7 +622,7 @@ public class GenericCsvInputFormatTest {
         format.setFilePath("file:///some/file/that/will/not/be/read");
 
         for (String charset : new String[] {"UTF-8", "UTF-16BE", "UTF-16LE"}) {
-            File tempFile = File.createTempFile("test_contents", "tmp");
+            File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
             tempFile.deleteOnExit();
 
             // write string with proper encoding
@@ -809,7 +810,7 @@ public class GenericCsvInputFormatTest {
     }
 
     private FileInputSplit createTempDeflateFile(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp.deflate");
+        File tempFile = Files.createTempFile("test_contents", "tmp.deflate").toFile();
         tempFile.deleteOnExit();
 
         DataOutputStream dos =
@@ -826,7 +827,7 @@ public class GenericCsvInputFormatTest {
     }
 
     private FileInputSplit createTempGzipFile(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp.gz");
+        File tempFile = Files.createTempFile("test_contents", "tmp.gz").toFile();
         tempFile.deleteOnExit();
 
         DataOutputStream dos =
@@ -843,7 +844,7 @@ public class GenericCsvInputFormatTest {
     }
 
     private FileInputSplit createTempZStandardFile(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp.zst");
+        File tempFile = Files.createTempFile("test_contents", "tmp.zst").toFile();
         tempFile.deleteOnExit();
 
         DataOutputStream dos =

@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.util;
 
+import java.nio.file.Files;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.MemorySize;
 import org.apache.flink.runtime.testutils.CommonTestUtils;
@@ -53,7 +54,7 @@ public class TestProcessBuilder {
 
     public TestProcessBuilder(String mainClass) throws IOException {
         File tempLogFile =
-                File.createTempFile(getClass().getSimpleName() + "-", "-log4j.properties");
+                Files.createTempFile(getClass().getSimpleName() + "-", "-log4j.properties").toFile();
         tempLogFile.deleteOnExit();
         CommonTestUtils.printLog4jDebugConfig(tempLogFile);
 

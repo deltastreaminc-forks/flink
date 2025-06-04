@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common.io;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.FileOutputFormat.OutputDirectoryMode;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.core.fs.FileSystem.WriteMode;
@@ -37,7 +38,7 @@ public class FileOutputFormatTest {
     @Test
     public void testCreateNonParallelLocalFS() throws IOException {
 
-        File tmpOutPath = File.createTempFile("fileOutputFormatTest", "Test1");
+        File tmpOutPath = Files.createTempFile("fileOutputFormatTest", "Test1").toFile();
         File tmpOutFile = new File(tmpOutPath.getAbsolutePath() + "/1");
 
         String tmpFilePath = tmpOutPath.toURI().toString();
@@ -240,7 +241,7 @@ public class FileOutputFormatTest {
         File tmpOutPath = null;
         File tmpOutFile = null;
 
-        tmpOutPath = File.createTempFile("fileOutputFormatTest", "Test1");
+        tmpOutPath = Files.createTempFile("fileOutputFormatTest", "Test1").toFile();
         tmpOutFile = new File(tmpOutPath.getAbsolutePath() + "/1");
 
         String tmpFilePath = tmpOutPath.toURI().toString();
@@ -349,7 +350,7 @@ public class FileOutputFormatTest {
         File tmpOutPath = null;
         File tmpOutFile = null;
 
-        tmpOutPath = File.createTempFile("fileOutputFormatTest", "Test1");
+        tmpOutPath = Files.createTempFile("fileOutputFormatTest", "Test1").toFile();
         tmpOutFile = new File(tmpOutPath.getAbsolutePath() + "/1");
 
         String tmpFilePath = tmpOutPath.toURI().toString();
@@ -536,7 +537,7 @@ public class FileOutputFormatTest {
         File tmpOutPath = null;
         File tmpOutFile = null;
 
-        tmpOutPath = File.createTempFile("fileOutputFormatTest", "Test1");
+        tmpOutPath = Files.createTempFile("fileOutputFormatTest", "Test1").toFile();
         tmpOutFile = new File(tmpOutPath.getAbsolutePath() + "/1");
 
         String tmpFilePath = tmpOutPath.toURI().toString();

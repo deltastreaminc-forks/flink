@@ -48,7 +48,7 @@ class TextInputFormatTest {
     void testSimpleRead(@TempDir File tempDir) throws IOException {
         final String first = "First line";
         final String second = "Second line";
-        File tempFile = File.createTempFile("TextInputFormatTest", "tmp", tempDir);
+        File tempFile = Files.createTempFile(tempDir.toPath(), "TextInputFormatTest", "tmp").toFile();
         tempFile.setWritable(true);
         try (PrintStream ps = new PrintStream(tempFile)) {
             ps.println(first);
@@ -89,7 +89,7 @@ class TextInputFormatTest {
             File tmpDir = new File(parentDir, dir);
             Files.createDirectories(tmpDir.toPath());
 
-            File tempFile = File.createTempFile("TextInputFormatTest", ".tmp", tmpDir);
+            File tempFile = Files.createTempFile(tmpDir.toPath(), "TextInputFormatTest", ".tmp").toFile();
 
             expectedFiles.add(
                     new Path(tempFile.getAbsolutePath())
@@ -145,7 +145,7 @@ class TextInputFormatTest {
         String content = first + lineBreaker + second + lineBreaker;
 
         // create input file
-        File tempFile = File.createTempFile("TextInputFormatTest", "tmp", tmpFile);
+        File tempFile = Files.createTempFile(tmpFile.toPath(), "TextInputFormatTest", "tmp").toFile();
         tempFile.setWritable(true);
 
         try (OutputStreamWriter wrt = new OutputStreamWriter(new FileOutputStream(tempFile))) {
@@ -203,7 +203,7 @@ class TextInputFormatTest {
         final String second = "Second line";
 
         // create input file
-        File tempFile = File.createTempFile("TextInputFormatTest", ".compressed", tempDir);
+        File tempFile = Files.createTempFile(tempDir.toPath(), "TextInputFormatTest", ".compressed").toFile();
         tempFile.setWritable(true);
 
         try (PrintStream ps = new PrintStream(tempFile)) {

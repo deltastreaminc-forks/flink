@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.manual;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.TypeHint;
 import org.apache.flink.api.common.typeutils.TypeComparator;
@@ -62,7 +63,7 @@ public class MassiveStringValueSorting {
                             300000, "http://some-uri.com/that/is/a/common/prefix/to/all");
 
             // the sorted file
-            sorted = File.createTempFile("sorted_strings", "txt");
+            sorted = Files.createTempFile("sorted_strings", "txt").toFile();
 
             String[] command = {
                 "/bin/bash",
@@ -174,7 +175,7 @@ public class MassiveStringValueSorting {
                             numStrings, "http://some-uri.com/that/is/a/common/prefix/to/all");
 
             // the sorted file
-            sorted = File.createTempFile("sorted_strings", "txt");
+            sorted = Files.createTempFile("sorted_strings", "txt").toFile();
 
             String[] command = {
                 "/bin/bash",
@@ -387,7 +388,7 @@ public class MassiveStringValueSorting {
 
         bld.append(prefix);
 
-        File f = File.createTempFile("strings", "txt");
+        File f = Files.createTempFile("strings", "txt").toFile();
         BufferedWriter wrt = null;
         try {
             wrt = new BufferedWriter(new FileWriter(f));
@@ -419,7 +420,7 @@ public class MassiveStringValueSorting {
 
         final StringBuilder bld = new StringBuilder();
 
-        File f = File.createTempFile("strings", "txt");
+        File f = Files.createTempFile("strings", "txt").toFile();
         BufferedWriter wrt = null;
         try {
             wrt = new BufferedWriter(new FileWriter(f));

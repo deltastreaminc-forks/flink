@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.java.io;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.ParseException;
 import org.apache.flink.api.common.typeinfo.BasicTypeInfo;
 import org.apache.flink.api.common.typeinfo.SqlTimeTypeInfo;
@@ -809,7 +810,7 @@ class RowCsvInputFormatTest {
         String fileContent =
                 "\"20:41:52-1-3-2015\"|\"Re: Taskmanager memory error in Eclipse\"|"
                         + "\"Blahblah <blah@blahblah.org>\"|\"blaaa|\"blubb\"";
-        File tempFile = File.createTempFile("CsvReaderQuotedString", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderQuotedString", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -841,7 +842,7 @@ class RowCsvInputFormatTest {
     @Test
     void testQuotedStringParsingWithEscapedQuotes() throws Exception {
         String fileContent = "\"\\\"Hello\\\" World\"|\"We are\\\" young\"";
-        File tempFile = File.createTempFile("CsvReaderQuotedString", "tmp");
+        File tempFile = Files.createTempFile("CsvReaderQuotedString", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 
@@ -975,7 +976,7 @@ class RowCsvInputFormatTest {
     }
 
     private static FileInputSplit createTempFile(String content) throws IOException {
-        File tempFile = File.createTempFile("test_contents", "tmp");
+        File tempFile = Files.createTempFile("test_contents", "tmp").toFile();
         tempFile.deleteOnExit();
         OutputStreamWriter wrt =
                 new OutputStreamWriter(new FileOutputStream(tempFile), StandardCharsets.UTF_8);
@@ -994,7 +995,7 @@ class RowCsvInputFormatTest {
         String fileContent = FIRST_PART + lineBreakerInFile + SECOND_PART + lineBreakerInFile;
 
         // create input file
-        File tempFile = File.createTempFile("CsvInputFormatTest", "tmp");
+        File tempFile = Files.createTempFile("CsvInputFormatTest", "tmp").toFile();
         tempFile.deleteOnExit();
         tempFile.setWritable(true);
 

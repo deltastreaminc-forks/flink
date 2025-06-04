@@ -16,6 +16,7 @@
  */
 package org.apache.flink.runtime.io.network.buffer;
 
+import java.nio.file.Files;
 import org.apache.flink.util.TestLogger;
 
 import org.apache.flink.shaded.netty4.io.netty.buffer.ByteBuf;
@@ -4578,7 +4579,7 @@ public abstract class AbstractByteBufTest extends TestLogger {
 
     @Test
     public void testReadBytesAndWriteBytesWithFileChannel() throws IOException {
-        File file = File.createTempFile("file-channel", ".tmp");
+        File file = Files.createTempFile("file-channel", ".tmp").toFile();
         RandomAccessFile randomAccessFile = null;
         try {
             randomAccessFile = new RandomAccessFile(file, "rw");
@@ -4621,7 +4622,7 @@ public abstract class AbstractByteBufTest extends TestLogger {
 
     @Test
     public void testGetBytesAndSetBytesWithFileChannel() throws IOException {
-        File file = File.createTempFile("file-channel", ".tmp");
+        File file = Files.createTempFile("file-channel", ".tmp").toFile();
         RandomAccessFile randomAccessFile = null;
         try {
             randomAccessFile = new RandomAccessFile(file, "rw");

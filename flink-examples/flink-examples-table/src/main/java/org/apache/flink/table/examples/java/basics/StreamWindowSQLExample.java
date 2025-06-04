@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.examples.java.basics;
 
+import java.nio.file.Files;
 import org.apache.flink.streaming.api.environment.StreamExecutionEnvironment;
 import org.apache.flink.table.api.bridge.java.StreamTableEnvironment;
 import org.apache.flink.util.FileUtils;
@@ -91,7 +92,7 @@ public class StreamWindowSQLExample {
 
     /** Creates a temporary file with the contents and returns the absolute path. */
     private static String createTempFile(String contents) throws IOException {
-        File tempFile = File.createTempFile("orders", ".csv");
+        File tempFile = Files.createTempFile("orders", ".csv").toFile();
         tempFile.deleteOnExit();
         FileUtils.writeFileUtf8(tempFile, contents);
         return tempFile.toURI().toString();

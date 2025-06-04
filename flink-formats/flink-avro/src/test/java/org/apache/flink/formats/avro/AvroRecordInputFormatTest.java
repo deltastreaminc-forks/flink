@@ -18,6 +18,7 @@
 
 package org.apache.flink.formats.avro;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.common.typeutils.TypeSerializer;
@@ -198,7 +199,7 @@ public class AvroRecordInputFormatTest {
 
     @BeforeEach
     public void createFiles() throws IOException {
-        testFile = File.createTempFile("AvroInputFormatTest", null);
+        testFile = Files.createTempFile("AvroInputFormatTest", null).toFile();
         writeTestFile(testFile);
     }
 

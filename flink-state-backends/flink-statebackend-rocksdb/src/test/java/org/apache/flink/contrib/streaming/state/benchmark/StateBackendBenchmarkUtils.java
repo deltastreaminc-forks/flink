@@ -18,6 +18,7 @@
 
 package org.apache.flink.contrib.streaming.state.benchmark;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.ExecutionConfig;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.state.ListState;
@@ -165,7 +166,7 @@ public class StateBackendBenchmarkUtils {
     }
 
     private static File prepareDirectory(String prefix, File parentDir) throws IOException {
-        File target = File.createTempFile(prefix, "", parentDir);
+        File target = Files.createTempFile(parentDir.toPath(), prefix, "").toFile();
         if (target.exists() && !target.delete()) {
             throw new IOException(
                     "Target dir {"

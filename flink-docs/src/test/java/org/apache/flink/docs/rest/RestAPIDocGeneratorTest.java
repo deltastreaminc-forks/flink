@@ -18,6 +18,7 @@
 
 package org.apache.flink.docs.rest;
 
+import java.nio.file.Files;
 import org.apache.flink.annotation.docs.FlinkJsonSchema;
 import org.apache.flink.docs.rest.data.TestEmptyMessageHeaders;
 import org.apache.flink.docs.rest.data.TestExcludeMessageHeaders;
@@ -37,7 +38,7 @@ class RestAPIDocGeneratorTest {
 
     @Test
     void testExcludeFromDocumentation() throws Exception {
-        File file = File.createTempFile("rest_v0_", ".html");
+        File file = Files.createTempFile("rest_v0_", ".html").toFile();
         RestAPIDocGenerator.createHtmlFile(
                 DocumentingRestEndpoint.forRestHandlerSpecifications(
                         new TestEmptyMessageHeaders("/test/empty1", "This is a testing REST API."),

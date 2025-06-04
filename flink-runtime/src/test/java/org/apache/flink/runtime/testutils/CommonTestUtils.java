@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.testutils;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.api.common.JobStatus;
 import org.apache.flink.core.execution.JobClient;
@@ -80,7 +81,7 @@ public class CommonTestUtils {
 
     /** Create a temporary log4j configuration for the test. */
     public static File createTemporaryLog4JProperties() throws IOException {
-        File log4jProps = File.createTempFile(FileUtils.getRandomFilename(""), "-log4j.properties");
+        File log4jProps = Files.createTempFile(FileUtils.getRandomFilename(""), "-log4j.properties").toFile();
         log4jProps.deleteOnExit();
         CommonTestUtils.printLog4jDebugConfig(log4jProps);
 

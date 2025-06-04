@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common.io;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.FileInputFormat.FileBaseStatistics;
 import org.apache.flink.api.common.io.statistics.BaseStatistics;
 import org.apache.flink.configuration.ConfigConstants;
@@ -800,7 +801,7 @@ public class FileInputFormatTest {
     @Test
     public void testDecorateInputStream() throws IOException {
         // create temporary file with 3 blocks
-        final File tempFile = File.createTempFile("input-stream-decoration-test", "tmp");
+        final File tempFile = Files.createTempFile("input-stream-decoration-test", "tmp").toFile();
         tempFile.deleteOnExit();
         final int blockSize = 8;
         final int numBlocks = 3;

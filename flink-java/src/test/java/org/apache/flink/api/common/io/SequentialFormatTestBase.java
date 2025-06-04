@@ -18,6 +18,7 @@
 
 package org.apache.flink.api.common.io;
 
+import java.nio.file.Files;
 import org.apache.flink.api.common.io.statistics.BaseStatistics;
 import org.apache.flink.api.java.tuple.Tuple2;
 import org.apache.flink.configuration.Configuration;
@@ -176,7 +177,7 @@ public abstract class SequentialFormatTestBase<T> {
     /** Write out the tuples in a temporary file and return it. */
     @BeforeEach
     void writeTuples() throws IOException {
-        this.tempFile = File.createTempFile("BinaryInputFormat", null);
+        this.tempFile = Files.createTempFile("BinaryInputFormat", null).toFile();
         this.tempFile.deleteOnExit();
         Configuration configuration = new Configuration();
         configuration.setLong(BinaryOutputFormat.BLOCK_SIZE_PARAMETER_KEY, this.blockSize);
