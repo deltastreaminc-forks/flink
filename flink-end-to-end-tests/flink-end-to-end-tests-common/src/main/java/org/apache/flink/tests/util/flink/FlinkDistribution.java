@@ -18,6 +18,7 @@
 
 package org.apache.flink.tests.util.flink;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.JobID;
 import org.apache.flink.configuration.Configuration;
 import org.apache.flink.configuration.GlobalConfiguration;
@@ -447,7 +448,7 @@ public final class FlinkDistribution {
                                         new FileInputStream(logFile.toFile()),
                                         StandardCharsets.UTF_8))) {
                     String line;
-                    while ((line = br.readLine()) != null) {
+                    while ((line = BoundedLineReader.readLine(br, 5_000_000)) != null) {
                         Matcher matcher = pattern.matcher(line);
                         if (matcher.matches()) {
                             matches.add(matchProcessor.apply(matcher));

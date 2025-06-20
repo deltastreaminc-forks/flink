@@ -98,7 +98,10 @@ under the License.
 			<scope>test</scope>
 			<type>test-jar</type>
 		</dependency>
-
+		<dependency>
+			<groupId>io.github.pixee</groupId>
+			<artifactId>java-security-toolkit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

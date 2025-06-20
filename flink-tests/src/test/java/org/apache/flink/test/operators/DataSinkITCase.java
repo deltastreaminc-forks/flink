@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.operators;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.functions.MapFunction;
 import org.apache.flink.api.common.operators.Order;
 import org.apache.flink.api.java.DataSet;
@@ -355,7 +356,7 @@ public class DataSinkITCase extends MultipleProgramsTestBase {
         for (BufferedReader br : resReaders) {
             long cmp = Long.MIN_VALUE;
             while (br.ready()) {
-                long cur = Long.parseLong(br.readLine());
+                long cur = Long.parseLong(BoundedLineReader.readLine(br, 5_000_000));
                 assertTrue("Invalid order of sorted output", cmp <= cur);
                 cmp = cur;
             }

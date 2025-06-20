@@ -367,7 +367,10 @@ under the License.
 			<type>test-jar</type>
 			<scope>test</scope>
 		</dependency>
-
+		<dependency>
+			<groupId>io.github.pixee</groupId>
+			<artifactId>java-security-toolkit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>
@@ -493,11 +496,9 @@ under the License.
 									 basedir="${project.build.directory}/test-classes"
 									 includes="**/DataStreamTestCollectSink.class,**/MyCustomSourceFunction.class,**/PartitionCustomTestMapFunction.class"/>
 
-								<jar destfile="${project.build.directory}/artifacts/dummy.jar"
-									 basedir="${project.build.directory}/test-classes"
-									 includes="**/TestJob.class">
+								<jar destfile="${project.build.directory}/artifacts/dummy.jar" basedir="${project.build.directory}/test-classes" includes="**/TestJob.class">
 									<manifest>
-										<attribute name="Main-Class" value="org.apache.flink.client.cli.TestJob" />
+										<attribute name="Main-Class" value="org.apache.flink.client.cli.TestJob"/>
 									</manifest>
 								</jar>
 							</target>

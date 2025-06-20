@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.iterative.aggregators;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.aggregators.ConvergenceCriterion;
 import org.apache.flink.api.common.aggregators.LongSumAggregator;
 import org.apache.flink.api.common.functions.RichFilterFunction;
@@ -101,7 +102,7 @@ public class AggregatorsITCase extends MultipleProgramsTestBase {
                                                                 .getFile(testName);
                                                 BufferedReader reader =
                                                         new BufferedReader(new FileReader(file));
-                                                String output = reader.readLine();
+                                                String output = BoundedLineReader.readLine(reader, 5_000_000);
                                                 reader.close();
                                                 assertEquals(output, testString);
                                             }

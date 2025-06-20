@@ -18,6 +18,7 @@
 
 package org.apache.flink.streaming.api.functions.sink;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.common.serialization.SerializationSchema;
 import org.apache.flink.configuration.ConfigConstants;
 import org.apache.flink.configuration.Configuration;
@@ -92,7 +93,7 @@ public class SocketClientSinkTest extends TestLogger {
         Socket sk = NetUtils.acceptWithoutTimeout(server);
         BufferedReader rdr = new BufferedReader(new InputStreamReader(sk.getInputStream()));
 
-        String value = rdr.readLine();
+        String value = BoundedLineReader.readLine(rdr, 5_000_000);
 
         sinkRunner.join();
         server.close();
@@ -135,7 +136,7 @@ public class SocketClientSinkTest extends TestLogger {
 
         Socket sk = NetUtils.acceptWithoutTimeout(server);
         BufferedReader rdr = new BufferedReader(new InputStreamReader(sk.getInputStream()));
-        String value = rdr.readLine();
+        String value = BoundedLineReader.readLine(rdr, 5_000_000);
 
         sinkRunner.join();
         simpleSink.close();
@@ -228,7 +229,7 @@ public class SocketClientSinkTest extends TestLogger {
                                     new BufferedReader(
                                             new InputStreamReader(socket.getInputStream()));
 
-                            String value = reader.readLine();
+                            String value = BoundedLineReader.readLine(reader, 5_000_000);
                             assertEquals("0", value);
 
                             socket.close();
@@ -303,7 +304,7 @@ public class SocketClientSinkTest extends TestLogger {
                     new BufferedReader(new InputStreamReader(socket.getInputStream()));
 
             // Wait for the reconnect
-            String value = reader.readLine();
+            String value = BoundedLineReader.readLine(reader, 5_000_000);
 
             assertEquals("1", value);
 

@@ -18,6 +18,7 @@
 
 package org.apache.flink.connector.file.src.reader;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.annotation.PublicEvolving;
 import org.apache.flink.api.common.typeinfo.TypeInformation;
 import org.apache.flink.api.common.typeinfo.Types;
@@ -85,7 +86,7 @@ public class TextLineInputFormat extends SimpleStreamFormat<String> {
         @Nullable
         @Override
         public String read() throws IOException {
-            return reader.readLine();
+            return BoundedLineReader.readLine(reader, 5_000_000);
         }
 
         @Override

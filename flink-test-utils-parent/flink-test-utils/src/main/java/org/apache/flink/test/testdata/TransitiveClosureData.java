@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.testdata;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.junit.Assert;
 
 import java.io.BufferedReader;
@@ -30,7 +31,7 @@ public class TransitiveClosureData {
     public static void checkOddEvenResult(BufferedReader result) throws IOException {
         Pattern split = Pattern.compile(" ");
         String line;
-        while ((line = result.readLine()) != null) {
+        while ((line = BoundedLineReader.readLine(result, 5_000_000)) != null) {
             String[] res = split.split(line);
             Assert.assertEquals("Malformed result: Wrong number of tokens in line.", 2, res.length);
             try {

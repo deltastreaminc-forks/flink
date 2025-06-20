@@ -18,6 +18,7 @@
 
 package org.apache.flink.table.tpch;
 
+import io.github.pixee.security.BoundedLineReader;
 import java.io.BufferedReader;
 import java.io.File;
 import java.io.FileReader;
@@ -53,8 +54,8 @@ public class TpchResultComparator {
             int actualLineNum = 0;
 
             String expectedLine, actualLine;
-            while ((expectedLine = expectedReader.readLine()) != null
-                    && (actualLine = actualReader.readLine()) != null) {
+            while ((expectedLine = BoundedLineReader.readLine(expectedReader, 5_000_000)) != null
+                    && (actualLine = BoundedLineReader.readLine(actualReader, 5_000_000)) != null) {
                 String[] expected = expectedLine.split("\\|");
                 expectedLineNum++;
                 String[] actual = actualLine.split("\\|");
@@ -115,10 +116,10 @@ public class TpchResultComparator {
                 }
             }
 
-            while (expectedReader.readLine() != null) {
+            while (BoundedLineReader.readLine(expectedReader, 5_000_000) != null) {
                 expectedLineNum++;
             }
-            while (actualReader.readLine() != null) {
+            while (BoundedLineReader.readLine(actualReader, 5_000_000) != null) {
                 actualLineNum++;
             }
             if (expectedLineNum != actualLineNum) {

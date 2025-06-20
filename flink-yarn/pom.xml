@@ -249,6 +249,10 @@ under the License.
 			<version>${aws.sdk.version}</version>
 			<scope>test</scope>
 		</dependency>
+		<dependency>
+			<groupId>io.github.pixee</groupId>
+			<artifactId>java-security-toolkit</artifactId>
+		</dependency>
 	</dependencies>
 
 	<dependencyManagement>

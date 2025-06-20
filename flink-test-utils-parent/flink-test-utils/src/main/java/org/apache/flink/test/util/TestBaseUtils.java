@@ -18,6 +18,7 @@
 
 package org.apache.flink.test.util;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.api.java.tuple.Tuple;
 
 import org.junit.Assert;
@@ -115,7 +116,7 @@ public class TestBaseUtils {
         try {
             for (BufferedReader reader : readers) {
                 String s;
-                while ((s = reader.readLine()) != null) {
+                while ((s = BoundedLineReader.readLine(reader, 5_000_000)) != null) {
                     target.add(s);
                 }
             }

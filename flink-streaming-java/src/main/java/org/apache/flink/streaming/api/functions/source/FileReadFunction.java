@@ -17,6 +17,7 @@
 
 package org.apache.flink.streaming.api.functions.source;
 
+import io.github.pixee.security.BoundedLineReader;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.api.common.functions.FlatMapFunction;
 import org.apache.flink.api.java.tuple.Tuple3;
@@ -50,7 +51,7 @@ public class FileReadFunction implements FlatMapFunction<Tuple3<String, Long, Lo
         String line;
 
         try {
-            while ((line = reader.readLine()) != null
+            while ((line = BoundedLineReader.readLine(reader, 5_000_000)) != null
                     && (value.f2 == -1L || stream.getPos() <= value.f2)) {
                 out.collect(line);
             }
