@@ -18,6 +18,7 @@
 
 package org.apache.flink.runtime.testutils;
 
+import io.github.pixee.security.SystemCommand;
 import org.apache.flink.util.ShutdownHookUtil;
 
 import org.apache.commons.lang3.ArrayUtils;
@@ -342,7 +343,7 @@ public abstract class TestJvmProcess {
 
     public static void killProcessWithSigTerm(long pid) throws Exception {
         // send it a regular kill command (SIG_TERM)
-        final Process kill = Runtime.getRuntime().exec("kill " + pid);
+        final Process kill = SystemCommand.runCommand(Runtime.getRuntime(), "kill " + pid);
         kill.waitFor();
         if (kill.exitValue() != 0) {
             fail("failed to send SIG_TERM to process " + pid);
