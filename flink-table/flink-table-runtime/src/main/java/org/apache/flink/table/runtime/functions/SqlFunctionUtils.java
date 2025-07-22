@@ -18,6 +18,8 @@
 
 package org.apache.flink.table.runtime.functions;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.table.data.DecimalData;
 import org.apache.flink.table.data.DecimalDataUtils;
 import org.apache.flink.table.data.binary.BinaryStringData;
@@ -76,7 +78,7 @@ public class SqlFunctionUtils {
             new ThreadLocalCache<String, URL>() {
                 public URL getNewInstance(String url) {
                     try {
-                        return new URL(url);
+                        return Urls.create(url, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
                     } catch (MalformedURLException e) {
                         throw new RuntimeException(e);
                     }

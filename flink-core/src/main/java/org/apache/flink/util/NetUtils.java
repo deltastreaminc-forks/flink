@@ -18,6 +18,8 @@
 
 package org.apache.flink.util;
 
+import io.github.pixee.security.HostValidator;
+import io.github.pixee.security.Urls;
 import org.apache.flink.annotation.Internal;
 import org.apache.flink.configuration.IllegalConfigurationException;
 
@@ -104,7 +106,7 @@ public class NetUtils {
      */
     private static URL validateHostPortString(String hostPort) {
         try {
-            URL u = new URL("http://" + hostPort);
+            URL u = Urls.create("http://" + hostPort, Urls.HTTP_PROTOCOLS, HostValidator.DENY_COMMON_INFRASTRUCTURE_TARGETS);
             if (u.getHost() == null) {
                 throw new IllegalArgumentException(
                         "The given host:port ('" + hostPort + "') doesn't contain a valid host");
